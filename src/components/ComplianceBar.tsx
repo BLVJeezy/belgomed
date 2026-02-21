@@ -20,8 +20,8 @@ const badges = [
 
 const ComplianceBar = () => {
   return (
-    <section id="licenties" className="py-16 relative">
-      <div className="container mx-auto px-6">
+    <section id="licenties" className="py-10 md:py-16 relative">
+      <div className="container mx-auto px-5 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {badges.map((badge, i) => (
             <div

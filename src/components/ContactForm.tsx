@@ -71,10 +71,10 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 relative">
+    <section id="contact" className="py-14 md:py-20 px-5 md:px-6 relative">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
             Offerte <span className="gradient-accent-text">Aanvragen</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
