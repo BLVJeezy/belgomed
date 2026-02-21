@@ -73,9 +73,9 @@ const Leaderboard = () => {
     <div className="p-6 lg:p-8 space-y-6 max-w-[1400px]">
       <div>
         <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-          <Trophy className="w-6 h-6 text-primary" /> Team Leaderboard
+          <Trophy className="w-6 h-6 text-primary" /> Sales Overzicht
         </h1>
-        <p className="text-sm text-muted-foreground mt-0.5">Prestatie-overzicht per teamlid</p>
+        <p className="text-sm text-muted-foreground mt-0.5">Team prestaties en pipeline status</p>
       </div>
 
       {loading ? (
