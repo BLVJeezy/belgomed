@@ -6,7 +6,6 @@ import logoB from "@/assets/logo-b.png";
 const navItems = [
   { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Leads", to: "/admin/leads", icon: Users },
-  { label: "Logistics", to: "/admin/logistics", icon: Truck },
   { label: "Settings", to: "/admin/settings", icon: Settings },
 ];
 
