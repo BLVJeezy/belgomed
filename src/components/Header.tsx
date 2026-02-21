@@ -14,7 +14,7 @@ const navItems = [
   { label: "Onze Diensten", href: "#diensten" },
   { label: "Over Ons", href: "#overons" },
   
-  { label: "Producten", href: "#producten" },
+  { label: "Diensten", href: "#diensten" },
   { label: "Contact", href: "#contact" },
 ];
 
