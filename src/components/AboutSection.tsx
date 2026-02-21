@@ -68,14 +68,14 @@ const AboutSection = () => {
     <div id="overons">
 
       {/* Expertise */}
-      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
+      <section className="py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-6 lg:px-12">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Onze Expertise</p>
-            <h3 className="text-3xl font-black text-white mb-8 uppercase leading-none lg:text-2xl">
+            <h3 className="text-3xl font-black text-foreground dark:text-white mb-8 uppercase leading-none lg:text-2xl">
               Jouw partner voor een <br />zorgeloos medicijnbeheer
             </h3>
-            <div className="space-y-5 text-white/60 leading-relaxed text-sm lg:text-base">
+            <div className="space-y-5 text-muted-foreground dark:text-white/60 leading-relaxed text-sm lg:text-base">
               <p>
                 In de zorg is een goed gevulde voorraad medicijnen cruciaal. Tekorten leiden niet alleen tot uitgestelde behandelingen, maar verhogen ook de druk op zorgverleners en brengen extra risico's voor patiënten met zich mee. Belgomed BV helpt dit te voorkomen door apotheken, ziekenhuizen en andere zorginstellingen te voorzien van de juiste producten, met stabiele leveringen, concurrerende prijzen en volledig beheer van logistiek en administratie.
               </p>
@@ -103,25 +103,25 @@ const AboutSection = () => {
 
 
       {/* Sectoren - Infinity Scroll */}
-      <section className="py-16 lg:py-20 bg-gradient-to-r from-[#001a1a] to-[#004d4d] overflow-hidden">
+      <section className="py-16 lg:py-20 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12 mb-10">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Wie We Bedienen</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-white mb-0 uppercase leading-none text-center">
+            <h3 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-0 uppercase leading-none text-center">
               Onze Sectoren
             </h3>
           </ScrollReveal>
         </div>
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#001a1a] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#004d4d] to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background dark:from-[#001a1a] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background dark:from-[#004d4d] to-transparent z-10" />
           <div className="flex animate-scroll-infinite">
             {[...sectors, ...sectors, ...sectors].map((sector, i) => (
               <div key={i} className="flex-shrink-0 flex flex-col items-center gap-4 px-10 lg:px-14">
-                <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-xl border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 flex items-center justify-center">
                   <sector.icon className="w-10 h-10 lg:w-12 lg:h-12 text-primary" strokeWidth={1.5} />
                 </div>
-                <span className="text-sm font-bold text-white/80 whitespace-nowrap">{sector.label}</span>
+                <span className="text-sm font-bold text-foreground/80 dark:text-white/80 whitespace-nowrap">{sector.label}</span>
               </div>
             ))}
           </div>
@@ -129,21 +129,21 @@ const AboutSection = () => {
       </section>
 
       {/* Values / Pillars */}
-      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
+      <section className="py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-6 lg:px-12">
         <div className="container mx-auto">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Onze Waarden</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-white mb-16 uppercase leading-none text-center">
+            <h3 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-16 uppercase leading-none text-center">
               Drie Pijlers
             </h3>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pillars.map((p, i) =>
             <ScrollReveal key={p.title} delay={i * 0.15}>
-                <div className="p-8 lg:p-10 border border-white/10 bg-white/5 backdrop-blur-sm rounded-sm text-center">
+                <div className="p-8 lg:p-10 border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 backdrop-blur-sm rounded-sm text-center">
                   <p.icon className="w-8 h-8 text-primary mx-auto mb-5" />
-                  <h4 className="text-lg font-black text-white uppercase tracking-wide mb-3">{p.title}</h4>
-                  <p className="text-sm text-white/60 leading-relaxed">{p.desc}</p>
+                  <h4 className="text-lg font-black text-foreground dark:text-white uppercase tracking-wide mb-3">{p.title}</h4>
+                  <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{p.desc}</p>
                 </div>
               </ScrollReveal>
             )}
