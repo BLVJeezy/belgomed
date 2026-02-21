@@ -64,14 +64,14 @@ const AboutSection = () => {
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Onze Expertise</p>
             <h3 className="text-3xl font-black text-white mb-8 uppercase leading-none lg:text-2xl">
-              GDP-Gecertificeerde <br />Uitmuntendheid
+              Jouw partner voor een <br />zorgeloos medicijnbeheer
             </h3>
             <div className="space-y-5 text-white/60 leading-relaxed text-sm lg:text-base">
               <p>
-                Als <strong className="text-white">GDP-gecertificeerde Belgische groothandel</strong> garandeert Belgomed BV constante temperatuurmonitoring en naleving van de hoogste hygiënestandaarden.
+                In de zorg is een goed gevulde voorraad medicijnen cruciaal. Tekorten leiden niet alleen tot uitgestelde behandelingen, maar verhogen ook de druk op zorgverleners en brengen extra risico's voor patiënten met zich mee. Belgomed BV helpt dit te voorkomen door apotheken, ziekenhuizen en andere zorginstellingen te voorzien van de juiste producten, met stabiele leveringen, concurrerende prijzen en volledig beheer van logistiek en administratie.
               </p>
               <p>
-                Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-white">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
+                Zo kunnen zorgverleners zich concentreren op wat écht telt: het welzijn van hun patiënten. We werken nauw samen met onze klanten en logistieke partners om processen efficiënt en betrouwbaar te laten verlopen. Met een strakke planning, een goedgevulde voorraad en doelgerichte oplossingen zorgen we dat medicijnen en medische hulpmiddelen altijd beschikbaar zijn.
               </p>
             </div>
             <a href="#contact" className="inline-block mt-8 px-8 py-3 bg-primary text-primary-foreground font-black uppercase text-sm tracking-widest hover:bg-primary/90 transition-colors rounded-sm">
