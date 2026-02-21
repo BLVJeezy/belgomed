@@ -57,21 +57,6 @@ const ScrollReveal = ({ children, className = "", delay = 0 }: { children: React
 const AboutSection = () => {
   return (
     <div id="overons">
-      {/* Hero */}
-      <section className="relative py-28 lg:py-36 bg-gradient-to-r from-[#001a1a] to-[#004d4d] overflow-hidden">
-        <ScrollReveal className="container mx-auto px-6 lg:px-12 relative z-10">
-          <h2 className="text-foreground text-4xl lg:text-7xl font-black uppercase tracking-tighter mb-6">
-            Sinds 1974 <br />
-            <span className="text-primary">Uw Medische Partner.</span>
-          </h2>
-          <p className="text-foreground/60 text-lg lg:text-xl max-w-2xl font-light">
-            Belgomed BV is meer dan een groothandel; wij zijn de schakel tussen hoogwaardige farmaceutica en de patiënten die ze het hardst nodig hebben.
-          </p>
-        </ScrollReveal>
-        <div className="absolute right-[-50px] bottom-[-50px] text-foreground/5 text-[200px] lg:text-[300px] font-black pointer-events-none select-none leading-none">
-          B
-        </div>
-      </section>
 
       {/* Expertise */}
       <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
