@@ -7,7 +7,7 @@ import logoB from "@/assets/logo-b.png";
 const navItems = [
   { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Leads", to: "/admin/leads", icon: Users },
-  { label: "Leaderboard", to: "/admin/leaderboard", icon: Trophy },
+  { label: "Sales", to: "/admin/leaderboard", icon: Trophy },
   { label: "Settings", to: "/admin/settings", icon: Settings },
 ];
 
