@@ -1,4 +1,5 @@
 import { Shield, Award, FileCheck } from "lucide-react";
+import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
 
 const timelineEvents = [
   { year: "1974", title: "Oprichting", desc: "Belgomed wordt opgericht als farmaceutische groothandel in België." },
@@ -50,7 +51,8 @@ const AboutSection = () => {
               </p>
             </div>
           </div>
-          <div className="aspect-square bg-white/5 border border-white/10 relative overflow-hidden group rounded-sm backdrop-blur-sm">
+          <div className="aspect-square relative overflow-hidden group rounded-sm">
+            <img src={pharmacyImage} alt="Belgische apotheek" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-white/5 group-hover:bg-transparent transition-all duration-500" />
             <div className="absolute bottom-8 left-8 text-white z-10">
               <p className="text-3xl lg:text-4xl font-black">Hasselt, BE</p>
