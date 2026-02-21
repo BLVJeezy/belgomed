@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Globe } from "lucide-react";
 import logoB from "@/assets/logo-b.png";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const languages = [
   { code: "NL", label: "Nederlands" },
@@ -86,7 +87,8 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
             {/* Search toggle */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}

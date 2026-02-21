@@ -6,6 +6,60 @@
 
 @layer base {
   :root {
+    --background: 180 10% 97%;
+    --foreground: 180 40% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 180 40% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 180 40% 10%;
+
+    --primary: 180 100% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 15% 90%;
+    --secondary-foreground: 180 40% 15%;
+
+    --muted: 180 10% 92%;
+    --muted-foreground: 180 10% 40%;
+
+    --accent: 180 100% 30%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 15% 85%;
+    --input: 180 15% 85%;
+    --ring: 180 100% 30%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 180 10% 97%;
+    --sidebar-foreground: 180 40% 10%;
+    --sidebar-primary: 180 100% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 180 15% 90%;
+    --sidebar-accent-foreground: 180 40% 15%;
+    --sidebar-border: 180 15% 85%;
+    --sidebar-ring: 180 100% 30%;
+
+    /* Custom Belgomed tokens */
+    --petrol-dark: 180 40% 10%;
+    --petrol-deep: 180 50% 25%;
+    --teal-deep: 168 50% 25%;
+    --aquamarine: 180 100% 30%;
+    --aquamarine-glow: 180 100% 40%;
+    --glass-bg: 180 30% 100%;
+    --glass-border: 180 20% 80%;
+    --gradient-hero: linear-gradient(135deg, hsl(180 15% 95%) 0%, hsl(168 20% 90%) 50%, hsl(180 15% 93%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 100% 30%), hsl(168 100% 35%));
+    --shadow-glow: 0 0 30px hsl(180 100% 30% / 0.1);
+    --shadow-card: 0 8px 32px hsl(180 30% 50% / 0.08);
+  }
+
+  .dark {
     --background: 180 100% 5%;
     --foreground: 180 20% 95%;
 
@@ -34,8 +88,6 @@
     --input: 180 20% 18%;
     --ring: 180 100% 40%;
 
-    --radius: 0.75rem;
-
     --sidebar-background: 180 100% 5%;
     --sidebar-foreground: 180 20% 95%;
     --sidebar-primary: 180 100% 40%;
@@ -53,15 +105,10 @@
     --aquamarine-glow: 180 100% 50%;
     --glass-bg: 180 30% 100%;
     --glass-border: 180 40% 100%;
-    --gradient-hero: linear-gradient(135deg, hsl(180 100% 5%) 0%, hsl(168 100% 15%) 50%, hsl(180 100% 10%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(180 100% 40%), hsl(168 100% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 100% 5%) 0%, hsl(168 100% 15%) 50%, hsl(180 100% 8%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 100% 40%), hsl(168 100% 50%));
     --shadow-glow: 0 0 30px hsl(180 100% 40% / 0.15);
     --shadow-card: 0 8px 32px hsl(180 100% 5% / 0.3);
-  }
-
-  .dark {
-    --background: 180 100% 5%;
-    --foreground: 180 20% 95%;
   }
 }
 
@@ -82,11 +129,15 @@
 
 @layer components {
   .glass-card {
-    @apply relative overflow-hidden rounded-xl border;
-    background: hsl(180 30% 100% / 0.05);
-    border-color: hsl(180 40% 100% / 0.1);
+    @apply relative overflow-hidden rounded-xl border border-border/30;
+    background: hsl(var(--card) / 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  .dark .glass-card {
+    background: hsl(180 30% 100% / 0.05);
+    border-color: hsl(180 40% 100% / 0.1);
   }
 
   .glass-card-hover {
@@ -94,10 +145,16 @@
   }
 
   .glass-card-hover:hover {
+    background: hsl(var(--card) / 0.95);
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.1);
+    transform: translateY(-4px);
+  }
+
+  .dark .glass-card-hover:hover {
     background: hsl(180 30% 100% / 0.08);
     border-color: hsl(180 100% 40% / 0.3);
     box-shadow: 0 0 30px hsl(180 100% 40% / 0.1);
-    transform: translateY(-4px);
   }
 
   .gradient-hero {
