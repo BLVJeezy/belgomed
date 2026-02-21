@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Globe } from "lucide-react";
-import logoB from "@/assets/logo-b.png";
+import logoHeader from "@/assets/logo-header.png";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const languages = [
@@ -41,9 +41,8 @@ const Header = () => {
       {/* Main nav */}
       <nav className="border-b border-border/30 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#" className="flex items-center gap-2">
-            <img src={logoB} alt="Belgomed" className="h-9 w-auto" />
-            <span className="text-xl font-bold tracking-wider text-foreground">BELGOMED</span>
+          <a href="#" className="flex items-center">
+            <img src={logoHeader} alt="Belgomed" className="h-9 w-auto" />
           </a>
 
           {/* Desktop nav */}
