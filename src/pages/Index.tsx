@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StatsCounter from "@/components/StatsCounter";
 import ComplianceBar from "@/components/ComplianceBar";
-import ServiceGrid from "@/components/ServiceGrid";
+
 
 import AboutSection from "@/components/AboutSection";
 import ContactForm from "@/components/ContactForm";
@@ -15,7 +15,7 @@ const Index = () => {
       <HeroSection />
       <StatsCounter />
       <ComplianceBar />
-      <ServiceGrid />
+      
       
       
       <AboutSection />
