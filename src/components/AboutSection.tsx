@@ -34,24 +34,24 @@ const AboutSection = () => {
       </section>
 
       {/* Expertise */}
-      <section className="py-20 lg:py-24 bg-white px-6 lg:px-12">
+      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <div>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Onze Expertise</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-[#001a1a] mb-8 uppercase leading-none">
+            <h3 className="text-3xl lg:text-4xl font-black text-white mb-8 uppercase leading-none">
               GDP-Gecertificeerde <br />Uitmuntendheid
             </h3>
-            <div className="space-y-5 text-slate-500 leading-relaxed text-sm lg:text-base">
+            <div className="space-y-5 text-white/60 leading-relaxed text-sm lg:text-base">
               <p>
-                Als <strong className="text-[#001a1a]">GDP-gecertificeerde Belgische groothandel</strong> garandeert Belgomed BV constante temperatuurmonitoring en naleving van de hoogste hygiënestandaarden.
+                Als <strong className="text-white">GDP-gecertificeerde Belgische groothandel</strong> garandeert Belgomed BV constante temperatuurmonitoring en naleving van de hoogste hygiënestandaarden.
               </p>
               <p>
-                Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-[#001a1a]">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
+                Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-white">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
               </p>
             </div>
           </div>
-          <div className="aspect-square bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-200 relative overflow-hidden group rounded-sm">
-            <div className="absolute inset-0 bg-[#001a1a]/20 group-hover:bg-transparent transition-all duration-500" />
+          <div className="aspect-square bg-white/5 border border-white/10 relative overflow-hidden group rounded-sm backdrop-blur-sm">
+            <div className="absolute inset-0 bg-white/5 group-hover:bg-transparent transition-all duration-500" />
             <div className="absolute bottom-8 left-8 text-white z-10">
               <p className="text-3xl lg:text-4xl font-black">Hasselt, BE</p>
               <p className="text-[10px] uppercase tracking-widest opacity-60 font-bold mt-1">Logistiek Zenuwcentrum</p>
