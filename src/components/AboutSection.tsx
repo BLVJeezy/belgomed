@@ -107,34 +107,6 @@ const AboutSection = () => {
       </section>
 
 
-      {/* Timeline */}
-      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
-        <div className="container mx-auto max-w-4xl">
-          <ScrollReveal>
-            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Onze Geschiedenis</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-white mb-16 uppercase leading-none text-center">
-              45+ Jaar Groei
-            </h3>
-          </ScrollReveal>
-          <div className="relative">
-            <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2" />
-            <div className="space-y-12">
-              {timelineEvents.map((event, i) => (
-                <ScrollReveal key={event.year} delay={i * 0.1}>
-                  <div className={`relative flex items-start gap-8 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
-                    <div className="absolute left-4 lg:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1/2 mt-1.5 ring-4 ring-[#001a1a] z-10" />
-                    <div className={`ml-12 lg:ml-0 lg:w-[calc(50%-2rem)] ${i % 2 === 0 ? "lg:text-right lg:pr-12" : "lg:text-left lg:pl-12 lg:ml-auto"}`}>
-                      <span className="text-xs font-black text-primary uppercase tracking-widest">{event.year}</span>
-                      <h4 className="text-lg font-black text-white uppercase mt-1">{event.title}</h4>
-                      <p className="text-sm text-white/50 mt-1">{event.desc}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Values / Pillars */}
       <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
