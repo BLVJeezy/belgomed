@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Settings } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -68,9 +68,14 @@ const Footer = () => {
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Belgomed BV. Alle rechten voorbehouden.
           </p>
-          <p className="text-xs text-muted-foreground">
-            FAGG Gereguleerd · GDP Gecertificeerd · WDA Vergund
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-muted-foreground">
+              FAGG Gereguleerd · GDP Gecertificeerd · WDA Vergund
+            </p>
+            <a href="/admin" className="p-1.5 rounded-md text-muted-foreground/40 hover:text-muted-foreground transition-colors" title="Admin">
+              <Settings className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
