@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Globe } from "lucide-react";
+import logoBelgomed from "@/assets/logo-belgomed.png";
 
 const languages = [
   { code: "NL", label: "Nederlands" },
@@ -37,8 +38,8 @@ const Header = () => {
       {/* Main nav */}
       <nav className="border-b border-border/30 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#" className="text-xl font-bold tracking-wider">
-            <span className="gradient-accent-text">BELGOMED</span>
+          <a href="#" className="flex items-center">
+            <img src={logoBelgomed} alt="Belgomed" className="h-10 w-auto" />
           </a>
 
           {/* Desktop nav */}
