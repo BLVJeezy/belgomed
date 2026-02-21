@@ -388,7 +388,7 @@ const Dashboard = () => {
                 const medals = ["🥇", "🥈", "🥉"];
                 const maxTotal = Math.max(...teamStats.map((m) => m.total), 1);
                 return (
-                  <div key={member.key} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-lg bg-secondary/20 border border-border/20">
+                  <a href={`/admin/leads?assignee=${member.key}`} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-lg bg-secondary/20 border border-border/20 hover:bg-secondary/30 hover:border-primary/20 transition-colors cursor-pointer group">
                     {/* Rank + Avatar */}
                     <div className="flex items-center gap-3 min-w-[180px]">
                       <span className="text-lg w-7 text-center">{medals[i] ?? `#${i + 1}`}</span>
@@ -396,7 +396,7 @@ const Dashboard = () => {
                         {member.avatar}
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                        <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{member.name}</p>
                         <p className="text-[11px] text-muted-foreground">{member.role}</p>
                       </div>
                     </div>
@@ -432,7 +432,7 @@ const Dashboard = () => {
                         <p className="text-xs font-medium text-foreground">{member.currentStage}</p>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
