@@ -1,22 +1,28 @@
 import { Pill, Heart, Stethoscope } from "lucide-react";
+import serviceRx from "@/assets/service-rx.jpg";
+import serviceOtc from "@/assets/service-otc.jpg";
+import serviceMed from "@/assets/service-med.jpg";
 
 const services = [
   {
     icon: Pill,
     title: "Medicijnen op Voorschrift",
     tag: "RX",
+    image: serviceRx,
     desc: "Veilige en hoogwaardige distributie van voorschriftgeneesmiddelen. Gegarandeerde traceerbaarheid en cold-chain compliance voor alle farmaceutische producten.",
   },
   {
     icon: Heart,
     title: "OTC Producten",
     tag: "OTC",
+    image: serviceOtc,
     desc: "Breed assortiment vrij verkrijgbare geneesmiddelen. Van pijnstillers tot vitaminen — snel en betrouwbaar geleverd aan apotheken en zorgverleners.",
   },
   {
     icon: Stethoscope,
     title: "Medische Hulpmiddelen",
     tag: "MED",
+    image: serviceMed,
     desc: "Uitgebreid aanbod klinische benodigdheden en medische apparatuur. CE-gecertificeerde producten met volledige documentatie en technische ondersteuning.",
   },
 ];
@@ -40,22 +46,35 @@ const ServiceGrid = () => {
           {services.map((service, i) => (
             <div
               key={service.title}
-              className={`glass-card-hover p-8 group fade-up fade-up-delay-${i + 1}`}
+              className={`glass-card-hover overflow-hidden group fade-up fade-up-delay-${i + 1}`}
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
-                  <service.icon className="w-7 h-7 text-primary" />
-                </div>
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full border border-primary/30 text-primary">
+              {/* Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                <span className="absolute top-3 right-3 text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full border border-primary/30 text-primary bg-background/60 backdrop-blur-sm">
                   {service.tag}
                 </span>
               </div>
-              <h3 className="text-lg font-bold tracking-tight mb-3 text-foreground">
-                {service.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {service.desc}
-              </p>
+
+              {/* Content */}
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
+                    <service.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold tracking-tight text-foreground">
+                    {service.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {service.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
