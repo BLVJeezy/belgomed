@@ -13,7 +13,7 @@ const languages = [
 const navItems = [
   { label: "Onze Diensten", href: "#diensten" },
   { label: "Over Ons", href: "#overons" },
-  { label: "Licenties", href: "#licenties" },
+  
   { label: "Producten", href: "#producten" },
   { label: "Contact", href: "#contact" },
 ];
