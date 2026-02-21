@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Eye, Users, MousePointerClick, Clock, ArrowUpRight, ArrowDownRight,
-  Globe, Smartphone, Monitor, TrendingUp,
+  Globe, Smartphone, Monitor, TrendingUp, Trophy, Loader2,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart, Bar, LineChart, Line,
@@ -72,9 +73,63 @@ const hourlyData = Array.from({ length: 24 }, (_, i) => ({
   bezoekers: Math.round(15 + Math.random() * 45 + (i >= 9 && i <= 17 ? 30 : 0)),
 }));
 
+const teamInfo: Record<string, { name: string; role: string; avatar: string }> = {
+  dirk: { name: "Dirk V.", role: "Sales Manager", avatar: "DV" },
+  sarah: { name: "Sarah M.", role: "Account Executive", avatar: "SM" },
+  jason: { name: "Jason B.", role: "Super-Admin", avatar: "JB" },
+};
+
+type TeamMemberStats = {
+  key: string;
+  name: string;
+  role: string;
+  avatar: string;
+  total: number;
+  active: number;
+  completed: number;
+  currentStage: string;
+};
+
 const Dashboard = () => {
   const [period, setPeriod] = useState<Period>("7d");
+  const [teamStats, setTeamStats] = useState<TeamMemberStats[]>([]);
+  const [teamLoading, setTeamLoading] = useState(true);
   const stats = trafficData[period];
+
+  useEffect(() => {
+    const fetchTeamStats = async () => {
+      setTeamLoading(true);
+      const { data: leads } = await supabase.from("leads").select("assignee, stage");
+
+      if (leads) {
+        const teamData = Object.entries(teamInfo).map(([key, info]) => {
+          const memberLeads = leads.filter((l) => l.assignee === key);
+          const active = memberLeads.filter((l) => l.stage !== "afgehandeld").length;
+          const completed = memberLeads.filter((l) => l.stage === "afgehandeld").length;
+          const activeLead = memberLeads.find((l) => l.stage !== "afgehandeld");
+          const stageLabels: Record<string, string> = {
+            nieuw: "Nieuw",
+            in_behandeling: "In Behandeling",
+            wacht_op_vergunning: "Wacht op FAGG",
+            offerte_gestuurd: "Offerte Gestuurd",
+            afgehandeld: "Afgehandeld",
+          };
+          return {
+            key,
+            ...info,
+            total: memberLeads.length,
+            active,
+            completed,
+            currentStage: activeLead ? stageLabels[activeLead.stage] ?? activeLead.stage : "Geen actieve leads",
+          };
+        });
+        teamData.sort((a, b) => b.total - a.total);
+        setTeamStats(teamData);
+      }
+      setTeamLoading(false);
+    };
+    fetchTeamStats();
+  }, []);
 
   const statCards = [
     { title: "Bezoekers", value: stats.visitors, change: stats.change, up: stats.up, icon: Users },
@@ -313,6 +368,77 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Team Leaderboard */}
+      <Card className="glass-card border-border/30">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base text-foreground flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-primary" />
+            Team Leaderboard
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {teamLoading ? (
+            <div className="flex items-center justify-center py-8">
+              <Loader2 className="w-5 h-5 text-primary animate-spin" />
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {teamStats.map((member, i) => {
+                const medals = ["🥇", "🥈", "🥉"];
+                const maxTotal = Math.max(...teamStats.map((m) => m.total), 1);
+                return (
+                  <div key={member.key} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-lg bg-secondary/20 border border-border/20">
+                    {/* Rank + Avatar */}
+                    <div className="flex items-center gap-3 min-w-[180px]">
+                      <span className="text-lg w-7 text-center">{medals[i] ?? `#${i + 1}`}</span>
+                      <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
+                        {member.avatar}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                        <p className="text-[11px] text-muted-foreground">{member.role}</p>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex-1 flex flex-wrap items-center gap-4 sm:gap-6">
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-foreground">{member.total}</p>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Totaal</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-primary">{member.active}</p>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Actief</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-green-400">{member.completed}</p>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Afgehandeld</p>
+                      </div>
+
+                      {/* Progress bar */}
+                      <div className="flex-1 min-w-[100px]">
+                        <div className="h-2 rounded-full bg-secondary/50 overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-500"
+                            style={{ width: `${(member.total / maxTotal) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Current activity */}
+                      <div className="text-right min-w-[140px]">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Bezig met</p>
+                        <p className="text-xs font-medium text-foreground">{member.currentStage}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };
