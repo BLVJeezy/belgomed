@@ -68,7 +68,7 @@ const AboutSection = () => {
             </h3>
             <div className="space-y-5 text-muted-foreground leading-relaxed text-sm lg:text-base">
               <p>
-                Als <strong className="text-foreground">GDP-gecertificeerde Belgische groothandel</strong> garandeert Belgomed BV constante temperatuurmonitoring en naleving van de hoogste hygiënestandaarden.
+                In de zorg is een goed gevulde voorraad medicijnen cruciaal. Tekorten leiden niet alleen tot uitgestelde behandelingen, maar verhogen ook de druk op zorgverleners en brengen extra risico's voor patiënten met zich mee. <strong className="text-foreground">Belgomed BV</strong> helpt dit te voorkomen door apotheken, ziekenhuizen en andere zorginstellingen te voorzien van de juiste producten, met stabiele leveringen, concurrerende prijzen en volledig beheer van logistiek en administratie.
               </p>
               <p>
                 Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-foreground">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
