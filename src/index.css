@@ -213,7 +213,10 @@
 }
 
 .animate-scroll-infinite {
-  animation: scrollInfinite 20s linear infinite;
+  animation: scrollInfinite 30s linear infinite;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .animate-scroll-infinite:hover {
