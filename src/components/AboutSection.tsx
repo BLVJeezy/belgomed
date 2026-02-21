@@ -106,26 +106,6 @@ const AboutSection = () => {
         </div>
       </section>
 
-      {/* Certification Grid */}
-      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-            {[
-              { value: "45+", label: "Jaren Ervaring", desc: "Expertise in export naar Centraal-Afrika.", borderColor: "border-primary" },
-              { value: "FAGG", label: "Regulering", desc: "Strikte naleving van alle farmaceutische wetgeving.", borderColor: "border-primary/50" },
-              { value: "WDA", label: "Licensed", desc: "Uw geautoriseerde groothandel voor medicijnen.", borderColor: "border-white/20" },
-            ].map((card, i) => (
-              <ScrollReveal key={card.value} delay={i * 0.15}>
-                <div className={`p-8 lg:p-10 bg-white/5 border border-white/10 border-t-4 ${card.borderColor} backdrop-blur-sm`}>
-                  <div className="text-3xl font-black mb-3 text-white">{card.value}</div>
-                  <p className="text-[10px] uppercase font-black text-white/40 tracking-widest mb-2">{card.label}</p>
-                  <p className="text-xs text-white/50 italic">{card.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Timeline */}
       <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
