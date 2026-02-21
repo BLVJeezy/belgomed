@@ -50,6 +50,9 @@ const AboutSection = () => {
                 Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-white">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
               </p>
             </div>
+            <a href="#contact" className="inline-block mt-8 px-8 py-3 bg-primary text-primary-foreground font-black uppercase text-sm tracking-widest hover:bg-primary/90 transition-colors rounded-sm">
+              Neem Contact Op
+            </a>
           </div>
           <div className="aspect-square relative overflow-hidden group rounded-sm">
             <img src={pharmacyImage} alt="Belgische apotheek" className="absolute inset-0 w-full h-full object-cover" />
