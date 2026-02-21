@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import StatsCounter from "@/components/StatsCounter";
 import ComplianceBar from "@/components/ComplianceBar";
 import ServiceGrid from "@/components/ServiceGrid";
-import QualityStatement from "@/components/QualityStatement";
+
 import AboutSection from "@/components/AboutSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ const Index = () => {
       <StatsCounter />
       <ComplianceBar />
       <ServiceGrid />
-      <QualityStatement />
+      
       
       <AboutSection />
       <ContactForm />
