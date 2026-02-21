@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -41,11 +42,13 @@ const teamMembers = [
 ];
 
 const Leads = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [newLeadAlert, setNewLeadAlert] = useState(false);
   const [newLeadCount, setNewLeadCount] = useState(0);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const assigneeFilter = searchParams.get("assignee");
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -112,17 +115,40 @@ const Leads = () => {
     a.click();
   };
 
+  const filteredLeads = assigneeFilter
+    ? leads.filter((l) => l.assignee === assigneeFilter)
+    : leads;
+
   const pipelineCounts = {
-    nieuw: leads.filter((l) => l.stage === "nieuw").length,
-    in_behandeling: leads.filter((l) => l.stage === "in_behandeling").length,
-    wacht_op_vergunning: leads.filter((l) => l.stage === "wacht_op_vergunning").length,
-    offerte_gestuurd: leads.filter((l) => l.stage === "offerte_gestuurd").length,
-    afgehandeld: leads.filter((l) => l.stage === "afgehandeld").length,
+    nieuw: filteredLeads.filter((l) => l.stage === "nieuw").length,
+    in_behandeling: filteredLeads.filter((l) => l.stage === "in_behandeling").length,
+    wacht_op_vergunning: filteredLeads.filter((l) => l.stage === "wacht_op_vergunning").length,
+    offerte_gestuurd: filteredLeads.filter((l) => l.stage === "offerte_gestuurd").length,
+    afgehandeld: filteredLeads.filter((l) => l.stage === "afgehandeld").length,
   };
+
+  const clearFilter = () => {
+    searchParams.delete("assignee");
+    setSearchParams(searchParams);
+  };
+
+  const filterName = assigneeFilter
+    ? teamMembers.find((t) => t.value === assigneeFilter)?.label ?? assigneeFilter
+    : null;
 
   return (
     <div className="p-6 lg:p-8 space-y-6 max-w-[1400px]">
-      {/* New lead alert banner */}
+      {/* Filter banner */}
+      {filterName && (
+        <div className="flex items-center justify-between bg-primary/10 border border-primary/30 rounded-lg px-5 py-3">
+          <span className="text-sm font-medium text-foreground">
+            🔍 Filter actief: leads van <span className="text-primary font-semibold">{filterName}</span>
+          </span>
+          <button onClick={clearFilter} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground bg-secondary/50 px-3 py-1.5 rounded-md">
+            <X className="w-3 h-3" /> Wis filter
+          </button>
+        </div>
+      )}
       {newLeadAlert && (
         <div className="flex items-center justify-between bg-primary/10 border border-primary/30 rounded-lg px-5 py-3 animate-in fade-in">
           <div className="flex items-center gap-3">
@@ -177,13 +203,13 @@ const Leads = () => {
         <CardHeader className="pb-3">
           <CardTitle className="text-lg text-foreground flex items-center gap-2">
             <FileText className="w-5 h-5 text-primary" />
-            Alle Leads ({leads.length})
+            Alle Leads ({filteredLeads.length}{assigneeFilter ? ` van ${filterName}` : ""})
           </CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
             <p className="text-muted-foreground text-sm py-8 text-center">Laden...</p>
-          ) : leads.length === 0 ? (
+          ) : filteredLeads.length === 0 ? (
             <div className="text-center py-12">
               <Users className="w-12 h-12 text-muted-foreground/30 mx-auto mb-3" />
               <p className="text-muted-foreground text-sm">Nog geen leads ontvangen.</p>
@@ -203,7 +229,7 @@ const Leads = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {leads.map((lead) => (
+                  {filteredLeads.map((lead) => (
                     <TableRow key={lead.id} className="border-border/20">
                       <TableCell>
                         <div className="font-medium text-foreground">{lead.bedrijfsnaam}</div>
