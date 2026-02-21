@@ -4,6 +4,7 @@ import ComplianceBar from "@/components/ComplianceBar";
 import ServiceGrid from "@/components/ServiceGrid";
 import QualityStatement from "@/components/QualityStatement";
 import ColdChainDashboard from "@/components/ColdChainDashboard";
+import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
       <ServiceGrid />
       <QualityStatement />
       <ColdChainDashboard />
+      <ContactForm />
       <Footer />
     </div>
   );
