@@ -1,6 +1,7 @@
 import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross, Hospital, Truck, Package, Users, Cog, Lightbulb, ClipboardList } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
+import ServiceGrid from "@/components/ServiceGrid";
 
 const timelineEvents = [
 { year: "1974", title: "Oprichting", desc: "Belgomed wordt opgericht als farmaceutische groothandel in België." },
@@ -131,6 +132,8 @@ const AboutSection = () => {
           </div>
         </div>
       </section>
+
+      <ServiceGrid />
 
       {/* Onze Diensten */}
       <section className="py-14 md:py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-5 md:px-6 lg:px-12">
