@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import StatsCounter from "@/components/StatsCounter";
-import ComplianceBar from "@/components/ComplianceBar";
 
 
 import AboutSection from "@/components/AboutSection";
@@ -14,7 +13,6 @@ const Index = () => {
       <Header />
       <HeroSection />
       <StatsCounter />
-      <ComplianceBar />
       
       
       
