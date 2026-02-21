@@ -27,11 +27,11 @@ const HeroSection = () => {
       {/* Radial glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
 
-      <div className="container mx-auto px-6 pt-36 pb-24 relative z-10">
+      <div className="container mx-auto px-5 md:px-6 pt-28 md:pt-36 pb-16 md:pb-24 relative z-10">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 mb-6 fade-up">
+          <div className="flex items-center gap-2 mb-4 md:mb-6 fade-up">
             <ShieldCheck className="w-4 h-4 text-primary" />
-            <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
+            <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-medium">
               GDP & WDA Gecertificeerd
             </span>
           </div>
@@ -39,25 +39,25 @@ const HeroSection = () => {
           <img
             src={logoHero}
             alt="Belgomed — Betrouwbaar en Belgisch, voor uw gezondheid"
-            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto mb-6 fade-up fade-up-delay-1 dark:invert dark:hue-rotate-180"
+            className="max-w-[280px] md:max-w-lg lg:max-w-xl w-full h-auto mb-4 md:mb-6 fade-up fade-up-delay-1 dark:invert dark:hue-rotate-180"
           />
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 fade-up fade-up-delay-2">
+          <p className="text-base md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-8 md:mb-10 fade-up fade-up-delay-2">
             Belgomed BV: Uw vertrouwde medische groothandel met GDP en WDA
             vergunning. Kwaliteit, compliance en betrouwbare distributie.
           </p>
 
-          <div className="flex flex-wrap gap-4 fade-up fade-up-delay-3">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 fade-up fade-up-delay-3">
             <a
               href="#diensten"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm tracking-wide uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_20px_hsl(180_100%_40%/0.3)]"
+              className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm tracking-wide uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_20px_hsl(180_100%_40%/0.3)]"
             >
               Onze Diensten
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-border text-foreground font-semibold text-sm tracking-wide uppercase hover:border-primary/50 hover:text-primary transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-lg border border-border text-foreground font-semibold text-sm tracking-wide uppercase hover:border-primary/50 hover:text-primary transition-all duration-300"
             >
               Contact
             </a>

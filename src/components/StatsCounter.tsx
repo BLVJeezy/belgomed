@@ -44,7 +44,7 @@ const Counter = ({ end, prefix = "", suffix = "", label, duration = 3000 }: Coun
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
+      <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-primary">
         {prefix}{formatNumber(count)}{suffix}
       </div>
       <p className="text-sm md:text-base text-muted-foreground mt-2 max-w-[200px] mx-auto">
@@ -56,9 +56,9 @@ const Counter = ({ end, prefix = "", suffix = "", label, duration = 3000 }: Coun
 
 const StatsCounter = () => {
   return (
-    <section className="py-16 lg:py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+    <section className="py-10 md:py-16 lg:py-20 bg-background">
+      <div className="container mx-auto px-5 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
           <Counter end={20000} prefix="+" suffix="" label="medische hulpmiddelen in voorraad" />
           <Counter end={10000} prefix="+" suffix="" label="leveringen per jaar" />
           <Counter end={250} prefix="+" suffix="" label="ziekenhuizen, rusthuizen & apothekers" />

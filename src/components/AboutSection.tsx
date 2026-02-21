@@ -68,11 +68,11 @@ const AboutSection = () => {
     <div id="overons">
 
       {/* Expertise */}
-      <section className="py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-6 lg:px-12">
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      <section className="py-14 md:py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-5 md:px-6 lg:px-12">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <ScrollReveal>
-            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Onze Expertise</p>
-            <h3 className="text-3xl font-black text-foreground dark:text-white mb-8 uppercase leading-none lg:text-2xl">
+            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4">Onze Expertise</p>
+            <h3 className="text-2xl md:text-3xl font-black text-foreground dark:text-white mb-6 md:mb-8 uppercase leading-none lg:text-2xl">
               Jouw partner voor een <br />zorgeloos medicijnbeheer
             </h3>
             <div className="space-y-5 text-muted-foreground dark:text-white/60 leading-relaxed text-sm lg:text-base">
@@ -103,8 +103,8 @@ const AboutSection = () => {
 
 
       {/* Sectoren - Infinity Scroll */}
-      <section className="py-16 lg:py-20 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12 mb-10">
+      <section className="py-12 md:py-16 lg:py-20 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] overflow-hidden">
+        <div className="container mx-auto px-5 md:px-6 lg:px-12 mb-8 md:mb-10">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Wie We Bedienen</p>
             <h3 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-0 uppercase leading-none text-center">
@@ -129,11 +129,11 @@ const AboutSection = () => {
       </section>
 
       {/* Values / Pillars */}
-      <section className="py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-6 lg:px-12">
+      <section className="py-14 md:py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-5 md:px-6 lg:px-12">
         <div className="container mx-auto">
           <ScrollReveal>
-            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Onze Waarden</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-16 uppercase leading-none text-center">
+            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4 text-center">Onze Waarden</p>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-10 md:mb-16 uppercase leading-none text-center">
               Drie Pijlers
             </h3>
           </ScrollReveal>

@@ -29,8 +29,8 @@ const services = [
 
 const ServiceGrid = () => {
   return (
-    <section id="diensten" className="py-24 relative">
-      <div className="container mx-auto px-6">
+    <section id="diensten" className="py-14 md:py-24 relative">
+      <div className="container mx-auto px-5 md:px-6">
         <div className="text-center mb-16 fade-up">
           <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
             Onze Diensten
