@@ -5,6 +5,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+
+const serviceOptions = [
+  { value: "RX", label: "Medicijnen op voorschrift (RX)" },
+  { value: "OTC", label: "OTC / Vrije verkoop" },
+  { value: "Medical Devices", label: "Medische Hulpmiddelen" },
+];
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -15,25 +22,52 @@ const ContactForm = () => {
     phone: "",
     subject: "",
     message: "",
+    service: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate submission
-    setTimeout(() => {
-      toast({
-        title: "Bericht verzonden",
-        description: "We nemen zo snel mogelijk contact met u op.",
+    try {
+      const { error } = await supabase.from("leads").insert({
+        bedrijfsnaam: formData.subject || formData.name,
+        contact_naam: formData.name.trim().slice(0, 100),
+        contact_email: formData.email.trim().slice(0, 255),
+        telefoon: formData.phone.trim().slice(0, 20),
+        sector: formData.service || "RX",
+        service_type: formData.service || null,
+        bericht: formData.message.trim().slice(0, 2000),
+        land: "België",
+        stage: "nieuw" as const,
       });
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+
+      if (error) {
+        toast({
+          title: "Fout",
+          description: "Er ging iets mis. Probeer het opnieuw.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Aanvraag verzonden ✓",
+          description: "Uw offerte-aanvraag is ontvangen. We nemen spoedig contact op.",
+        });
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "", service: "" });
+      }
+    } catch {
+      toast({
+        title: "Fout",
+        description: "Verbindingsfout. Probeer het later opnieuw.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -41,10 +75,10 @@ const ContactForm = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Contacteer <span className="gradient-accent-text">Ons</span>
+            Offerte <span className="gradient-accent-text">Aanvragen</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Heeft u vragen over onze diensten? Neem gerust contact met ons op.
+            Vraag een GDP-gecertificeerde offerte aan. Wij nemen binnen 24 uur contact op.
           </p>
         </div>
 
@@ -91,13 +125,13 @@ const ContactForm = () => {
             <form onSubmit={handleSubmit} className="glass-card p-6 space-y-5">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Naam *</Label>
+                  <Label htmlFor="name">Naam / Bedrijf *</Label>
                   <Input
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Uw naam"
+                    placeholder="Uw naam of bedrijfsnaam"
                     required
                     maxLength={100}
                   />
@@ -131,17 +165,34 @@ const ContactForm = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Onderwerp *</Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
+                  <Label htmlFor="service">Productgroep *</Label>
+                  <select
+                    id="service"
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
-                    placeholder="Onderwerp"
                     required
-                    maxLength={150}
-                  />
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <option value="">Selecteer type...</option>
+                    {serviceOptions.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="subject">Onderwerp *</Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Bijv. Offerte antibiotica DRC"
+                  required
+                  maxLength={150}
+                />
               </div>
 
               <div className="space-y-2">
@@ -151,7 +202,7 @@ const ContactForm = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Uw bericht..."
+                  placeholder="Beschrijf uw aanvraag..."
                   rows={5}
                   required
                   maxLength={2000}
@@ -160,7 +211,7 @@ const ContactForm = () => {
 
               <Button type="submit" className="w-full gap-2" size="lg" disabled={isSubmitting}>
                 <Send className="h-4 w-4" />
-                {isSubmitting ? "Verzenden..." : "Verstuur bericht"}
+                {isSubmitting ? "Verzenden..." : "Verstuur naar Belgomed Admin"}
               </Button>
             </form>
           </div>
