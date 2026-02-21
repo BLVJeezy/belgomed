@@ -1,4 +1,4 @@
-import { Shield, Award, FileCheck } from "lucide-react";
+import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross, Hospital } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
 
@@ -14,6 +14,15 @@ const pillars = [
 { icon: Shield, title: "Betrouwbaarheid", desc: "Decennialange ervaring als stabiele partner in farmaceutische logistiek." },
 { icon: Award, title: "Kwaliteit", desc: "GDP-gecertificeerde processen garanderen de hoogste standaarden." },
 { icon: FileCheck, title: "Transparantie", desc: "Volledige traceerbaarheid en open communicatie met alle partners." }];
+
+const sectors = [
+  { icon: Cross, label: "Apotheken" },
+  { icon: Hospital, label: "Ziekenhuizen" },
+  { icon: Building2, label: "Woonzorgcentra" },
+  { icon: Brain, label: "Psychiatrische instellingen" },
+  { icon: Home, label: "Polikliniek" },
+  { icon: HeartHandshake, label: "NGO" },
+];
 
 
 const useScrollReveal = () => {
@@ -92,6 +101,32 @@ const AboutSection = () => {
       </section>
 
 
+
+      {/* Sectoren - Infinity Scroll */}
+      <section className="py-16 lg:py-20 bg-gradient-to-r from-[#001a1a] to-[#004d4d] overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12 mb-10">
+          <ScrollReveal>
+            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Wie We Bedienen</p>
+            <h3 className="text-3xl lg:text-4xl font-black text-white mb-0 uppercase leading-none text-center">
+              Onze Sectoren
+            </h3>
+          </ScrollReveal>
+        </div>
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#001a1a] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#004d4d] to-transparent z-10" />
+          <div className="flex animate-scroll-infinite">
+            {[...sectors, ...sectors, ...sectors].map((sector, i) => (
+              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-4 px-10 lg:px-14">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+                  <sector.icon className="w-10 h-10 lg:w-12 lg:h-12 text-primary" strokeWidth={1.5} />
+                </div>
+                <span className="text-sm font-bold text-white/80 whitespace-nowrap">{sector.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Values / Pillars */}
       <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
