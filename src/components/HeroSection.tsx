@@ -9,9 +9,9 @@ const HeroSection = () => {
         <img
           src={heroImage}
           alt="Farmaceutische producten en medicatie"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-50"
         />
-        <div className="absolute inset-0 gradient-hero opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
       </div>
 
       {/* Background grid pattern */}
