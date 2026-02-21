@@ -1,4 +1,4 @@
-import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross, Hospital } from "lucide-react";
+import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross, Hospital, Truck, Package, Users, Cog, Lightbulb, ClipboardList } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
 
@@ -10,10 +10,14 @@ const timelineEvents = [
 { year: "Heden", title: "Marktleider", desc: "45+ jaar ervaring, opererend vanuit ons distributiecentrum in Hasselt." }];
 
 
-const pillars = [
-{ icon: Shield, title: "Betrouwbaarheid", desc: "Decennialange ervaring als stabiele partner in farmaceutische logistiek." },
-{ icon: Award, title: "Kwaliteit", desc: "GDP-gecertificeerde processen garanderen de hoogste standaarden." },
-{ icon: FileCheck, title: "Transparantie", desc: "Volledige traceerbaarheid en open communicatie met alle partners." }];
+const diensten = [
+  { icon: Truck, title: "Snelle landelijke distributie", desc: "In heel België zorgen wij voor een snelle en veilige levering van medicijnen." },
+  { icon: Package, title: "Stockbeheer met reserve", desc: "Met een efficiënt stockbeheer en een noodreserve voorkomen wij tekorten, ook in crisissituaties." },
+  { icon: Users, title: "Groepsaankoop en betere voorwaarden", desc: "Door een gezamenlijke aankoop bieden wij zorginstellingen betere voorwaarden en lagere kosten." },
+  { icon: Cog, title: "Geoptimaliseerde processen", desc: "We nemen logistieke en administratieve taken uit handen, zodat zorgverleners meer ruimte krijgen om zich op patiënten te focussen." },
+  { icon: Lightbulb, title: "Innovatieve oplossingen voor de zorg", desc: "Met innovatieve tools maken wij ons voorraadbeheer en distributie sneller, transparanter en betrouwbaarder." },
+  { icon: ClipboardList, title: "Administratieve ontzorging", desc: "Wij nemen administratieve taken rondom medicijnbeheer en bestellingen uit handen, zodat zorgverleners zich volledig kunnen concentreren op hun patiënten." },
+];
 
 const sectors = [
   { icon: Cross, label: "Apotheken" },
@@ -128,22 +132,22 @@ const AboutSection = () => {
         </div>
       </section>
 
-      {/* Values / Pillars */}
+      {/* Onze Diensten */}
       <section className="py-14 md:py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-5 md:px-6 lg:px-12">
         <div className="container mx-auto">
           <ScrollReveal>
-            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4 text-center">Onze Waarden</p>
+            <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4 text-center">Wat Wij Doen</p>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-10 md:mb-16 uppercase leading-none text-center">
-              Drie Pijlers
+              Onze Diensten
             </h3>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pillars.map((p, i) =>
-            <ScrollReveal key={p.title} delay={i * 0.15}>
-                <div className="p-8 lg:p-10 border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 backdrop-blur-sm rounded-sm text-center">
-                  <p.icon className="w-8 h-8 text-primary mx-auto mb-5" />
-                  <h4 className="text-lg font-black text-foreground dark:text-white uppercase tracking-wide mb-3">{p.title}</h4>
-                  <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{p.desc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {diensten.map((d, i) =>
+              <ScrollReveal key={d.title} delay={i * 0.1}>
+                <div className="p-6 md:p-8 lg:p-10 border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 backdrop-blur-sm rounded-sm h-full">
+                  <d.icon className="w-8 h-8 text-primary mb-4 md:mb-5" strokeWidth={1.5} />
+                  <h4 className="text-sm md:text-base font-black text-foreground dark:text-white uppercase tracking-wide mb-2 md:mb-3">{d.title}</h4>
+                  <p className="text-xs md:text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{d.desc}</p>
                 </div>
               </ScrollReveal>
             )}
