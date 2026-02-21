@@ -64,7 +64,7 @@ const AboutSection = () => {
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">Onze Expertise</p>
             <h3 className="text-3xl lg:text-4xl font-black text-foreground mb-8 uppercase leading-none">
-              GDP-Gecertificeerde <br />Uitmuntendheid
+              Jouw partner voor een <br />zorgeloos medicijnbeheer
             </h3>
             <div className="space-y-5 text-muted-foreground leading-relaxed text-sm lg:text-base">
               <p>
