@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import heroImage from "@/assets/hero-medication.jpg";
-
+import logoHero from "@/assets/logo-belgomed-hero.png";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center gradient-hero overflow-hidden">
@@ -36,11 +36,11 @@ const HeroSection = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-6 fade-up fade-up-delay-1">
-            VITALITY
-            <br />
-            <span className="gradient-accent-text">DELIVERED.</span>
-          </h1>
+          <img
+            src={logoHero}
+            alt="Belgomed — Betrouwbaar en Belgisch, voor uw gezondheid"
+            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto mb-6 fade-up fade-up-delay-1"
+          />
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 fade-up fade-up-delay-2">
             Belgomed BV: Uw vertrouwde medische groothandel met GDP en WDA
