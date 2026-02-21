@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LayoutDashboard, Users, Settings, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Users, Settings, LogOut, Menu, X, Trophy } from "lucide-react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import logoB from "@/assets/logo-b.png";
@@ -7,6 +7,7 @@ import logoB from "@/assets/logo-b.png";
 const navItems = [
   { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Leads", to: "/admin/leads", icon: Users },
+  { label: "Leaderboard", to: "/admin/leaderboard", icon: Trophy },
   { label: "Settings", to: "/admin/settings", icon: Settings },
 ];
 
