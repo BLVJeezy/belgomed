@@ -39,7 +39,7 @@ const HeroSection = () => {
           <img
             src={logoHero}
             alt="Belgomed — Betrouwbaar en Belgisch, voor uw gezondheid"
-            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto mb-6 fade-up fade-up-delay-1"
+            className="max-w-md md:max-w-lg lg:max-w-xl w-full h-auto mb-6 fade-up fade-up-delay-1 dark:invert dark:hue-rotate-180"
           />
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 fade-up fade-up-delay-2">
