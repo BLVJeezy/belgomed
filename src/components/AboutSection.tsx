@@ -107,19 +107,19 @@ const AboutSection = () => {
       </section>
 
       {/* Certification Grid */}
-      <section className="py-20 lg:py-24 bg-slate-50 border-y border-slate-200 px-6 lg:px-12">
+      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {[
               { value: "45+", label: "Jaren Ervaring", desc: "Expertise in export naar Centraal-Afrika.", borderColor: "border-primary" },
-              { value: "FAGG", label: "Regulering", desc: "Strikte naleving van alle farmaceutische wetgeving.", borderColor: "border-[#001a1a]" },
-              { value: "WDA", label: "Licensed", desc: "Uw geautoriseerde groothandel voor medicijnen.", borderColor: "border-slate-300" },
+              { value: "FAGG", label: "Regulering", desc: "Strikte naleving van alle farmaceutische wetgeving.", borderColor: "border-primary/50" },
+              { value: "WDA", label: "Licensed", desc: "Uw geautoriseerde groothandel voor medicijnen.", borderColor: "border-white/20" },
             ].map((card, i) => (
               <ScrollReveal key={card.value} delay={i * 0.15}>
-                <div className={`p-8 lg:p-10 bg-white shadow-sm border-t-4 ${card.borderColor}`}>
-                  <div className="text-3xl font-black mb-3 text-[#001a1a]">{card.value}</div>
-                  <p className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">{card.label}</p>
-                  <p className="text-xs text-slate-500 italic">{card.desc}</p>
+                <div className={`p-8 lg:p-10 bg-white/5 border border-white/10 border-t-4 ${card.borderColor} backdrop-blur-sm`}>
+                  <div className="text-3xl font-black mb-3 text-white">{card.value}</div>
+                  <p className="text-[10px] uppercase font-black text-white/40 tracking-widest mb-2">{card.label}</p>
+                  <p className="text-xs text-white/50 italic">{card.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -128,25 +128,25 @@ const AboutSection = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 lg:py-24 bg-white px-6 lg:px-12">
+      <section className="py-20 lg:py-24 bg-gradient-to-r from-[#001a1a] to-[#004d4d] px-6 lg:px-12">
         <div className="container mx-auto max-w-4xl">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">Onze Geschiedenis</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-[#001a1a] mb-16 uppercase leading-none text-center">
+            <h3 className="text-3xl lg:text-4xl font-black text-white mb-16 uppercase leading-none text-center">
               45+ Jaar Groei
             </h3>
           </ScrollReveal>
           <div className="relative">
-            <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-slate-200 -translate-x-1/2" />
+            <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2" />
             <div className="space-y-12">
               {timelineEvents.map((event, i) => (
                 <ScrollReveal key={event.year} delay={i * 0.1}>
                   <div className={`relative flex items-start gap-8 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
-                    <div className="absolute left-4 lg:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1/2 mt-1.5 ring-4 ring-white z-10" />
+                    <div className="absolute left-4 lg:left-1/2 w-3 h-3 bg-primary rounded-full -translate-x-1/2 mt-1.5 ring-4 ring-[#001a1a] z-10" />
                     <div className={`ml-12 lg:ml-0 lg:w-[calc(50%-2rem)] ${i % 2 === 0 ? "lg:text-right lg:pr-12" : "lg:text-left lg:pl-12 lg:ml-auto"}`}>
                       <span className="text-xs font-black text-primary uppercase tracking-widest">{event.year}</span>
-                      <h4 className="text-lg font-black text-[#001a1a] uppercase mt-1">{event.title}</h4>
-                      <p className="text-sm text-slate-500 mt-1">{event.desc}</p>
+                      <h4 className="text-lg font-black text-white uppercase mt-1">{event.title}</h4>
+                      <p className="text-sm text-white/50 mt-1">{event.desc}</p>
                     </div>
                   </div>
                 </ScrollReveal>
