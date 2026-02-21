@@ -1,8 +1,19 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import heroImage from "@/assets/hero-medication.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center gradient-hero overflow-hidden">
+      {/* Hero background image */}
+      <div className="absolute inset-0">
+        <img
+          src={heroImage}
+          alt="Farmaceutische producten en medicatie"
+          className="w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 gradient-hero opacity-80" />
+      </div>
+
       {/* Background grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
