@@ -52,7 +52,9 @@ export type Database = {
       }
       leads: {
         Row: {
+          assignee: string | null
           bedrijfsnaam: string
+          bericht: string | null
           contact_email: string | null
           contact_naam: string | null
           created_at: string
@@ -60,11 +62,16 @@ export type Database = {
           land: string
           notities: string | null
           sector: string
+          service_type: string | null
+          stage: Database["public"]["Enums"]["lead_stage"]
           status: Database["public"]["Enums"]["lead_status"]
+          telefoon: string | null
           updated_at: string
         }
         Insert: {
+          assignee?: string | null
           bedrijfsnaam: string
+          bericht?: string | null
           contact_email?: string | null
           contact_naam?: string | null
           created_at?: string
@@ -72,11 +79,16 @@ export type Database = {
           land?: string
           notities?: string | null
           sector?: string
+          service_type?: string | null
+          stage?: Database["public"]["Enums"]["lead_stage"]
           status?: Database["public"]["Enums"]["lead_status"]
+          telefoon?: string | null
           updated_at?: string
         }
         Update: {
+          assignee?: string | null
           bedrijfsnaam?: string
+          bericht?: string | null
           contact_email?: string | null
           contact_naam?: string | null
           created_at?: string
@@ -84,7 +96,10 @@ export type Database = {
           land?: string
           notities?: string | null
           sector?: string
+          service_type?: string | null
+          stage?: Database["public"]["Enums"]["lead_stage"]
           status?: Database["public"]["Enums"]["lead_status"]
+          telefoon?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -122,6 +137,12 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      lead_stage:
+        | "nieuw"
+        | "in_behandeling"
+        | "wacht_op_vergunning"
+        | "offerte_gestuurd"
+        | "afgehandeld"
       lead_status: "new" | "pending" | "qualified" | "closed"
     }
     CompositeTypes: {
@@ -251,6 +272,13 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      lead_stage: [
+        "nieuw",
+        "in_behandeling",
+        "wacht_op_vergunning",
+        "offerte_gestuurd",
+        "afgehandeld",
+      ],
       lead_status: ["new", "pending", "qualified", "closed"],
     },
   },
