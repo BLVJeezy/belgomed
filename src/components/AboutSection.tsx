@@ -71,7 +71,7 @@ const AboutSection = () => {
                 In de zorg is een goed gevulde voorraad medicijnen cruciaal. Tekorten leiden niet alleen tot uitgestelde behandelingen, maar verhogen ook de druk op zorgverleners en brengen extra risico's voor patiënten met zich mee. <strong className="text-foreground">Belgomed BV</strong> helpt dit te voorkomen door apotheken, ziekenhuizen en andere zorginstellingen te voorzien van de juiste producten, met stabiele leveringen, concurrerende prijzen en volledig beheer van logistiek en administratie.
               </p>
               <p>
-                Al onze processen voldoen strikt aan de hoge eisen die worden opgelegd door het <strong className="text-foreground">FAGG</strong>. Wij bieden een breed gamma aan OTC, RX-medicatie en medische hulpmiddelen.
+                Zo kunnen zorgverleners zich concentreren op wat écht telt: het welzijn van hun patiënten. We werken nauw samen met onze klanten en logistieke partners om processen efficiënt en betrouwbaar te laten verlopen. Met een strakke planning, een goedgevulde voorraad en doelgerichte oplossingen zorgen we dat medicijnen en medische hulpmiddelen altijd beschikbaar zijn.
               </p>
             </div>
             <a href="#contact" className="inline-block mt-8 px-8 py-3 bg-primary text-primary-foreground font-black uppercase text-sm tracking-widest hover:bg-primary/90 transition-colors rounded-sm">
