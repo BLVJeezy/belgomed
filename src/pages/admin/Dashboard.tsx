@@ -1,156 +1,318 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FileText, Thermometer, Package, TrendingUp, Users, ShieldCheck } from "lucide-react";
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  Eye, Users, MousePointerClick, Clock, ArrowUpRight, ArrowDownRight,
+  Globe, Smartphone, Monitor, TrendingUp,
+} from "lucide-react";
+import {
+  AreaChart, Area, BarChart, Bar, LineChart, Line,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell,
 } from "recharts";
 
-const mockChartData = [
-  { month: "Jan", exportVolume: 85, gdpCompliance: 99.2 },
-  { month: "Feb", exportVolume: 92, gdpCompliance: 99.5 },
-  { month: "Mar", exportVolume: 102, gdpCompliance: 99.3 },
-  { month: "Apr", exportVolume: 110, gdpCompliance: 99.7 },
-  { month: "May", exportVolume: 118, gdpCompliance: 99.8 },
-  { month: "Jun", exportVolume: 128, gdpCompliance: 99.8 },
-];
+type Period = "today" | "7d" | "30d";
 
-type Period = "daily" | "weekly" | "monthly";
-
-const statsConfig: Record<Period, { label: string; stats: { title: string; value: string; sub: string; icon: React.ElementType }[] }> = {
-  daily: {
-    label: "Dagelijks",
-    stats: [
-      { title: "Nieuwe Offertes", value: "7", sub: "+3 vs gisteren", icon: FileText },
-      { title: "Cold-chain Stabiliteit", value: "99.8%", sub: "Alle zones stabiel", icon: Thermometer },
-    ],
+const trafficData: Record<Period, { label: string; visitors: string; change: string; up: boolean; pageviews: string; pvChange: string; pvUp: boolean; bounce: string; bChange: string; bUp: boolean; avgTime: string; tChange: string; tUp: boolean }> = {
+  today: {
+    label: "Vandaag",
+    visitors: "342", change: "+18%", up: true,
+    pageviews: "1,247", pvChange: "+12%", pvUp: true,
+    bounce: "38%", bChange: "-3%", bUp: true,
+    avgTime: "2m 45s", tChange: "+8%", tUp: true,
   },
-  weekly: {
-    label: "Wekelijks",
-    stats: [
-      { title: "Export Volume (DRC)", value: "128.5 Ton", sub: "+12% vs vorige week", icon: Package },
-      { title: "Nieuwe Leads", value: "42", sub: "+8 vs vorige week", icon: Users },
-    ],
+  "7d": {
+    label: "7 Dagen",
+    visitors: "2,841", change: "+24%", up: true,
+    pageviews: "9,632", pvChange: "+19%", pvUp: true,
+    bounce: "41%", bChange: "+2%", bUp: false,
+    avgTime: "2m 32s", tChange: "+5%", tUp: true,
   },
-  monthly: {
-    label: "Maandelijks",
-    stats: [
-      { title: "Omzetgroei", value: "+18.2%", sub: "vs vorige maand", icon: TrendingUp },
-      { title: "Partner Acquisitie", value: "5 nieuw", sub: "3 DRC, 1 RW, 1 BU", icon: Users },
-    ],
+  "30d": {
+    label: "30 Dagen",
+    visitors: "11,429", change: "+31%", up: true,
+    pageviews: "38,291", pvChange: "+27%", pvUp: true,
+    bounce: "39%", bChange: "-4%", bUp: true,
+    avgTime: "2m 51s", tChange: "+11%", tUp: true,
   },
 };
 
+const visitorChartData = [
+  { dag: "Ma", bezoekers: 312, pageviews: 890 },
+  { dag: "Di", bezoekers: 428, pageviews: 1240 },
+  { dag: "Wo", bezoekers: 389, pageviews: 1050 },
+  { dag: "Do", bezoekers: 502, pageviews: 1480 },
+  { dag: "Vr", bezoekers: 467, pageviews: 1320 },
+  { dag: "Za", bezoekers: 285, pageviews: 720 },
+  { dag: "Zo", bezoekers: 198, pageviews: 530 },
+];
+
+const topPages = [
+  { page: "/", naam: "Homepage", views: 4821, pct: 38 },
+  { page: "/diensten", naam: "Onze Diensten", views: 2103, pct: 17 },
+  { page: "/contact", naam: "Contact / Offerte", views: 1847, pct: 15 },
+  { page: "/producten", naam: "Producten", views: 1392, pct: 11 },
+  { page: "/licenties", naam: "Licenties & GDP", views: 982, pct: 8 },
+];
+
+const deviceData = [
+  { name: "Desktop", value: 58, color: "hsl(180 100% 40%)" },
+  { name: "Mobile", value: 34, color: "hsl(168 100% 45%)" },
+  { name: "Tablet", value: 8, color: "hsl(180 40% 30%)" },
+];
+
+const countryData = [
+  { land: "België", bezoekers: 4210, vlag: "🇧🇪" },
+  { land: "DR Congo", bezoekers: 3180, vlag: "🇨🇩" },
+  { land: "Nederland", bezoekers: 1420, vlag: "🇳🇱" },
+  { land: "Rwanda", bezoekers: 890, vlag: "🇷🇼" },
+  { land: "Duitsland", bezoekers: 640, vlag: "🇩🇪" },
+];
+
+const hourlyData = Array.from({ length: 24 }, (_, i) => ({
+  uur: `${i.toString().padStart(2, "0")}:00`,
+  bezoekers: Math.round(15 + Math.random() * 45 + (i >= 9 && i <= 17 ? 30 : 0)),
+}));
+
 const Dashboard = () => {
-  const [period, setPeriod] = useState<Period>("weekly");
-  const [leadCount, setLeadCount] = useState(0);
+  const [period, setPeriod] = useState<Period>("7d");
+  const stats = trafficData[period];
 
-  useEffect(() => {
-    const fetchLeadCount = async () => {
-      const { count } = await supabase
-        .from("leads")
-        .select("*", { count: "exact", head: true });
-      setLeadCount(count ?? 0);
-    };
-    fetchLeadCount();
-  }, []);
-
-  const currentStats = statsConfig[period];
+  const statCards = [
+    { title: "Bezoekers", value: stats.visitors, change: stats.change, up: stats.up, icon: Users },
+    { title: "Pageviews", value: stats.pageviews, change: stats.pvChange, up: stats.pvUp, icon: Eye },
+    { title: "Bounce Rate", value: stats.bounce, change: stats.bChange, up: stats.bUp, icon: MousePointerClick },
+    { title: "Gem. Sessieduur", value: stats.avgTime, change: stats.tChange, up: stats.tUp, icon: Clock },
+  ];
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-6 lg:p-8 space-y-6 max-w-[1400px]">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Operational Overview</h1>
-          <p className="text-sm text-muted-foreground">Welkom terug, Jason</p>
+          <h1 className="text-2xl font-bold text-foreground">Website Analytics</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">Verkeer en bezoekersgedrag — belgomed.be</p>
         </div>
-        <div className="flex gap-1 bg-secondary/50 rounded-lg p-1">
-          {(["daily", "weekly", "monthly"] as Period[]).map((p) => (
+        <div className="flex gap-1 bg-secondary/50 rounded-lg p-1 self-start">
+          {(["today", "7d", "30d"] as Period[]).map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-2 rounded-md text-xs font-medium uppercase tracking-wider transition-colors ${
+              className={`px-4 py-2 rounded-md text-xs font-medium transition-colors ${
                 period === p
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {statsConfig[p].label}
+              {trafficData[p].label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Stats cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {currentStats.stats.map((stat) => (
-          <Card key={stat.title} className="glass-card border-border/30">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
-              <stat.icon className="w-5 h-5 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-xs text-primary mt-1">{stat.sub}</p>
+      {/* Stat cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {statCards.map((s) => (
+          <Card key={s.title} className="glass-card border-border/30">
+            <CardContent className="p-5">
+              <div className="flex items-center justify-between mb-3">
+                <s.icon className="w-5 h-5 text-primary/70" />
+                <span className={`flex items-center gap-0.5 text-xs font-medium ${s.up ? "text-green-400" : "text-red-400"}`}>
+                  {s.up ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                  {s.change}
+                </span>
+              </div>
+              <p className="text-2xl lg:text-3xl font-bold text-foreground">{s.value}</p>
+              <p className="text-xs text-muted-foreground mt-1">{s.title}</p>
             </CardContent>
           </Card>
         ))}
-        <Card className="glass-card border-border/30">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">GDP Compliance</CardTitle>
-            <ShieldCheck className="w-5 h-5 text-primary" />
+      </div>
+
+      {/* Main chart + devices */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Visitor trend */}
+        <Card className="glass-card border-border/30 lg:col-span-2">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base text-foreground flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-primary" />
+              Bezoekerstrend
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-foreground">99.8%</p>
-            <p className="text-xs text-primary mt-1">Alle normen voldaan</p>
+            <ResponsiveContainer width="100%" height={280}>
+              <AreaChart data={visitorChartData}>
+                <defs>
+                  <linearGradient id="colorBezoekers" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="hsl(180 100% 40%)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="hsl(180 100% 40%)" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 20% 18%)" />
+                <XAxis dataKey="dag" stroke="hsl(180 15% 55%)" fontSize={12} />
+                <YAxis stroke="hsl(180 15% 55%)" fontSize={12} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "hsl(180 30% 10%)",
+                    border: "1px solid hsl(180 20% 18%)",
+                    borderRadius: "8px",
+                    color: "hsl(180 20% 95%)",
+                    fontSize: "12px",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="bezoekers"
+                  stroke="hsl(180 100% 40%)"
+                  strokeWidth={2}
+                  fill="url(#colorBezoekers)"
+                  name="Bezoekers"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="pageviews"
+                  stroke="hsl(168 100% 45%)"
+                  strokeWidth={2}
+                  dot={false}
+                  strokeDasharray="5 5"
+                  name="Pageviews"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Devices */}
+        <Card className="glass-card border-border/30">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base text-foreground flex items-center gap-2">
+              <Monitor className="w-4 h-4 text-primary" />
+              Apparaten
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center">
+            <ResponsiveContainer width="100%" height={180}>
+              <PieChart>
+                <Pie
+                  data={deviceData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={50}
+                  outerRadius={75}
+                  paddingAngle={4}
+                  dataKey="value"
+                >
+                  {deviceData.map((entry, i) => (
+                    <Cell key={i} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "hsl(180 30% 10%)",
+                    border: "1px solid hsl(180 20% 18%)",
+                    borderRadius: "8px",
+                    color: "hsl(180 20% 95%)",
+                    fontSize: "12px",
+                  }}
+                  formatter={(value: number) => `${value}%`}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="flex gap-4 mt-2">
+              {deviceData.map((d) => (
+                <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: d.color }} />
+                  {d.name} {d.value}%
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Chart */}
-      <Card className="glass-card border-border/30">
-        <CardHeader>
-          <CardTitle className="text-lg text-foreground">Export Volume vs GDP Compliance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={350}>
-            <LineChart data={mockChartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 20% 18%)" />
-              <XAxis dataKey="month" stroke="hsl(180 15% 55%)" fontSize={12} />
-              <YAxis yAxisId="left" stroke="hsl(180 15% 55%)" fontSize={12} />
-              <YAxis yAxisId="right" orientation="right" stroke="hsl(180 15% 55%)" fontSize={12} domain={[98, 100]} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "hsl(180 30% 10%)",
-                  border: "1px solid hsl(180 20% 18%)",
-                  borderRadius: "8px",
-                  color: "hsl(180 20% 95%)",
-                }}
-              />
-              <Legend />
-              <Line
-                yAxisId="left"
-                type="monotone"
-                dataKey="exportVolume"
-                stroke="hsl(180 100% 40%)"
-                strokeWidth={2}
-                dot={{ fill: "hsl(180 100% 40%)", r: 4 }}
-                name="Export Volume (Ton)"
-              />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="gdpCompliance"
-                stroke="hsl(168 100% 45%)"
-                strokeWidth={2}
-                dot={{ fill: "hsl(168 100% 45%)", r: 4 }}
-                name="GDP Compliance (%)"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      {/* Bottom row: Top pages + Countries + Hourly */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Top pages */}
+        <Card className="glass-card border-border/30">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base text-foreground">Top Pagina's</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {topPages.map((p) => (
+              <div key={p.page} className="space-y-1.5">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-foreground truncate mr-2">{p.naam}</span>
+                  <span className="text-muted-foreground text-xs whitespace-nowrap">{p.views.toLocaleString()}</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-secondary/50 overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+                    style={{ width: `${p.pct}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Countries */}
+        <Card className="glass-card border-border/30">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base text-foreground flex items-center gap-2">
+              <Globe className="w-4 h-4 text-primary" />
+              Landen
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {countryData.map((c) => (
+              <div key={c.land} className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-lg">{c.vlag}</span>
+                  <span className="text-sm text-foreground">{c.land}</span>
+                </div>
+                <span className="text-sm font-medium text-muted-foreground">{c.bezoekers.toLocaleString()}</span>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Hourly traffic */}
+        <Card className="glass-card border-border/30">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base text-foreground flex items-center gap-2">
+              <Smartphone className="w-4 h-4 text-primary" />
+              Verkeer per uur
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={hourlyData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(180 20% 18%)" />
+                <XAxis
+                  dataKey="uur"
+                  stroke="hsl(180 15% 55%)"
+                  fontSize={10}
+                  interval={3}
+                />
+                <YAxis stroke="hsl(180 15% 55%)" fontSize={10} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "hsl(180 30% 10%)",
+                    border: "1px solid hsl(180 20% 18%)",
+                    borderRadius: "8px",
+                    color: "hsl(180 20% 95%)",
+                    fontSize: "12px",
+                  }}
+                />
+                <Bar
+                  dataKey="bezoekers"
+                  fill="hsl(180 100% 40%)"
+                  radius={[3, 3, 0, 0]}
+                  name="Bezoekers"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
