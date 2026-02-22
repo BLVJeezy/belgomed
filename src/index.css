@@ -203,30 +203,10 @@
   }
 }
 
-@keyframes scrollInfinite {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-.animate-scroll-infinite {
-  animation: scrollInfinite 25s linear infinite;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.animate-scroll-infinite-mobile {
-  animation: scrollInfinite 15s linear infinite;
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.animate-scroll-infinite:hover,
-.animate-scroll-infinite-mobile:hover {
-  animation-play-state: paused;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
