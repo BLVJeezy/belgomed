@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { MessageCircle, X, Send, Bot, User, CheckCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -14,7 +15,7 @@ async function streamChat({
 }: {
   messages: Msg[];
   onDelta: (text: string) => void;
-  onDone: () => void;
+  onDone: (fullText: string) => void;
   onError: (msg: string) => void;
 }) {
   const resp = await fetch(CHAT_URL, {
@@ -36,6 +37,7 @@ async function streamChat({
   const reader = resp.body.getReader();
   const decoder = new TextDecoder();
   let buf = "";
+  let fullText = "";
 
   while (true) {
     const { done, value } = await reader.read();
@@ -49,15 +51,45 @@ async function streamChat({
       if (line.endsWith("\r")) line = line.slice(0, -1);
       if (!line.startsWith("data: ")) continue;
       const json = line.slice(6).trim();
-      if (json === "[DONE]") { onDone(); return; }
+      if (json === "[DONE]") { onDone(fullText); return; }
       try {
         const parsed = JSON.parse(json);
         const content = parsed.choices?.[0]?.delta?.content;
-        if (content) onDelta(content);
+        if (content) { fullText += content; onDelta(content); }
       } catch { buf = line + "\n" + buf; break; }
     }
   }
-  onDone();
+  onDone(fullText);
+}
+
+async function submitLead(leadData: Record<string, string>) {
+  try {
+    const resp = await fetch(CHAT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      },
+      body: JSON.stringify({ action: "submit_lead", leadData }),
+    });
+    return resp.ok;
+  } catch {
+    return false;
+  }
+}
+
+function stripLeadTag(text: string): string {
+  return text.replace(/\[LEAD_CAPTURED\].*?\[\/LEAD_CAPTURED\]/s, "").trim();
+}
+
+function extractLeadData(text: string): Record<string, string> | null {
+  const match = text.match(/\[LEAD_CAPTURED\](.*?)\[\/LEAD_CAPTURED\]/s);
+  if (!match) return null;
+  try {
+    return JSON.parse(match[1]);
+  } catch {
+    return null;
+  }
 }
 
 const ChatBot = () => {
@@ -65,11 +97,31 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [leadSaved, setLeadSaved] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
+
+  const handleLeadCapture = useCallback(async (fullText: string) => {
+    const leadData = extractLeadData(fullText);
+    if (leadData && !leadSaved) {
+      const ok = await submitLead(leadData);
+      if (ok) {
+        setLeadSaved(true);
+        toast.success("Uw gegevens zijn opgeslagen! Een collega neemt spoedig contact met u op.");
+      }
+      // Clean the lead tag from displayed message
+      setMessages((prev) =>
+        prev.map((m, i) =>
+          i === prev.length - 1 && m.role === "assistant"
+            ? { ...m, content: stripLeadTag(m.content) }
+            : m
+        )
+      );
+    }
+  }, [leadSaved]);
 
   const send = async () => {
     const text = input.trim();
@@ -82,12 +134,14 @@ const ChatBot = () => {
     let assistantSoFar = "";
     const upsert = (chunk: string) => {
       assistantSoFar += chunk;
+      // Display without lead tag
+      const display = stripLeadTag(assistantSoFar);
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (last?.role === "assistant") {
-          return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantSoFar } : m));
+          return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: display } : m));
         }
-        return [...prev, { role: "assistant", content: assistantSoFar }];
+        return [...prev, { role: "assistant", content: display }];
       });
     };
 
@@ -95,7 +149,10 @@ const ChatBot = () => {
       await streamChat({
         messages: [...messages, userMsg],
         onDelta: upsert,
-        onDone: () => setLoading(false),
+        onDone: (fullText) => {
+          setLoading(false);
+          handleLeadCapture(fullText);
+        },
         onError: (msg) => {
           upsert(msg);
           setLoading(false);
@@ -106,7 +163,6 @@ const ChatBot = () => {
       setLoading(false);
     }
   };
-
   return (
     <>
       {/* Floating button */}
