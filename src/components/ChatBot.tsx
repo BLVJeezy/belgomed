@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { MessageCircle, X, Send, Bot, User, CheckCircle } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, CheckCircle, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 
@@ -78,50 +78,108 @@ async function submitLead(leadData: Record<string, string>) {
   }
 }
 
-function stripLeadTag(text: string): string {
-  return text.replace(/\[LEAD_CAPTURED\].*?\[\/LEAD_CAPTURED\]/s, "").trim();
+function stripFormTag(text: string): string {
+  return text.replace(/\[SHOW_LEAD_FORM\]/g, "").trim();
 }
 
-function extractLeadData(text: string): Record<string, string> | null {
-  const match = text.match(/\[LEAD_CAPTURED\](.*?)\[\/LEAD_CAPTURED\]/s);
-  if (!match) return null;
-  try {
-    return JSON.parse(match[1]);
-  } catch {
-    return null;
-  }
+function hasLeadFormTag(text: string): boolean {
+  return text.includes("[SHOW_LEAD_FORM]");
 }
+
+const LeadForm = ({ onSubmit, conversationSummary }: { onSubmit: () => void; conversationSummary: string }) => {
+  const [naam, setNaam] = useState("");
+  const [telefoon, setTelefoon] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!naam.trim() || !telefoon.trim() || !email.trim()) {
+      toast.error("Vul alle 3 velden in aub.");
+      return;
+    }
+    setSubmitting(true);
+    const ok = await submitLead({
+      naam: naam.trim(),
+      telefoon: telefoon.trim(),
+      email: email.trim(),
+      bedrijfsnaam: "Via Chatbot",
+      bericht: conversationSummary,
+    });
+    setSubmitting(false);
+    if (ok) {
+      setSubmitted(true);
+      toast.success("Verzoek verstuurd! Een collega neemt spoedig contact op.");
+      onSubmit();
+    } else {
+      toast.error("Kon niet versturen. Probeer opnieuw.");
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="bg-primary/5 border border-primary/20 rounded-xl p-3 flex items-center gap-2 text-sm text-primary">
+        <CheckCircle className="w-4 h-4 flex-shrink-0" />
+        <span>Verzoek verstuurd! We nemen snel contact op.</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-secondary/80 border border-border/50 rounded-xl p-3 space-y-2">
+      <p className="text-xs font-medium text-foreground">Laat uw gegevens achter:</p>
+      <input
+        value={naam}
+        onChange={(e) => setNaam(e.target.value)}
+        placeholder="Naam *"
+        className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+      />
+      <input
+        value={telefoon}
+        onChange={(e) => setTelefoon(e.target.value)}
+        placeholder="Telefoon *"
+        type="tel"
+        className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+      />
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="E-mail *"
+        type="email"
+        className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+      />
+      <button
+        onClick={handleSubmit}
+        disabled={submitting || !naam.trim() || !telefoon.trim() || !email.trim()}
+        className="w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+      >
+        {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+        Verstuur verzoek
+      </button>
+    </div>
+  );
+};
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadSaved, setLeadSaved] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages]);
+  }, [messages, showLeadForm]);
 
-  const handleLeadCapture = useCallback(async (fullText: string) => {
-    const leadData = extractLeadData(fullText);
-    if (leadData && !leadSaved) {
-      const ok = await submitLead(leadData);
-      if (ok) {
-        setLeadSaved(true);
-        toast.success("Uw gegevens zijn opgeslagen! Een collega neemt spoedig contact met u op.");
-      }
-      // Clean the lead tag from displayed message
-      setMessages((prev) =>
-        prev.map((m, i) =>
-          i === prev.length - 1 && m.role === "assistant"
-            ? { ...m, content: stripLeadTag(m.content) }
-            : m
-        )
-      );
-    }
-  }, [leadSaved]);
+  const getConversationSummary = useCallback(() => {
+    return messages
+      .filter((m) => m.role === "user")
+      .map((m) => m.content)
+      .join(" | ")
+      .slice(0, 500);
+  }, [messages]);
 
   const send = async () => {
     const text = input.trim();
@@ -134,8 +192,7 @@ const ChatBot = () => {
     let assistantSoFar = "";
     const upsert = (chunk: string) => {
       assistantSoFar += chunk;
-      // Display without lead tag
-      const display = stripLeadTag(assistantSoFar);
+      const display = stripFormTag(assistantSoFar);
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (last?.role === "assistant") {
@@ -151,7 +208,9 @@ const ChatBot = () => {
         onDelta: upsert,
         onDone: (fullText) => {
           setLoading(false);
-          handleLeadCapture(fullText);
+          if (hasLeadFormTag(fullText) && !leadSaved) {
+            setShowLeadForm(true);
+          }
         },
         onError: (msg) => {
           upsert(msg);
@@ -163,9 +222,9 @@ const ChatBot = () => {
       setLoading(false);
     }
   };
+
   return (
     <>
-      {/* Floating button */}
       <button
         onClick={() => setOpen(!open)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-105"
@@ -174,10 +233,8 @@ const ChatBot = () => {
         {open ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
       </button>
 
-      {/* Chat window */}
       {open && (
         <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[500px] max-h-[calc(100vh-8rem)] bg-background border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
-          {/* Header */}
           <div className="bg-primary text-primary-foreground px-4 py-3 flex items-center gap-3">
             <Bot className="w-5 h-5" />
             <div>
@@ -186,12 +243,11 @@ const ChatBot = () => {
             </div>
           </div>
 
-          {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.length === 0 && (
               <div className="text-center text-muted-foreground text-sm py-8">
                 <Bot className="w-10 h-10 mx-auto mb-3 opacity-40" />
-                <p>Welkom! Stel gerust uw vraag over onze diensten, producten of leveringen.</p>
+                <p>Welkom! Stel gerust uw vraag.</p>
               </div>
             )}
             {messages.map((msg, i) => (
@@ -223,6 +279,15 @@ const ChatBot = () => {
                 )}
               </div>
             ))}
+
+            {/* Lead form inline */}
+            {showLeadForm && !leadSaved && (
+              <LeadForm
+                onSubmit={() => setLeadSaved(true)}
+                conversationSummary={getConversationSummary()}
+              />
+            )}
+
             {loading && messages[messages.length - 1]?.role !== "assistant" && (
               <div className="flex gap-2">
                 <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -235,12 +300,8 @@ const ChatBot = () => {
             )}
           </div>
 
-          {/* Input */}
           <div className="border-t border-border p-3">
-            <form
-              onSubmit={(e) => { e.preventDefault(); send(); }}
-              className="flex gap-2"
-            >
+            <form onSubmit={(e) => { e.preventDefault(); send(); }} className="flex gap-2">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
