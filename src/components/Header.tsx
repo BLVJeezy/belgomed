@@ -2,27 +2,27 @@ import { useState, useRef, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Globe } from "lucide-react";
 import logoHeader from "@/assets/logo-header.png";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useLang } from "@/contexts/LangContext";
 
 const languages = [
-  { code: "NL", label: "Nederlands" },
-  { code: "DE", label: "Deutsch" },
-  { code: "FR", label: "Français" },
-  { code: "EN", label: "English" },
+  { code: "NL" as const, label: "Nederlands" },
+  { code: "DE" as const, label: "Deutsch" },
+  { code: "FR" as const, label: "Français" },
+  { code: "EN" as const, label: "English" },
 ];
-
-const navItems = [
-  { label: "Over Ons", href: "#overons" },
-  { label: "Diensten", href: "#diensten" },
-  { label: "Contact", href: "#contact" },
-];
-
 
 const Header = () => {
-  const [activeLang, setActiveLang] = useState("NL");
+  const { lang, setLang, t } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+
+  const navItems = [
+    { label: t("nav.about"), href: "#overons" },
+    { label: t("nav.services"), href: "#diensten" },
+    { label: t("nav.contact"), href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -36,32 +36,30 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Main nav */}
       <nav className="border-b border-border/30 bg-background/60 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <a href="#" className="flex items-center">
             <img src={logoHeader} alt="Belgomed" className="h-9 w-auto dark:invert dark:hue-rotate-180" />
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) =>
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                 {item.label}
               </a>
-            )}
+            ))}
 
-            {/* Language dropdown */}
             <div className="relative" ref={langRef}>
               <button
                 onClick={() => setLangOpen(!langOpen)}
                 className="flex items-center gap-1.5 px-2 py-0.5 rounded text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Globe className="w-4 h-4" />
-                {activeLang}
+                {lang}
                 <ChevronDown className={`w-3 h-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
               </button>
               {langOpen && (
@@ -69,9 +67,9 @@ const Header = () => {
                   {languages.map((l) => (
                     <button
                       key={l.code}
-                      onClick={() => { setActiveLang(l.code); setLangOpen(false); }}
+                      onClick={() => { setLang(l.code); setLangOpen(false); }}
                       className={`w-full text-left px-3 py-2 text-xs tracking-wide transition-colors ${
-                        activeLang === l.code
+                        lang === l.code
                           ? "text-primary font-semibold bg-primary/10"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                       }`}
@@ -86,54 +84,51 @@ const Header = () => {
 
           <div className="flex items-center gap-1">
             <ThemeToggle />
-            {/* Search toggle */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors">
+              className="p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+            >
               <Search className="w-4 h-4" />
             </button>
-
-            {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors">
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
+            >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* Search bar */}
-        {searchOpen &&
-        <div className="border-t border-border/30 px-6 py-3 bg-background/80 backdrop-blur-xl">
+        {searchOpen && (
+          <div className="border-t border-border/30 px-6 py-3 bg-background/80 backdrop-blur-xl">
             <div className="container mx-auto">
               <input
-              type="text"
-              placeholder="Zoek producten, medicijnen, hulpmiddelen..."
-              className="w-full bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
-              autoFocus />
-
+                type="text"
+                placeholder={t("nav.search")}
+                className="w-full bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+                autoFocus
+              />
             </div>
           </div>
-        }
+        )}
 
-        {/* Mobile nav */}
-        {mobileOpen &&
-        <div className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl px-6 py-4 space-y-3">
-            {navItems.map((item) =>
-          <a
-            key={item.label}
-            href={item.href}
-            onClick={() => setMobileOpen(false)}
-            className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors">
-
+        {mobileOpen && (
+          <div className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl px-6 py-4 space-y-3">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors"
+              >
                 {item.label}
               </a>
-          )}
+            ))}
           </div>
-        }
+        )}
       </nav>
-    </header>);
-
+    </header>
+  );
 };
 
 export default Header;
