@@ -11,9 +11,7 @@ const languages = [
 ];
 
 const navItems = [
-  { label: "Onze Diensten", href: "#diensten" },
   { label: "Over Ons", href: "#overons" },
-  
   { label: "Diensten", href: "#diensten" },
   { label: "Contact", href: "#contact" },
 ];
