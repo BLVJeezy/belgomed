@@ -124,19 +124,16 @@ const ServiceGrid = () => {
         </div>
 
         {/* Live Cold Chain */}
-        <div className="mt-10 glass-card-hover overflow-hidden group fade-up rounded-xl">
+        <div className="mt-10 rounded-xl border border-border/30 dark:border-white/10 bg-card/50 backdrop-blur-sm fade-up">
           <div className="p-6 md:p-8">
-            <div className="flex flex-col md:flex-row items-start gap-6 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-500">
-                <Thermometer className="w-7 h-7 text-primary" />
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <Thermometer className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                <h3 className="text-lg font-semibold tracking-tight text-foreground">Cold Chain Monitoring</h3>
               </div>
-              <div>
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full border border-primary/30 text-primary bg-background/60 backdrop-blur-sm">COLD CHAIN</span>
-                <h3 className="text-xl font-bold tracking-tight text-foreground mt-3">Live Cold Chain Monitoring</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-2 max-w-2xl">
-                  Real-time temperatuurmonitoring voor de volledige supply chain. Onze geavanceerde cold chain technologie garandeert de integriteit van temperatuurgevoelige producten van magazijn tot levering.
-                </p>
-              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">
+                Real-time temperatuurmonitoring van magazijn tot levering.
+              </p>
             </div>
 
             <ColdChainTracker />
