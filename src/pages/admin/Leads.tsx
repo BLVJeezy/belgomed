@@ -180,40 +180,7 @@ const Leads = () => {
                 </p>
               </div>
 
-              {/* Assignee */}
-              <Select
-                value={lead.assignee ?? "unassigned"}
-                onValueChange={(val) => updateAssignee(lead.id, val === "unassigned" ? "" : val)}
-              >
-                <SelectTrigger className="w-[130px] h-8 text-xs border-border/20 rounded-lg flex-shrink-0">
-                  <SelectValue placeholder="Onverwerkt" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="unassigned">Onverwerkt</SelectItem>
-                  {teamMembers.map((m) => (
-                    <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
 
-              {/* Stage */}
-              <Select
-                value={lead.stage}
-                onValueChange={(val) => updateStage(lead.id, val)}
-              >
-                <SelectTrigger className={`w-[155px] h-8 text-xs font-semibold border rounded-lg flex-shrink-0 ${stageConfig[lead.stage]?.bg ?? ""} ${stageConfig[lead.stage]?.color ?? ""}`}>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(stageConfig).map(([key, cfg]) => (
-                    <SelectItem key={key} value={key}>
-                      <span className="flex items-center gap-1.5">
-                        <span>{cfg.icon}</span> {cfg.label}
-                      </span>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
 
               {/* Date */}
               <span className="text-xs text-muted-foreground tabular-nums flex-shrink-0 hidden sm:block">
