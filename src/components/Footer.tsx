@@ -47,7 +47,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border/30 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Belgomed BV. {t("footer.rights")}</p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Belgomed BV. {t("footer.rights")}</p>
+            <a href="/terms" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-2 hover:underline">
+              {t("footer.terms")}
+            </a>
+          </div>
           <div className="flex items-center gap-4">
             <p className="text-xs text-muted-foreground">{t("footer.regulated")}</p>
             <a href="/admin" className="p-1.5 rounded-md text-muted-foreground/40 hover:text-muted-foreground transition-colors" title="Admin">
