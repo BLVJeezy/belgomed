@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Eye, Users, Clock, ArrowUpRight, ArrowDownRight,
-  Globe, TrendingUp, Trophy, Loader2, Monitor, Smartphone, Tablet,
+  Eye, Users, Clock,
+  Globe, TrendingUp, Loader2, Monitor, Smartphone, Tablet,
   BarChart3, Activity,
 } from "lucide-react";
 import {
@@ -25,22 +25,6 @@ type PageView = {
   created_at: string;
 };
 
-const teamInfo: Record<string, { name: string; role: string; avatar: string }> = {
-  dirk: { name: "Dirk V.", role: "Sales Manager", avatar: "DV" },
-  sarah: { name: "Sarah M.", role: "Account Executive", avatar: "SM" },
-  jason: { name: "Jason B.", role: "Super-Admin", avatar: "JB" },
-};
-
-type TeamMemberStats = {
-  key: string;
-  name: string;
-  role: string;
-  avatar: string;
-  total: number;
-  active: number;
-  completed: number;
-  currentStage: string;
-};
 
 const DEVICE_COLORS = ["hsl(var(--primary))", "hsl(168 80% 45%)", "hsl(200 60% 50%)"];
 
@@ -97,8 +81,6 @@ const Dashboard = () => {
   const [period, setPeriod] = useState<Period>("7d");
   const [pageViews, setPageViews] = useState<PageView[]>([]);
   const [analyticsLoading, setAnalyticsLoading] = useState(true);
-  const [teamStats, setTeamStats] = useState<TeamMemberStats[]>([]);
-  const [teamLoading, setTeamLoading] = useState(true);
 
   // Fetch page views with auto-refresh
   useEffect(() => {
@@ -123,34 +105,6 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, [period]);
 
-  // Fetch team stats
-  useEffect(() => {
-    const fetchTeamStats = async () => {
-      setTeamLoading(true);
-      const { data: leads } = await supabase.from("leads").select("assignee, stage");
-      if (leads) {
-        const stageLabels: Record<string, string> = {
-          nieuw: "Nieuw", in_behandeling: "In Behandeling",
-          wacht_op_vergunning: "Wacht op Vergunning",
-          offerte_gestuurd: "Offerte Gestuurd", afgehandeld: "Afgehandeld",
-        };
-        const teamData = Object.entries(teamInfo).map(([key, info]) => {
-          const memberLeads = leads.filter((l) => l.assignee === key);
-          const active = memberLeads.filter((l) => l.stage !== "afgehandeld").length;
-          const completed = memberLeads.filter((l) => l.stage === "afgehandeld").length;
-          const activeLead = memberLeads.find((l) => l.stage !== "afgehandeld");
-          return {
-            key, ...info, total: memberLeads.length, active, completed,
-            currentStage: activeLead ? stageLabels[activeLead.stage] ?? activeLead.stage : "Geen actieve leads",
-          };
-        });
-        teamData.sort((a, b) => b.total - a.total);
-        setTeamStats(teamData);
-      }
-      setTeamLoading(false);
-    };
-    fetchTeamStats();
-  }, []);
 
   // Computed analytics
   const analytics = useMemo(() => {
@@ -473,76 +427,6 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Team Leaderboard */}
-      <Card className="glass-card border-border/20">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-primary" />
-            Sales Overzicht
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {teamLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-5 h-5 text-primary animate-spin" />
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {teamStats.map((member, i) => {
-                const medals = ["🥇", "🥈", "🥉"];
-                const maxTotal = Math.max(...teamStats.map((m) => m.total), 1);
-                return (
-                  <a
-                    key={member.key}
-                    href={`/admin/leads?assignee=${member.key}`}
-                    className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-secondary/15 border border-border/15 hover:bg-secondary/25 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 cursor-pointer group"
-                  >
-                    <div className="flex items-center gap-3 min-w-[180px]">
-                      <span className="text-lg w-7 text-center">{medals[i] ?? `#${i + 1}`}</span>
-                      <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-xs font-bold text-primary group-hover:bg-primary/25 transition-colors">
-                        {member.avatar}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{member.name}</p>
-                        <p className="text-[11px] text-muted-foreground">{member.role}</p>
-                      </div>
-                    </div>
-                    <div className="flex-1 flex flex-wrap items-center gap-4 sm:gap-6">
-                      <div className="text-center">
-                        <p className="text-lg font-bold text-foreground">{member.total}</p>
-                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Totaal</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-lg font-bold text-primary">{member.active}</p>
-                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Actief</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-lg font-bold text-emerald-400">{member.completed}</p>
-                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Afgehandeld</p>
-                      </div>
-                      <div className="flex-1 min-w-[100px]">
-                        <div className="h-2 rounded-full bg-secondary/30 overflow-hidden">
-                          <div
-                            className="h-full rounded-full transition-all duration-700 ease-out"
-                            style={{
-                              width: `${(member.total / maxTotal) * 100}%`,
-                              background: "linear-gradient(90deg, hsl(var(--primary)), hsl(168 80% 45%))",
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="text-right min-w-[140px]">
-                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">Bezig met</p>
-                        <p className="text-xs font-semibold text-foreground">{member.currentStage}</p>
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-          )}
-        </CardContent>
-      </Card>
     </div>
   );
 };
