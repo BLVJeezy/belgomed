@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/contexts/LangContext";
-import { Users, Warehouse, FileText, Heart, Handshake } from "lucide-react";
+import { Users, FileText, Heart, Handshake } from "lucide-react";
 
 interface CounterProps {
   end: number;
@@ -52,17 +52,16 @@ const StatsCounter = () => {
   const { t } = useLang();
 
   const stats = [
-    { end: 1200, icon: <Users className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Bevlogen medewerkers" },
-    { end: 7, icon: <Warehouse className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Vestigingen, verspreid over België" },
-    { end: 44000, icon: <FileText className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Referenties op voorraad" },
+    { end: 15, icon: <Users className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Bevlogen medewerkers" },
+    { end: 12500, icon: <FileText className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Referenties op voorraad" },
     { end: 1, icon: <Heart className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Coöperatief hart voor de zelfstandige apotheker" },
-    { end: 3200, icon: <Handshake className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Tevreden klanten" },
+    { end: 200, prefix: "", suffix: "+", icon: <Handshake className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Tevreden klanten" },
   ];
 
   return (
     <section className="py-12 md:py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-5 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6 lg:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-10">
           {stats.map((s, i) => (
             <Counter key={i} end={s.end} icon={s.icon} label={s.label} />
           ))}
