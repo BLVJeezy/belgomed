@@ -177,7 +177,7 @@ const TermsContent = () => {
               <p>Trichterheideweg 11</p>
               <p>3500 Hasselt, Belgium</p>
               <p className="mt-3">Email: <a href="mailto:info@belgomed.be" className="text-primary hover:underline">info@belgomed.be</a></p>
-              <p>Phone: +32 (0)11 00 00 00</p>
+              
             </div>
           </section>
         </div>

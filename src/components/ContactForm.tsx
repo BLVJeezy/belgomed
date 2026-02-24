@@ -81,13 +81,6 @@ const ContactForm = () => {
                   <p className="text-sm text-muted-foreground">info@belgomed.be</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-primary/10"><Phone className="h-5 w-5 text-primary" /></div>
-                <div>
-                  <h3 className="font-semibold text-foreground">{t("contact.phone")}</h3>
-                  <p className="text-sm text-muted-foreground">+32 (0)11 00 00 00</p>
-                </div>
-              </div>
             </div>
             <div className="rounded-lg overflow-hidden border border-border/30 mt-2">
               <iframe
