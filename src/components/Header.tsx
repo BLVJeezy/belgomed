@@ -134,7 +134,7 @@ const Header = () => {
             <a
               href="/admin"
               onClick={() => setMobileOpen(false)}
-              className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors"
+              className="inline-block mt-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold tracking-widest uppercase rounded-sm text-center w-full hover:bg-primary/90 transition-colors"
             >
               My Belgomed
             </a>
