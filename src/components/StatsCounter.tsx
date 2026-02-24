@@ -52,10 +52,10 @@ const StatsCounter = () => {
   const { t } = useLang();
 
   const stats = [
-    { end: 15, icon: <Users className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Bevlogen medewerkers" },
-    { end: 12500, icon: <FileText className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Referenties op voorraad" },
-    { end: 1, icon: <Heart className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Coöperatief hart voor de zelfstandige apotheker" },
-    { end: 200, prefix: "", suffix: "+", icon: <Handshake className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Tevreden klanten" },
+    { end: 15, prefix: "+", icon: <Users className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Medewerkers" },
+    { end: 12500, prefix: "+", icon: <FileText className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Onze voorraad" },
+    { end: 1, prefix: "+", icon: <Heart className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Coöperatief hart" },
+    { end: 200, prefix: "+", icon: <Handshake className="w-10 h-10 md:w-12 md:h-12" strokeWidth={1} />, label: "Ziekenhuizen, rusthuizen & apothekers" },
   ];
 
   return (
