@@ -63,7 +63,7 @@ const StatsCounter = () => {
       <div className="container mx-auto px-5 md:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-10">
           {stats.map((s, i) => (
-            <Counter key={i} end={s.end} icon={s.icon} label={s.label} />
+            <Counter key={i} end={s.end} prefix={s.prefix} icon={s.icon} label={s.label} />
           ))}
         </div>
       </div>
