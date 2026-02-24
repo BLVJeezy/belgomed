@@ -207,13 +207,7 @@ const Leads = () => {
             );
           })}
         </div>
-        {stageFilter && (
-          <div className="flex justify-end mt-2">
-            <button onClick={() => setStageFilter(null)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
-              <X className="w-3 h-3" /> Toon alle fases
-            </button>
-          </div>
-        )}
+        
       </div>
 
       {/* Leads table */}
