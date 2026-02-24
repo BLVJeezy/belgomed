@@ -116,6 +116,22 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015.desc": "Verkrijging van de Wholesale Distribution Authorisation.",
     "timeline.now": "Marktleider",
     "timeline.now.desc": "45+ jaar ervaring, opererend vanuit ons distributiecentrum in Hasselt.",
+
+    // FAQ
+    "faq.tag": "Veelgestelde Vragen",
+    "faq.title": "Heeft u vragen?",
+    "faq.q1": "Wat is Belgomed BV?",
+    "faq.a1": "Belgomed BV is een Belgische farmaceutische groothandel gevestigd in Hasselt. Wij zijn gespecialiseerd in de distributie van medicijnen op voorschrift (RX), vrij verkrijgbare geneesmiddelen (OTC) en medische hulpmiddelen aan apotheken, ziekenhuizen en zorginstellingen.",
+    "faq.q2": "Heeft Belgomed een GDP- en WDA-vergunning?",
+    "faq.a2": "Ja, Belgomed BV beschikt over zowel een GDP-certificering (Good Distribution Practice) als een WDA-vergunning (Wholesale Distribution Authorisation), wat garandeert dat al onze distributieprocessen voldoen aan de strengste Europese farmaceutische normen.",
+    "faq.q3": "Welke sectoren bedient Belgomed?",
+    "faq.a3": "Wij bedienen apotheken, ziekenhuizen, woonzorgcentra, psychiatrische instellingen, poliklinieken en NGO's in heel België. Onze diensten omvatten snelle landelijke distributie, stockbeheer en groepsaankopen.",
+    "faq.q4": "Hoe kan ik een offerte aanvragen?",
+    "faq.a4": "U kunt eenvoudig een offerte aanvragen via ons contactformulier op deze website. Selecteer uw productgroep (RX, OTC of Medische Hulpmiddelen), beschrijf uw aanvraag en wij nemen binnen 24 uur contact met u op.",
+    "faq.q5": "Levert Belgomed in heel België?",
+    "faq.a5": "Ja, wij verzorgen snelle en veilige leveringen in heel België vanuit ons distributiecentrum in Hasselt. Onze logistiek is geoptimaliseerd voor betrouwbare en tijdige leveringen.",
+    "faq.q6": "Biedt Belgomed cold-chain distributie aan?",
+    "faq.a6": "Ja, wij garanderen volledige cold-chain compliance voor temperatuurgevoelige farmaceutische producten. Onze opslagfaciliteiten en transportmiddelen voldoen aan alle GDP-vereisten voor koude keten distributie.",
   },
 
   EN: {
@@ -212,6 +228,22 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015.desc": "Obtaining the Wholesale Distribution Authorisation.",
     "timeline.now": "Market Leader",
     "timeline.now.desc": "45+ years of experience, operating from our distribution center in Hasselt.",
+
+    // FAQ
+    "faq.tag": "Frequently Asked Questions",
+    "faq.title": "Got questions?",
+    "faq.q1": "What is Belgomed BV?",
+    "faq.a1": "Belgomed BV is a Belgian pharmaceutical wholesaler based in Hasselt. We specialize in the distribution of prescription medicines (RX), over-the-counter medicines (OTC) and medical devices to pharmacies, hospitals and healthcare institutions.",
+    "faq.q2": "Does Belgomed have GDP and WDA authorization?",
+    "faq.a2": "Yes, Belgomed BV holds both GDP certification (Good Distribution Practice) and a WDA license (Wholesale Distribution Authorisation), ensuring all our distribution processes meet the strictest European pharmaceutical standards.",
+    "faq.q3": "Which sectors does Belgomed serve?",
+    "faq.a3": "We serve pharmacies, hospitals, care homes, psychiatric institutions, polyclinics and NGOs throughout Belgium. Our services include fast national distribution, stock management and group purchasing.",
+    "faq.q4": "How can I request a quote?",
+    "faq.a4": "You can easily request a quote through our contact form on this website. Select your product group (RX, OTC or Medical Devices), describe your request and we will contact you within 24 hours.",
+    "faq.q5": "Does Belgomed deliver throughout Belgium?",
+    "faq.a5": "Yes, we provide fast and safe deliveries throughout Belgium from our distribution center in Hasselt. Our logistics are optimized for reliable and timely deliveries.",
+    "faq.q6": "Does Belgomed offer cold-chain distribution?",
+    "faq.a6": "Yes, we guarantee full cold-chain compliance for temperature-sensitive pharmaceutical products. Our storage facilities and transport meet all GDP requirements for cold chain distribution.",
   },
 
   FR: {
@@ -308,6 +340,22 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015.desc": "Obtention de l'autorisation de distribution en gros.",
     "timeline.now": "Leader du Marché",
     "timeline.now.desc": "45+ ans d'expérience, opérant depuis notre centre de distribution à Hasselt.",
+
+    // FAQ
+    "faq.tag": "Questions Fréquentes",
+    "faq.title": "Vous avez des questions ?",
+    "faq.q1": "Qu'est-ce que Belgomed BV ?",
+    "faq.a1": "Belgomed BV est un grossiste pharmaceutique belge basé à Hasselt. Nous sommes spécialisés dans la distribution de médicaments sur ordonnance (RX), de médicaments en vente libre (OTC) et de dispositifs médicaux aux pharmacies, hôpitaux et établissements de soins.",
+    "faq.q2": "Belgomed dispose-t-il d'une autorisation GDP et WDA ?",
+    "faq.a2": "Oui, Belgomed BV possède à la fois la certification GDP (Good Distribution Practice) et l'autorisation WDA (Wholesale Distribution Authorisation), garantissant que tous nos processus de distribution répondent aux normes pharmaceutiques européennes les plus strictes.",
+    "faq.q3": "Quels secteurs Belgomed dessert-il ?",
+    "faq.a3": "Nous desservons les pharmacies, hôpitaux, maisons de repos, institutions psychiatriques, polycliniques et ONG dans toute la Belgique. Nos services comprennent une distribution nationale rapide, la gestion des stocks et les achats groupés.",
+    "faq.q4": "Comment puis-je demander un devis ?",
+    "faq.a4": "Vous pouvez facilement demander un devis via notre formulaire de contact sur ce site. Sélectionnez votre groupe de produits (RX, OTC ou Dispositifs Médicaux), décrivez votre demande et nous vous contacterons dans les 24 heures.",
+    "faq.q5": "Belgomed livre-t-il dans toute la Belgique ?",
+    "faq.a5": "Oui, nous assurons des livraisons rapides et sûres dans toute la Belgique depuis notre centre de distribution à Hasselt. Notre logistique est optimisée pour des livraisons fiables et ponctuelles.",
+    "faq.q6": "Belgomed propose-t-il une distribution chaîne du froid ?",
+    "faq.a6": "Oui, nous garantissons une conformité totale de la chaîne du froid pour les produits pharmaceutiques thermosensibles. Nos installations de stockage et nos moyens de transport répondent à toutes les exigences GDP.",
   },
 
   DE: {
@@ -404,6 +452,22 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015.desc": "Erhalt der Großhandelsvertriebsgenehmigung.",
     "timeline.now": "Marktführer",
     "timeline.now.desc": "45+ Jahre Erfahrung, betrieben von unserem Distributionszentrum in Hasselt.",
+
+    // FAQ
+    "faq.tag": "Häufig Gestellte Fragen",
+    "faq.title": "Haben Sie Fragen?",
+    "faq.q1": "Was ist Belgomed BV?",
+    "faq.a1": "Belgomed BV ist ein belgischer pharmazeutischer Großhändler mit Sitz in Hasselt. Wir sind spezialisiert auf den Vertrieb von verschreibungspflichtigen Medikamenten (RX), rezeptfreien Arzneimitteln (OTC) und medizinischen Geräten an Apotheken, Krankenhäuser und Gesundheitseinrichtungen.",
+    "faq.q2": "Verfügt Belgomed über eine GDP- und WDA-Genehmigung?",
+    "faq.a2": "Ja, Belgomed BV verfügt sowohl über die GDP-Zertifizierung (Good Distribution Practice) als auch über eine WDA-Genehmigung (Wholesale Distribution Authorisation), die sicherstellt, dass alle unsere Vertriebsprozesse den strengsten europäischen pharmazeutischen Standards entsprechen.",
+    "faq.q3": "Welche Sektoren bedient Belgomed?",
+    "faq.a3": "Wir bedienen Apotheken, Krankenhäuser, Pflegeheime, psychiatrische Einrichtungen, Polikliniken und NGOs in ganz Belgien. Unsere Dienstleistungen umfassen schnellen nationalen Vertrieb, Lagerverwaltung und Gruppeneinkauf.",
+    "faq.q4": "Wie kann ich ein Angebot anfordern?",
+    "faq.a4": "Sie können einfach ein Angebot über unser Kontaktformular auf dieser Website anfordern. Wählen Sie Ihre Produktgruppe (RX, OTC oder Medizinische Geräte), beschreiben Sie Ihre Anfrage und wir melden uns innerhalb von 24 Stunden.",
+    "faq.q5": "Liefert Belgomed in ganz Belgien?",
+    "faq.a5": "Ja, wir sorgen für schnelle und sichere Lieferungen in ganz Belgien von unserem Distributionszentrum in Hasselt aus. Unsere Logistik ist auf zuverlässige und pünktliche Lieferungen optimiert.",
+    "faq.q6": "Bietet Belgomed Cold-Chain-Distribution an?",
+    "faq.a6": "Ja, wir garantieren vollständige Cold-Chain-Compliance für temperatursensible pharmazeutische Produkte. Unsere Lagerstätten und Transportmittel erfüllen alle GDP-Anforderungen für die Kühlkettendistribution.",
   },
 };
 
