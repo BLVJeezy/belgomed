@@ -11,7 +11,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-border/30 py-10 md:py-16">
+    <footer className="border-t border-border/30 py-10 md:py-16" role="contentinfo">
       <div className="container mx-auto px-5 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
