@@ -75,15 +75,17 @@ const AboutSection = () => {
         <div className="relative">
           <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-background dark:from-[#001a1a] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-background dark:from-[#004d4d] to-transparent z-10 pointer-events-none" />
-          <div className="flex overflow-x-auto scrollbar-hide gap-2 px-5 md:px-12 py-2 snap-x snap-mandatory">
-            {sectorIcons.map((Icon, i) => (
-              <div key={i} className="flex-shrink-0 flex flex-col items-center gap-3 px-4 md:px-8 lg:px-10 snap-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 flex items-center justify-center">
-                  <Icon className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary" strokeWidth={1.5} />
+          <div className="overflow-hidden">
+            <div className="flex gap-2 animate-infinite-scroll w-max">
+              {[...sectorIcons, ...sectorIcons].map((Icon, i) => (
+                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-3 px-4 md:px-8 lg:px-10">
+                  <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl border border-border dark:border-white/10 bg-secondary/50 dark:bg-white/5 flex items-center justify-center">
+                    <Icon className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs md:text-sm font-bold text-foreground/80 dark:text-white/80 whitespace-nowrap">{t(sectorKeys[i % sectorKeys.length])}</span>
                 </div>
-                <span className="text-xs md:text-sm font-bold text-foreground/80 dark:text-white/80 whitespace-nowrap">{t(sectorKeys[i])}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
