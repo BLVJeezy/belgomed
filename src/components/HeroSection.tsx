@@ -23,7 +23,8 @@ const HeroSection = () => {
               {t("hero.badge")}
             </span>
           </div>
-          <img src={logoHero} alt="Belgomed" className="max-w-[280px] md:max-w-lg lg:max-w-xl w-full h-auto mb-4 md:mb-6 fade-up fade-up-delay-1 dark:invert dark:hue-rotate-180" />
+          <img src={logoHero} alt="Belgomed BV — Medische Groothandel" className="max-w-[280px] md:max-w-lg lg:max-w-xl w-full h-auto mb-4 md:mb-6 fade-up fade-up-delay-1 dark:invert dark:hue-rotate-180" />
+          <h1 className="sr-only">Belgomed BV — GDP &amp; WDA Gecertificeerde Medische Groothandel in België</h1>
           <p className="text-base md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-8 md:mb-10 fade-up fade-up-delay-2">
             {t("hero.desc")}
           </p>

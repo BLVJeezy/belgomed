@@ -38,9 +38,9 @@ const AboutSection = () => {
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4">{t("about.tag")}</p>
-            <h3 className="text-2xl md:text-3xl font-black text-foreground dark:text-white mb-6 md:mb-8 uppercase leading-none lg:text-2xl whitespace-pre-line">
+            <h2 className="text-2xl md:text-3xl font-black text-foreground dark:text-white mb-6 md:mb-8 uppercase leading-none lg:text-2xl whitespace-pre-line">
               {t("about.title")}
-            </h3>
+            </h2>
             <div className="space-y-5 text-muted-foreground dark:text-white/60 leading-relaxed text-sm lg:text-base">
               <p>{t("about.p1")}</p>
               <p>{t("about.p2")}</p>
@@ -67,9 +67,9 @@ const AboutSection = () => {
         <div className="container mx-auto px-5 md:px-6 lg:px-12 mb-8 md:mb-10">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4 text-center">{t("sectors.tag")}</p>
-            <h3 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-0 uppercase leading-none text-center">
+            <h2 className="text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-0 uppercase leading-none text-center">
               {t("sectors.title")}
-            </h3>
+            </h2>
           </ScrollReveal>
         </div>
         <div className="relative">
@@ -95,9 +95,9 @@ const AboutSection = () => {
         <div className="container mx-auto">
           <ScrollReveal>
             <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-3 md:mb-4 text-center">{t("diensten.tag")}</p>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-10 md:mb-16 uppercase leading-none text-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground dark:text-white mb-10 md:mb-16 uppercase leading-none text-center">
               {t("diensten.title")}
-            </h3>
+            </h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {dienstIcons.map((Icon, i) => (
