@@ -55,7 +55,7 @@ const Header = () => {
 
             <a
               href="/admin"
-              className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 shadow-sm"
             >
               My Belgomed
             </a>
