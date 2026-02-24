@@ -32,7 +32,7 @@ const stageOrder = ["nieuw", "in_behandeling", "wacht_op_vergunning", "offerte_g
 const stageConfig: Record<string, { label: string; color: string; bg: string; icon: string }> = {
   nieuw: { label: "Nieuw", color: "text-primary", bg: "bg-primary/10 border-primary/30", icon: "🆕" },
   in_behandeling: { label: "In Behandeling", color: "text-blue-400", bg: "bg-blue-500/10 border-blue-500/30", icon: "⚙️" },
-  wacht_op_vergunning: { label: "Wacht op FAGG", color: "text-yellow-400", bg: "bg-yellow-500/10 border-yellow-500/30", icon: "📋" },
+  wacht_op_vergunning: { label: "Wacht op Vergunning", color: "text-yellow-400", bg: "bg-yellow-500/10 border-yellow-500/30", icon: "📋" },
   offerte_gestuurd: { label: "Offerte Gestuurd", color: "text-accent", bg: "bg-accent/10 border-accent/30", icon: "📨" },
   afgehandeld: { label: "Afgehandeld", color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/30", icon: "✅" },
 };

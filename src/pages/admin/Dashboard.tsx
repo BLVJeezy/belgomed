@@ -142,7 +142,7 @@ const Dashboard = () => {
           const stageLabels: Record<string, string> = {
             nieuw: "Nieuw",
             in_behandeling: "In Behandeling",
-            wacht_op_vergunning: "Wacht op FAGG",
+            wacht_op_vergunning: "Wacht op Vergunning",
             offerte_gestuurd: "Offerte Gestuurd",
             afgehandeld: "Afgehandeld",
           };
