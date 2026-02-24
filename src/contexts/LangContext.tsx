@@ -24,9 +24,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // About
     "about.tag": "Onze Expertise",
-    "about.title": "Jouw partner voor een\nzorgeloos medicijnbeheer",
-    "about.p1": "In de zorg is een goed gevulde voorraad medicijnen cruciaal. Tekorten leiden niet alleen tot uitgestelde behandelingen, maar verhogen ook de druk op zorgverleners en brengen extra risico's voor patiënten met zich mee. Belgomed BV helpt dit te voorkomen door apotheken, ziekenhuizen en andere zorginstellingen te voorzien van de juiste producten, met stabiele leveringen, concurrerende prijzen en volledig beheer van logistiek en administratie.",
-    "about.p2": "Zo kunnen zorgverleners zich concentreren op wat écht telt: het welzijn van hun patiënten. We werken nauw samen met onze klanten en logistieke partners om processen efficiënt en betrouwbaar te laten verlopen. Met een strakke planning, een goedgevulde voorraad en doelgerichte oplossingen zorgen we dat medicijnen en medische hulpmiddelen altijd beschikbaar zijn.",
+    "about.title": "Zorgeloze voorraad,\nfocus op de patiënt",
+    "about.p1": "Medicijntekorten zorgen voor onnodige druk en risico's in de zorg. Belgomed BV ontzorgt ziekenhuizen en apotheken met stabiele leveringen, scherpe tarieven en volledig logistiek beheer.",
+    "about.p2": "Door onze strakke planning en ruime voorraad garanderen wij de beschikbaarheid van uw medische producten. Zo creëren wij de ruimte die zorgverleners nodig hebben om zich volledig op hun patiënten te richten.",
     "about.cta": "Neem Contact Op",
     "about.location": "Hasselt, BE",
     "about.locationSub": "Logistiek Zenuwcentrum",
