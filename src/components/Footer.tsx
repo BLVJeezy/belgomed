@@ -55,7 +55,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-4">
             <p className="text-xs text-muted-foreground">{t("footer.regulated")}</p>
-            <a href="/admin" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-2 hover:underline">
+            <a href="/admin" className="px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-sm">
               My Belgomed
             </a>
           </div>
