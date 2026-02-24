@@ -53,6 +53,13 @@ const Header = () => {
               </a>
             ))}
 
+            <a
+              href="/admin"
+              className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+            >
+              My Belgomed
+            </a>
+
             <div className="relative" ref={langRef}>
               <button
                 onClick={() => setLangOpen(!langOpen)}
@@ -124,6 +131,13 @@ const Header = () => {
                 {item.label}
               </a>
             ))}
+            <a
+              href="/admin"
+              onClick={() => setMobileOpen(false)}
+              className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors"
+            >
+              My Belgomed
+            </a>
           </div>
         )}
       </nav>

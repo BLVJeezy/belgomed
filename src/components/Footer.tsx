@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Settings } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { useLang } from "@/contexts/LangContext";
 
 const Footer = () => {
@@ -55,8 +55,8 @@ const Footer = () => {
           </div>
           <div className="flex items-center gap-4">
             <p className="text-xs text-muted-foreground">{t("footer.regulated")}</p>
-            <a href="/admin" className="p-1.5 rounded-md text-muted-foreground/40 hover:text-muted-foreground transition-colors" title="Admin">
-              <Settings className="w-3.5 h-3.5" />
+            <a href="/admin" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-2 hover:underline">
+              My Belgomed
             </a>
           </div>
         </div>
