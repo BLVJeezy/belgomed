@@ -1,4 +1,4 @@
-import { Pill, Heart, Stethoscope } from "lucide-react";
+import { Pill, Heart, Stethoscope, Thermometer } from "lucide-react";
 import serviceRx from "@/assets/service-rx.jpg";
 import serviceOtc from "@/assets/service-otc.jpg";
 import serviceMed from "@/assets/service-med.jpg";
@@ -48,6 +48,20 @@ const ServiceGrid = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Live Cold Chain */}
+        <div className="mt-10 glass-card-hover overflow-hidden group fade-up p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+          <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-500">
+            <Thermometer className="w-7 h-7 text-primary" />
+          </div>
+          <div>
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full border border-primary/30 text-primary bg-background/60 backdrop-blur-sm">COLD</span>
+            <h3 className="text-xl font-bold tracking-tight text-foreground mt-3">Live Cold Chain</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+              Real-time temperatuurmonitoring voor de volledige supply chain. Onze geavanceerde cold chain technologie garandeert de integriteit van temperatuurgevoelige producten van magazijn tot levering.
+            </p>
+          </div>
         </div>
       </div>
     </section>
