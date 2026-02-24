@@ -100,10 +100,11 @@ const Dashboard = () => {
   const [teamStats, setTeamStats] = useState<TeamMemberStats[]>([]);
   const [teamLoading, setTeamLoading] = useState(true);
 
-  // Fetch page views
+  // Fetch page views with auto-refresh
   useEffect(() => {
+    let isFirst = true;
     const fetchPageViews = async () => {
-      setAnalyticsLoading(true);
+      if (isFirst) setAnalyticsLoading(true);
       const since = period === "today" ? getDaysAgo(0) : period === "7d" ? getDaysAgo(7) : getDaysAgo(30);
 
       const { data, error } = await supabase
@@ -115,9 +116,11 @@ const Dashboard = () => {
       if (!error && data) {
         setPageViews(data as PageView[]);
       }
-      setAnalyticsLoading(false);
+      if (isFirst) { setAnalyticsLoading(false); isFirst = false; }
     };
     fetchPageViews();
+    const interval = setInterval(fetchPageViews, 30_000);
+    return () => clearInterval(interval);
   }, [period]);
 
   // Fetch team stats
