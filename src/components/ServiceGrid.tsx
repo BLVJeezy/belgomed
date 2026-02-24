@@ -43,23 +43,27 @@ const ColdChainTracker = () => {
         <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Live — Alle zones operationeel</span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {zones.map((zone, i) => {
           const Icon = zone.icon;
           return (
-            <div key={zone.name} className="relative rounded-lg border border-border/30 dark:border-white/10 bg-secondary/30 dark:bg-white/5 p-4 transition-all duration-300 hover:border-primary/30">
-              <div className="flex items-center justify-between mb-3">
-                <Icon className="w-4 h-4 text-muted-foreground/60" strokeWidth={1.5} />
-                <div className="flex items-center gap-1">
+            <div key={zone.name} className="relative rounded-lg border border-border/30 dark:border-white/10 bg-secondary/30 dark:bg-white/5 p-5 transition-all duration-300 hover:border-primary/30 flex items-center gap-5">
+              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 flex-shrink-0">
+                <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-foreground">{zone.name}</p>
+                <p className="text-[11px] text-muted-foreground">Bereik: {zone.target}</p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className={`text-2xl font-bold text-primary tabular-nums transition-all duration-500 ${pulse ? "scale-105" : "scale-100"}`}>
+                  {temps[i]}°
+                </p>
+                <div className="flex items-center justify-end gap-1 mt-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   <span className="text-[9px] uppercase tracking-wider text-emerald-500 font-bold">OK</span>
                 </div>
               </div>
-              <p className={`text-2xl md:text-3xl font-bold text-primary tabular-nums transition-all duration-500 ${pulse ? "scale-105" : "scale-100"}`}>
-                {temps[i]}°
-              </p>
-              <p className="text-[11px] font-semibold text-foreground/80 mt-1">{zone.name}</p>
-              <p className="text-[9px] text-muted-foreground mt-0.5">Bereik: {zone.target}</p>
             </div>
           );
         })}
