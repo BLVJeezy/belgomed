@@ -15,7 +15,7 @@ const zones = [
   { name: "Magazijn A", temp: 4.2, target: "2–8°C", icon: Snowflake },
   { name: "Transport", temp: 5.1, target: "2–8°C", icon: Truck },
   { name: "Magazijn B", temp: 3.8, target: "2–8°C", icon: Snowflake },
-  { name: "Koelcel", temp: -18.5, target: "-25–-15°C", icon: TrendingDown },
+  
 ];
 
 const ColdChainTracker = () => {
