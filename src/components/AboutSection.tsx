@@ -2,6 +2,7 @@ import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross
 import { useEffect, useRef, useState } from "react";
 import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
 import ServiceGrid from "@/components/ServiceGrid";
+import StatsCounter from "@/components/StatsCounter";
 import { useLang } from "@/contexts/LangContext";
 
 const sectorIcons = [Cross, Hospital, Building2, Brain, Home, HeartHandshake];
@@ -61,6 +62,8 @@ const AboutSection = () => {
           </ScrollReveal>
         </div>
       </section>
+
+      <StatsCounter />
 
       {/* Sectoren */}
       <section className="py-12 md:py-16 lg:py-20 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] overflow-hidden">
