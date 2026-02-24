@@ -36,10 +36,6 @@ const Footer = () => {
                 <span className="text-sm text-muted-foreground">Trichterheideweg 11, 3500 Hasselt, België</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">+32 (0) 11 00 00 00</span>
-              </div>
-              <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">info@belgomed.be</span>
               </div>
