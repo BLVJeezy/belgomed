@@ -72,7 +72,7 @@ const AdminLogin = () => {
         <div className="glass-card p-8">
           <h1 className="text-xl font-semibold text-foreground mb-1">Toegang Dashboard</h1>
           <p className="text-sm text-muted-foreground mb-6">
-            Alleen voor geautoriseerd personeel
+            Alleen voor geautoriseerde klanten    
           </p>
 
           <form onSubmit={handleLogin} className="space-y-5">
