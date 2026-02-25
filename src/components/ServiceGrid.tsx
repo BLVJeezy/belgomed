@@ -140,6 +140,7 @@ const ServiceGrid = () => {
             </div>
 
             <ColdChainTracker />
+            <p className="mt-4 text-[10px] text-muted-foreground/70 italic">Onze opslag wordt continu bewaakt volgens GDP-richtlijnen. Bovenstaande waarden dienen ter illustratie.</p>
           </div>
         </div>
       </div>
