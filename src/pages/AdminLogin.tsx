@@ -60,7 +60,7 @@ const AdminLogin = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <img alt="Belgomed" className="h-14 w-auto dark:invert dark:brightness-200" src="/lovable-uploads/0133504b-f9ba-47e9-a052-2847415e760d.png" />
+            <img alt="Belgomed" className="h-14 w-auto dark:invert dark:hue-rotate-180" src="/lovable-uploads/0133504b-f9ba-47e9-a052-2847415e760d.png" />
           </div>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Shield className="w-4 h-4 text-primary" />
