@@ -6,17 +6,17 @@ import serviceMed from "@/assets/service-med.jpg";
 import { useLang } from "@/contexts/LangContext";
 
 const serviceData = [
-  { icon: Pill, tag: "RX", image: serviceRx, titleKey: "sg.rx.title", descKey: "sg.rx.desc" },
-  { icon: Heart, tag: "OTC", image: serviceOtc, titleKey: "sg.otc.title", descKey: "sg.otc.desc" },
-  { icon: Stethoscope, tag: "MED", image: serviceMed, titleKey: "sg.med.title", descKey: "sg.med.desc" },
-];
+{ icon: Pill, tag: "RX", image: serviceRx, titleKey: "sg.rx.title", descKey: "sg.rx.desc" },
+{ icon: Heart, tag: "OTC", image: serviceOtc, titleKey: "sg.otc.title", descKey: "sg.otc.desc" },
+{ icon: Stethoscope, tag: "MED", image: serviceMed, titleKey: "sg.med.title", descKey: "sg.med.desc" }];
+
 
 const zones = [
-  { name: "Magazijn A", temp: 4.2, target: "2–8°C", icon: Snowflake },
-  { name: "Transport", temp: 5.1, target: "2–8°C", icon: Truck },
-  { name: "Magazijn B", temp: 3.8, target: "2–8°C", icon: Snowflake },
-  
-];
+{ name: "Magazijn A", temp: 4.2, target: "2–8°C", icon: Snowflake },
+{ name: "Transport", temp: 5.1, target: "2–8°C", icon: Truck },
+{ name: "Magazijn B", temp: 3.8, target: "2–8°C", icon: Snowflake }];
+
+
 
 const ColdChainTracker = () => {
   const [temps, setTemps] = useState(zones.map((z) => z.temp));
@@ -40,7 +40,7 @@ const ColdChainTracker = () => {
     <div className="space-y-4">
       <div className="flex items-center gap-2 mb-2">
         <div className={`w-2 h-2 rounded-full bg-emerald-500 ${pulse ? "animate-ping" : ""}`} />
-        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Live — Alle zones operationeel</span>
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -64,8 +64,8 @@ const ColdChainTracker = () => {
                   <span className="text-[9px] uppercase tracking-wider text-emerald-500 font-bold">OK</span>
                 </div>
               </div>
-            </div>
-          );
+            </div>);
+
         })}
       </div>
 
@@ -83,8 +83,8 @@ const ColdChainTracker = () => {
           <span className="text-[10px] text-muted-foreground font-medium">99.8% Stabiliteit</span>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 const ServiceGrid = () => {
@@ -105,8 +105,8 @@ const ServiceGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {serviceData.map((service, i) => (
-            <div key={service.tag} className={`glass-card-hover overflow-hidden group fade-up fade-up-delay-${i + 1}`}>
+          {serviceData.map((service, i) =>
+          <div key={service.tag} className={`glass-card-hover overflow-hidden group fade-up fade-up-delay-${i + 1}`}>
               <div className="relative h-48 overflow-hidden">
                 <img src={service.image} alt={t(service.titleKey)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
@@ -124,7 +124,7 @@ const ServiceGrid = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">{t(service.descKey)}</p>
               </div>
             </div>
-          ))}
+          )}
         </div>
 
         {/* Live Cold Chain */}
@@ -144,8 +144,8 @@ const ServiceGrid = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default ServiceGrid;
