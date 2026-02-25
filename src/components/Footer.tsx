@@ -15,8 +15,9 @@ const Footer = () => {
       <div className="container mx-auto px-5 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <span className="text-lg font-bold tracking-wider gradient-accent-text">BELGOMED</span>
+            <span className="text-lg font-bold tracking-wider gradient-accent-text">BELGOMED BV</span>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{t("footer.desc")}</p>
+            <p className="text-xs text-muted-foreground/60 mt-2">Belgomed — Medische groothandel Hasselt, België</p>
           </div>
           <div>
             <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground mb-4">{t("footer.nav")}</h4>
