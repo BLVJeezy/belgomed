@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Eye, RefreshCw, Users, X } from "lucide-react";
+import { Eye, RefreshCw, Trash2, Users, X } from "lucide-react";
 
 type Lead = {
   id: string;
@@ -28,6 +28,15 @@ const Leads = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
+
+  const deleteLead = useCallback(async (id: string) => {
+    setDeleting(id);
+    await supabase.from("leads").delete().eq("id", id);
+    setLeads((prev) => prev.filter((l) => l.id !== id));
+    if (selectedLead?.id === id) setSelectedLead(null);
+    setDeleting(null);
+  }, [selectedLead]);
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -76,14 +85,25 @@ const Leads = () => {
                   {lead.sector} · {lead.land} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
                 </p>
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSelectedLead(lead)}
-                className="shrink-0 text-primary hover:text-primary hover:bg-primary/10"
-              >
-                <Eye className="w-4 h-4 mr-1" /> Bekijk details
-              </Button>
+              <div className="flex items-center gap-1 shrink-0">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSelectedLead(lead)}
+                  className="text-primary hover:text-primary hover:bg-primary/10"
+                >
+                  <Eye className="w-4 h-4 mr-1" /> Bekijk
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => deleteLead(lead.id)}
+                  disabled={deleting === lead.id}
+                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           ))}
         </div>
