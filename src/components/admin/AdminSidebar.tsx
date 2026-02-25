@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LayoutDashboard, Users, Settings, LogOut, Menu, X } from "lucide-react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import logoB from "@/assets/logo-b.png";
+import logoHeader from "@/assets/logo-header.png";
 
 const navItems = [
   { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
@@ -27,8 +27,7 @@ const AdminSidebar = () => {
       <div className="p-5 lg:p-6 border-b border-border/30 flex items-center justify-between">
         <div>
           <a href="/" className="flex items-center gap-2">
-            <img src={logoB} alt="Belgomed" className="h-8 w-auto" />
-            <span className="text-lg font-bold tracking-wider text-foreground">BELGOMED</span>
+            <img src={logoHeader} alt="Belgomed" className="h-8 w-auto dark:invert dark:hue-rotate-180" />
           </a>
           <p className="text-[10px] uppercase tracking-widest text-primary mt-1">Admin Dashboard</p>
         </div>
@@ -81,7 +80,7 @@ const AdminSidebar = () => {
       {/* Mobile top bar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/30 flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <img src={logoB} alt="Belgomed" className="h-7 w-auto" />
+          <img src={logoHeader} alt="Belgomed" className="h-7 w-auto dark:invert dark:hue-rotate-180" />
           <span className="text-sm font-bold tracking-wider text-foreground">{currentPage}</span>
         </div>
         <button
