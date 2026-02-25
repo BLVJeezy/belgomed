@@ -44,11 +44,11 @@ const COUNTRY_FLAGS: Record<string, string> = {
   "United Kingdom": "🇬🇧", Burundi: "🇧🇮", Uganda: "🇺🇬", Tanzania: "🇹🇿",
 };
 
-function getDaysAgo(days: number): Date {
+function getDaysAgoUTC(days: number): string {
   const d = new Date();
-  d.setDate(d.getDate() - days);
-  d.setHours(0, 0, 0, 0);
-  return d;
+  d.setUTCDate(d.getUTCDate() - days);
+  d.setUTCHours(0, 0, 0, 0);
+  return d.toISOString();
 }
 
 const periodLabels: Record<Period, string> = {
@@ -87,12 +87,12 @@ const Dashboard = () => {
     let isFirst = true;
     const fetchPageViews = async () => {
       if (isFirst) setAnalyticsLoading(true);
-      const since = period === "today" ? getDaysAgo(0) : period === "7d" ? getDaysAgo(7) : getDaysAgo(30);
+      const since = period === "today" ? getDaysAgoUTC(0) : period === "7d" ? getDaysAgoUTC(7) : getDaysAgoUTC(30);
 
       const { data, error } = await supabase
         .from("page_views")
         .select("id, path, device_type, country, country_code, ip_hash, session_id, created_at")
-        .gte("created_at", since.toISOString())
+        .gte("created_at", since)
         .order("created_at", { ascending: false });
 
       if (!error && data) {
@@ -158,10 +158,9 @@ const Dashboard = () => {
 
     // Visitor chart data (by day)
     const dayMap: Record<string, { bezoekers: Set<string>; pageviews: number }> = {};
-    const dayNames = ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"];
     pageViews.forEach((v) => {
       const d = new Date(v.created_at);
-      const key = d.toISOString().slice(0, 10);
+      const key = d.toISOString().slice(0, 10); // YYYY-MM-DD in UTC
       if (!dayMap[key]) dayMap[key] = { bezoekers: new Set(), pageviews: 0 };
       dayMap[key].pageviews++;
       dayMap[key].bezoekers.add(v.ip_hash || v.session_id || v.id);
@@ -169,15 +168,15 @@ const Dashboard = () => {
     const visitorChartData = Object.entries(dayMap)
       .sort((a, b) => a[0].localeCompare(b[0]))
       .map(([date, d]) => ({
-        dag: dayNames[new Date(date).getDay()],
+        dag: `${date.slice(8, 10)}/${date.slice(5, 7)}`, // DD/MM format
         bezoekers: d.bezoekers.size,
         pageviews: d.pageviews,
       }));
 
-    // Hourly data
+    // Hourly data (UTC)
     const hourCounts = new Array(24).fill(0);
     pageViews.forEach((v) => {
-      const h = new Date(v.created_at).getHours();
+      const h = new Date(v.created_at).getUTCHours();
       hourCounts[h]++;
     });
     const hourlyData = hourCounts.map((count, i) => ({
