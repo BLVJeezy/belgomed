@@ -41,7 +41,7 @@ const AdminLogin = () => {
 
       if (roleError || !roleData) {
         await supabase.auth.signOut();
-        setError("Geen admin-toegang. Alleen geautoriseerd personeel.");
+        setError("Alleen geautoriseerd personeel.");
         setLoading(false);
         return;
       }
