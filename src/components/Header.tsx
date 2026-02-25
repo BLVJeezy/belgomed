@@ -5,11 +5,11 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useLang } from "@/contexts/LangContext";
 
 const languages = [
-  { code: "NL" as const, label: "Nederlands" },
-  { code: "DE" as const, label: "Deutsch" },
-  { code: "FR" as const, label: "Français" },
-  { code: "EN" as const, label: "English" },
-];
+{ code: "NL" as const, label: "Nederlands" },
+{ code: "DE" as const, label: "Deutsch" },
+{ code: "FR" as const, label: "Français" },
+{ code: "EN" as const, label: "English" }];
+
 
 const Header = () => {
   const { lang, setLang, t } = useLang();
@@ -19,10 +19,10 @@ const Header = () => {
   const langRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-    { label: t("nav.about"), href: "#overons" },
-    { label: t("nav.services"), href: "#diensten" },
-    { label: t("nav.contact"), href: "#contact" },
-  ];
+  { label: t("nav.about"), href: "#overons" },
+  { label: t("nav.services"), href: "#diensten" },
+  { label: t("nav.contact"), href: "#contact" }];
+
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -43,49 +43,49 @@ const Header = () => {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
+            {navItems.map((item) =>
+            <a
+              key={item.label}
+              href={item.href}
+              className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+
                 {item.label}
               </a>
-            ))}
+            )}
 
             <a
               href="/admin"
-              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 shadow-sm"
-            >
-              My Belgomed
+              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 shadow-sm">
+
+              Belgomed Hub
             </a>
 
             <div className="relative" ref={langRef}>
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 px-2 py-0.5 rounded text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
+                className="flex items-center gap-1.5 px-2 py-0.5 rounded text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+
                 <Globe className="w-4 h-4" />
                 {lang}
                 <ChevronDown className={`w-3 h-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
               </button>
-              {langOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[150px] z-50">
-                  {languages.map((l) => (
-                    <button
-                      key={l.code}
-                      onClick={() => { setLang(l.code); setLangOpen(false); }}
-                      className={`w-full text-left px-3 py-2 text-xs tracking-wide transition-colors ${
-                        lang === l.code
-                          ? "text-primary font-semibold bg-primary/10"
-                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                      }`}
-                    >
+              {langOpen &&
+              <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[150px] z-50">
+                  {languages.map((l) =>
+                <button
+                  key={l.code}
+                  onClick={() => {setLang(l.code);setLangOpen(false);}}
+                  className={`w-full text-left px-3 py-2 text-xs tracking-wide transition-colors ${
+                  lang === l.code ?
+                  "text-primary font-semibold bg-primary/10" :
+                  "text-muted-foreground hover:text-foreground hover:bg-secondary/50"}`
+                  }>
+
                       {l.code} — {l.label}
                     </button>
-                  ))}
+                )}
                 </div>
-              )}
+              }
             </div>
           </div>
 
@@ -93,56 +93,56 @@ const Header = () => {
             <ThemeToggle />
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-            >
+              className="p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors">
+
               <Search className="w-4 h-4" />
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors"
-            >
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary transition-colors">
+
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {searchOpen && (
-          <div className="border-t border-border/30 px-6 py-3 bg-background/80 backdrop-blur-xl">
+        {searchOpen &&
+        <div className="border-t border-border/30 px-6 py-3 bg-background/80 backdrop-blur-xl">
             <div className="container mx-auto">
               <input
-                type="text"
-                placeholder={t("nav.search")}
-                className="w-full bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
-                autoFocus
-              />
+              type="text"
+              placeholder={t("nav.search")}
+              className="w-full bg-secondary/50 border border-border/50 rounded-lg px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+              autoFocus />
+
             </div>
           </div>
-        )}
+        }
 
-        {mobileOpen && (
-          <div className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl px-6 py-4 space-y-3">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors"
-              >
+        {mobileOpen &&
+        <div className="md:hidden border-t border-border/30 bg-background/95 backdrop-blur-xl px-6 py-4 space-y-3">
+            {navItems.map((item) =>
+          <a
+            key={item.label}
+            href={item.href}
+            onClick={() => setMobileOpen(false)}
+            className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors">
+
                 {item.label}
               </a>
-            ))}
+          )}
             <a
-              href="/admin"
-              onClick={() => setMobileOpen(false)}
-              className="inline-block mt-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold tracking-widest uppercase rounded-sm text-center w-full hover:bg-primary/90 transition-colors"
-            >
+            href="/admin"
+            onClick={() => setMobileOpen(false)}
+            className="inline-block mt-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold tracking-widest uppercase rounded-sm text-center w-full hover:bg-primary/90 transition-colors">
+
               My Belgomed
             </a>
           </div>
-        )}
+        }
       </nav>
-    </header>
-  );
+    </header>);
+
 };
 
 export default Header;
