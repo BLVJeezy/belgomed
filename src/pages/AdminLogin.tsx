@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail, Shield } from "lucide-react";
-import logoB from "@/assets/logo-b.png";
+import logoHeader from "@/assets/logo-header.png";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -59,13 +59,12 @@ const AdminLogin = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <img src={logoB} alt="Belgomed" className="h-12 w-auto" />
-            <span className="text-2xl font-bold tracking-wider text-foreground">BELGOMED</span>
+          <div className="flex items-center justify-center mb-4">
+            <img src={logoHeader} alt="Belgomed" className="h-14 w-auto dark:brightness-200 dark:contrast-90" />
           </div>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Shield className="w-4 h-4 text-primary" />
-            <span className="text-sm uppercase tracking-widest">Admin Portal</span>
+            <span className="text-sm uppercase tracking-widest">Client Login</span>
           </div>
         </div>
 
