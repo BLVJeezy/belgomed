@@ -181,10 +181,10 @@ const ChatBot = () => {
     slice(0, 500);
   }, [messages]);
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (directText?: string) => {
+    const text = (directText || input).trim();
     if (!text || loading) return;
-    setInput("");
+    if (!directText) setInput("");
     const userMsg: Msg = { role: "user", content: text };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
@@ -247,9 +247,24 @@ const ChatBot = () => {
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.length === 0 &&
-          <div className="text-center text-muted-foreground text-sm py-8">
-                <Bot className="w-10 h-10 mx-auto mb-3 opacity-40" />
+          <div className="text-center text-muted-foreground text-sm py-6 space-y-3">
+                <Bot className="w-10 h-10 mx-auto mb-1 opacity-40" />
                 <p>Welkom! Stel gerust uw vraag.</p>
+                <div className="flex flex-col gap-2 mt-2">
+                  {[
+                    "Welke producten bieden jullie aan?",
+                    "Hoe werkt de levering en cold chain?",
+                    "Kan ik een offerte aanvragen?"
+                  ].map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => send(q)}
+                      className="text-left bg-secondary/80 hover:bg-secondary border border-border/50 rounded-lg px-3 py-2 text-sm text-foreground transition-colors"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
               </div>
           }
             {messages.map((msg, i) =>
