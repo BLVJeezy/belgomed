@@ -22,7 +22,7 @@ const AdminLogin = () => {
     try {
       const { data, error: authError } = await supabase.auth.signInWithPassword({
         email: email.trim(),
-        password,
+        password
       });
 
       if (authError) {
@@ -32,12 +32,12 @@ const AdminLogin = () => {
       }
 
       // Check admin role
-      const { data: roleData, error: roleError } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", data.user.id)
-        .eq("role", "admin")
-        .maybeSingle();
+      const { data: roleData, error: roleError } = await supabase.
+      from("user_roles").
+      select("role").
+      eq("user_id", data.user.id).
+      eq("role", "admin").
+      maybeSingle();
 
       if (roleError || !roleData) {
         await supabase.auth.signOut();
@@ -60,7 +60,7 @@ const AdminLogin = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
-            <img src={logoBelgomed} alt="Belgomed" className="h-14 w-auto dark:invert dark:brightness-200" />
+            <img alt="Belgomed" className="h-14 w-auto dark:invert dark:brightness-200" src="/lovable-uploads/0133504b-f9ba-47e9-a052-2847415e760d.png" />
           </div>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Shield className="w-4 h-4 text-primary" />
@@ -87,8 +87,8 @@ const AdminLogin = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@belgomed.be"
                   className="pl-10 bg-secondary/50 border-border/50 focus:border-primary"
-                  required
-                />
+                  required />
+
               </div>
             </div>
 
@@ -103,16 +103,16 @@ const AdminLogin = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="pl-10 bg-secondary/50 border-border/50 focus:border-primary"
-                  required
-                />
+                  required />
+
               </div>
             </div>
 
-            {error && (
-              <p className="text-sm text-destructive bg-destructive/10 rounded-lg px-3 py-2">
+            {error &&
+            <p className="text-sm text-destructive bg-destructive/10 rounded-lg px-3 py-2">
                 {error}
               </p>
-            )}
+            }
 
             <Button type="submit" className="w-full" size="lg" disabled={loading}>
               {loading ? "Verifiëren..." : "Dashboard Ontgrendelen"}
@@ -124,8 +124,8 @@ const AdminLogin = () => {
           © {new Date().getFullYear()} Belgomed — Beveiligde toegang
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default AdminLogin;
