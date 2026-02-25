@@ -90,12 +90,13 @@ const LeadForm = ({ onSubmit, conversationSummary }: {onSubmit: () => void;conve
   const [naam, setNaam] = useState("");
   const [telefoon, setTelefoon] = useState("");
   const [email, setEmail] = useState("");
+  const [bedrijfsnaam, setBedrijfsnaam] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
     if (!naam.trim() || !telefoon.trim() || !email.trim()) {
-      toast.error("Vul alle 3 velden in aub.");
+      toast.error("Vul naam, telefoon en e-mail in aub.");
       return;
     }
     setSubmitting(true);
@@ -103,7 +104,7 @@ const LeadForm = ({ onSubmit, conversationSummary }: {onSubmit: () => void;conve
       naam: naam.trim(),
       telefoon: telefoon.trim(),
       email: email.trim(),
-      bedrijfsnaam: "Via Chatbot",
+      bedrijfsnaam: bedrijfsnaam.trim() || "Via Chatbot",
       bericht: conversationSummary
     });
     setSubmitting(false);
@@ -122,42 +123,41 @@ const LeadForm = ({ onSubmit, conversationSummary }: {onSubmit: () => void;conve
         <CheckCircle className="w-4 h-4 flex-shrink-0" />
         <span>Verzoek verstuurd! We nemen snel contact op.</span>
       </div>);
-
   }
 
   return (
     <div className="bg-secondary/80 border border-border/50 rounded-xl p-3 space-y-2">
-      <p className="text-xs font-medium text-foreground">Laat uw gegevens achter:</p>
+      <p className="text-xs font-medium text-foreground">Laat uw gegevens achter zodat we u persoonlijk kunnen helpen:</p>
       <input
         value={naam}
         onChange={(e) => setNaam(e.target.value)}
         placeholder="Naam *"
         className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50" />
-
+      <input
+        value={bedrijfsnaam}
+        onChange={(e) => setBedrijfsnaam(e.target.value)}
+        placeholder="Bedrijfsnaam"
+        className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50" />
       <input
         value={telefoon}
         onChange={(e) => setTelefoon(e.target.value)}
         placeholder="Telefoon *"
         type="tel"
         className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50" />
-
       <input
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="E-mail *"
         type="email"
         className="w-full bg-background border border-border/50 rounded-lg px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50" />
-
       <button
         onClick={handleSubmit}
         disabled={submitting || !naam.trim() || !telefoon.trim() || !email.trim()}
         className="w-full bg-primary text-primary-foreground rounded-lg py-2 text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
-
         {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         Verstuur verzoek
       </button>
     </div>);
-
 };
 
 const ChatBot = () => {
