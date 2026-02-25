@@ -225,12 +225,14 @@ const ChatBot = () => {
 
   return (
     <>
-      
-
-
-
-
-
+      {/* Floating toggle button */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all flex items-center justify-center"
+        aria-label="Chat openen"
+      >
+        {open ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+      </button>
 
 
       {open &&
