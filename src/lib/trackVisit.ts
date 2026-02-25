@@ -21,7 +21,8 @@ export function trackVisit() {
   if (window.location.pathname.startsWith("/admin")) return;
 
   const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-  if (!projectId) return;
+  const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  if (!projectId || !anonKey) return;
 
   const payload = {
     path: window.location.pathname,
@@ -33,16 +34,14 @@ export function trackVisit() {
 
   const url = `https://${projectId}.supabase.co/functions/v1/track-visit`;
 
-  // Use sendBeacon for non-blocking, or fall back to fetch
-  const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, blob);
-  } else {
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    }).catch(() => {});
-  }
+  // Use fetch with keepalive (sendBeacon can't send custom headers)
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": anonKey,
+    },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  }).catch(() => {});
 }
