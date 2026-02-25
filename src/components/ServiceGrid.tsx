@@ -135,9 +135,9 @@ const ServiceGrid = () => {
                 <Thermometer className="w-5 h-5 text-primary" strokeWidth={1.5} />
                 <h3 className="text-lg font-semibold tracking-tight text-foreground">Cold Chain Monitoring</h3>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">
-                Real-time temperatuurmonitoring van magazijn tot levering.
-              </p>
+              
+
+
             </div>
 
             <ColdChainTracker />
