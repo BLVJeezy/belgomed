@@ -136,6 +136,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Ja, wij verzorgen snelle en veilige leveringen in heel België vanuit ons distributiecentrum in Hasselt. Onze logistiek is geoptimaliseerd voor betrouwbare en tijdige leveringen.",
     "faq.q6": "Biedt Belgomed cold-chain distributie aan?",
     "faq.a6": "Ja, wij garanderen volledige cold-chain compliance voor temperatuurgevoelige farmaceutische producten. Onze opslagfaciliteiten en transportmiddelen voldoen aan alle GDP-vereisten voor koude keten distributie.",
+
+    // Process
+    "process.tag": "Hoe Wij Werken",
+    "process.title": "Ons Proces",
+    "process.step": "Stap",
+    "process.1.title": "Aanvraag & Intake",
+    "process.1.desc": "U neemt contact op met ons team. Wij bespreken uw behoeften, volumes en gewenste productgroepen.",
+    "process.2.title": "Analyse & Offerte",
+    "process.2.desc": "Ons team analyseert uw aanvraag en stelt een offerte op maat op met de beste voorwaarden.",
+    "process.3.title": "Compliance & Vergunningen",
+    "process.3.desc": "Wij controleren alle GDP- en WDA-vereisten en zorgen voor volledige documentatie en traceerbaarheid.",
+    "process.4.title": "Levering & Distributie",
+    "process.4.desc": "Snelle, veilige levering vanuit ons distributiecentrum in Hasselt — inclusief cold-chain indien nodig.",
+    "process.5.title": "Nazorg & Partnerschap",
+    "process.5.desc": "Continue ondersteuning, voorraadbeheer en proactieve communicatie voor een duurzaam partnerschap.",
   },
 
   EN: {
@@ -252,6 +267,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Yes, we provide fast and safe deliveries throughout Belgium from our distribution center in Hasselt. Our logistics are optimized for reliable and timely deliveries.",
     "faq.q6": "Does Belgomed offer cold-chain distribution?",
     "faq.a6": "Yes, we guarantee full cold-chain compliance for temperature-sensitive pharmaceutical products. Our storage facilities and transport meet all GDP requirements for cold chain distribution.",
+
+    // Process
+    "process.tag": "How We Work",
+    "process.title": "Our Process",
+    "process.step": "Step",
+    "process.1.title": "Inquiry & Intake",
+    "process.1.desc": "You contact our team. We discuss your needs, volumes and desired product groups.",
+    "process.2.title": "Analysis & Quote",
+    "process.2.desc": "Our team analyzes your request and prepares a tailored quote with the best conditions.",
+    "process.3.title": "Compliance & Licenses",
+    "process.3.desc": "We verify all GDP and WDA requirements and ensure complete documentation and traceability.",
+    "process.4.title": "Delivery & Distribution",
+    "process.4.desc": "Fast, safe delivery from our distribution center in Hasselt — including cold-chain when needed.",
+    "process.5.title": "Aftercare & Partnership",
+    "process.5.desc": "Continuous support, inventory management and proactive communication for a lasting partnership.",
   },
 
   FR: {
@@ -368,6 +398,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Oui, nous assurons des livraisons rapides et sûres dans toute la Belgique depuis notre centre de distribution à Hasselt. Notre logistique est optimisée pour des livraisons fiables et ponctuelles.",
     "faq.q6": "Belgomed propose-t-il une distribution chaîne du froid ?",
     "faq.a6": "Oui, nous garantissons une conformité totale de la chaîne du froid pour les produits pharmaceutiques thermosensibles. Nos installations de stockage et nos moyens de transport répondent à toutes les exigences GDP.",
+
+    // Process
+    "process.tag": "Comment Nous Travaillons",
+    "process.title": "Notre Processus",
+    "process.step": "Étape",
+    "process.1.title": "Demande & Accueil",
+    "process.1.desc": "Vous contactez notre équipe. Nous discutons de vos besoins, volumes et groupes de produits souhaités.",
+    "process.2.title": "Analyse & Devis",
+    "process.2.desc": "Notre équipe analyse votre demande et prépare un devis sur mesure avec les meilleures conditions.",
+    "process.3.title": "Conformité & Licences",
+    "process.3.desc": "Nous vérifions toutes les exigences GDP et WDA et assurons une documentation complète et une traçabilité.",
+    "process.4.title": "Livraison & Distribution",
+    "process.4.desc": "Livraison rapide et sûre depuis notre centre de distribution à Hasselt — chaîne du froid incluse si nécessaire.",
+    "process.5.title": "Suivi & Partenariat",
+    "process.5.desc": "Support continu, gestion des stocks et communication proactive pour un partenariat durable.",
   },
 
   DE: {
@@ -484,6 +529,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Ja, wir sorgen für schnelle und sichere Lieferungen in ganz Belgien von unserem Distributionszentrum in Hasselt aus. Unsere Logistik ist auf zuverlässige und pünktliche Lieferungen optimiert.",
     "faq.q6": "Bietet Belgomed Cold-Chain-Distribution an?",
     "faq.a6": "Ja, wir garantieren vollständige Cold-Chain-Compliance für temperatursensible pharmazeutische Produkte. Unsere Lagerstätten und Transportmittel erfüllen alle GDP-Anforderungen für die Kühlkettendistribution.",
+
+    // Process
+    "process.tag": "Wie Wir Arbeiten",
+    "process.title": "Unser Prozess",
+    "process.step": "Schritt",
+    "process.1.title": "Anfrage & Aufnahme",
+    "process.1.desc": "Sie kontaktieren unser Team. Wir besprechen Ihre Bedürfnisse, Mengen und gewünschte Produktgruppen.",
+    "process.2.title": "Analyse & Angebot",
+    "process.2.desc": "Unser Team analysiert Ihre Anfrage und erstellt ein maßgeschneidertes Angebot mit den besten Konditionen.",
+    "process.3.title": "Compliance & Genehmigungen",
+    "process.3.desc": "Wir prüfen alle GDP- und WDA-Anforderungen und sorgen für vollständige Dokumentation und Rückverfolgbarkeit.",
+    "process.4.title": "Lieferung & Distribution",
+    "process.4.desc": "Schnelle, sichere Lieferung aus unserem Distributionszentrum in Hasselt — inklusive Kühlkette bei Bedarf.",
+    "process.5.title": "Nachbetreuung & Partnerschaft",
+    "process.5.desc": "Kontinuierliche Unterstützung, Lagerverwaltung und proaktive Kommunikation für eine dauerhafte Partnerschaft.",
   },
 };
 
