@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin } from "lucide-react";
 import { useLang } from "@/contexts/LangContext";
 
 const Footer = () => {
@@ -40,6 +40,10 @@ const Footer = () => {
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">info@belgomed.be</span>
               </div>
+              <a href="https://www.linkedin.com/company/belgomed" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mt-3">
+                <Linkedin className="w-4 h-4" />
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
         </div>
