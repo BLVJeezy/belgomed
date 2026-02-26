@@ -5,8 +5,8 @@ const Footer = () => {
   const { t } = useLang();
 
   const navItems = [
-  { label: t("nav.services"), href: "#diensten" },
-  { label: t("nav.about"), href: "#overons" },
+  { label: t("diensten.title"), href: "#diensten" },
+  { label: t("process.title"), href: "#process" },
   { label: t("nav.contact"), href: "#contact" }];
 
 
