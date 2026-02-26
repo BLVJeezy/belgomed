@@ -6,7 +6,7 @@ const translations: Record<Lang, Record<string, string>> = {
   NL: {
     // Nav
     "nav.about": "Over Ons",
-    "nav.services": "Diensten",
+    "nav.process": "Ons Proces",
     "nav.contact": "Contact",
     "nav.search": "Zoek producten, medicijnen, hulpmiddelen...",
 
@@ -155,7 +155,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
   EN: {
     "nav.about": "About Us",
-    "nav.services": "Services",
+    "nav.process": "Our Process",
     "nav.contact": "Contact",
     "nav.search": "Search products, medicines, medical devices...",
     "hero.badge": "GDP & WDA Certified",
@@ -286,7 +286,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
   FR: {
     "nav.about": "À Propos",
-    "nav.services": "Services",
+    "nav.process": "Notre Processus",
     "nav.contact": "Contact",
     "nav.search": "Rechercher produits, médicaments, dispositifs médicaux...",
     "hero.badge": "Certifié GDP & WDA",
@@ -417,7 +417,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
   DE: {
     "nav.about": "Über Uns",
-    "nav.services": "Leistungen",
+    "nav.process": "Unser Prozess",
     "nav.contact": "Kontakt",
     "nav.search": "Produkte, Medikamente, Hilfsmittel suchen...",
     "hero.badge": "GDP & WDA Zertifiziert",

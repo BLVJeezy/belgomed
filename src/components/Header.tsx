@@ -20,7 +20,7 @@ const Header = () => {
 
   const navItems = [
   { label: t("nav.about"), href: "#overons" },
-  { label: t("nav.services"), href: "#diensten" },
+  { label: t("nav.process"), href: "#process" },
   { label: t("nav.contact"), href: "#contact" }];
 
 
