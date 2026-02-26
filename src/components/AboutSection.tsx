@@ -96,8 +96,7 @@ const AboutSection = () => {
       <ServiceGrid />
 
       {/* Diensten */}
-      <section className="py-14 md:py-20 lg:py-24 bg-background dark:bg-gradient-to-r dark:from-[#001a1a] dark:to-[#004d4d] px-5 md:px-6 lg:px-12">
-        
+      
 
 
 
@@ -116,7 +115,8 @@ const AboutSection = () => {
 
 
 
-      </section>
+
+
     </div>);
 
 };
