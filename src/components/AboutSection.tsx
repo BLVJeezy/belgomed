@@ -56,7 +56,7 @@ const AboutSection = () => {
               <div className="absolute inset-0 bg-white/5 group-hover:bg-transparent transition-all duration-500" />
               <div className="absolute bottom-8 left-8 text-white z-10">
                 <p className="text-3xl lg:text-4xl font-black">{t("about.location")}</p>
-                <p className="text-[10px] uppercase tracking-widest opacity-60 font-bold mt-1">{t("about.locationSub")}</p>
+                
               </div>
             </div>
           </ScrollReveal>
