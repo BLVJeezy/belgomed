@@ -53,6 +53,9 @@ const Footer = () => {
             <a href="/terms" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-2 hover:underline">
               {t("footer.terms")}
             </a>
+            <a href="/privacy" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-2 hover:underline">
+              {t("footer.privacy")}
+            </a>
           </div>
           <div className="flex flex-col items-center gap-3 md:flex-row md:gap-4 w-full md:w-auto">
             <p className="text-xs text-muted-foreground">{t("footer.regulated")}</p>
