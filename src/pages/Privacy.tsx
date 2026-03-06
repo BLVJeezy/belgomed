@@ -1,12 +1,15 @@
-import { useLang } from "@/contexts/LangContext";
+import { LangProvider, useLang } from "@/contexts/LangContext";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const Privacy = () => {
+const PrivacyContent = () => {
   const { t } = useLang();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Header />
       <div className="container mx-auto px-5 md:px-6 py-16 max-w-3xl">
         <Link
           to="/"
@@ -20,49 +23,25 @@ const Privacy = () => {
         <p className="text-sm text-muted-foreground mb-10">{t("privacy.version")}</p>
 
         <div className="space-y-8 text-sm leading-relaxed text-muted-foreground">
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">1. {t("privacy.s1.title")}</h2>
-            <p>{t("privacy.s1.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">2. {t("privacy.s2.title")}</h2>
-            <p>{t("privacy.s2.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">3. {t("privacy.s3.title")}</h2>
-            <p>{t("privacy.s3.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">4. {t("privacy.s4.title")}</h2>
-            <p>{t("privacy.s4.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">5. {t("privacy.s5.title")}</h2>
-            <p>{t("privacy.s5.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">6. {t("privacy.s6.title")}</h2>
-            <p>{t("privacy.s6.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">7. {t("privacy.s7.title")}</h2>
-            <p>{t("privacy.s7.body")}</p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground mb-2">8. {t("privacy.s8.title")}</h2>
-            <p>{t("privacy.s8.body")}</p>
-          </section>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <section key={i}>
+              <h2 className="text-lg font-semibold text-foreground mb-2">
+                {i}. {t(`privacy.s${i}.title`)}
+              </h2>
+              <p>{t(`privacy.s${i}.body`)}</p>
+            </section>
+          ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
+
+const Privacy = () => (
+  <LangProvider>
+    <PrivacyContent />
+  </LangProvider>
+);
 
 export default Privacy;
