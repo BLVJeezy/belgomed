@@ -16,4 +16,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://belgomed.com/sitemap.xml
+Sitemap: https://qjhyojwdvhkwwfvplaab.supabase.co/functions/v1/sitemap
