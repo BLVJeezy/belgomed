@@ -148,7 +148,8 @@ const Dashboard = () => {
       pageCounts[v.path] = (pageCounts[v.path] || 0) + 1;
     });
     const pageNames: Record<string, string> = {
-      "/": "Homepage", "/terms": "Voorwaarden",
+      "/": "Homepage", "/terms": "Voorwaarden", "/privacy": "Privacybeleid",
+      "/privacy-disclaimer": "Privacy Disclaimer", "/admin": "Admin Login",
     };
     const topPages = Object.entries(pageCounts)
       .sort((a, b) => b[1] - a[1])
