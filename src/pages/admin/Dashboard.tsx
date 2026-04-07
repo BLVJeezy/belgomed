@@ -40,8 +40,10 @@ const tooltipStyle = {
 
 const COUNTRY_FLAGS: Record<string, string> = {
   Belgium: "🇧🇪", "DR Congo": "🇨🇩", Congo: "🇨🇩", Netherlands: "🇳🇱",
+  "The Netherlands": "🇳🇱",
   Rwanda: "🇷🇼", Germany: "🇩🇪", France: "🇫🇷", "United States": "🇺🇸",
   "United Kingdom": "🇬🇧", Burundi: "🇧🇮", Uganda: "🇺🇬", Tanzania: "🇹🇿",
+  Ireland: "🇮🇪", Italy: "🇮🇹", Luxembourg: "🇱🇺", Spain: "🇪🇸",
 };
 
 function getDaysAgoUTC(days: number): string {
