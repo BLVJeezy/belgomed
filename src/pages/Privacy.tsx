@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import { LangProvider, useLang } from "@/contexts/LangContext";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { trackVisit } from "@/lib/trackVisit";
 
 const PrivacyContent = () => {
   const { t } = useLang();
+
+  useEffect(() => {
+    trackVisit();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

@@ -40,8 +40,10 @@ const tooltipStyle = {
 
 const COUNTRY_FLAGS: Record<string, string> = {
   Belgium: "🇧🇪", "DR Congo": "🇨🇩", Congo: "🇨🇩", Netherlands: "🇳🇱",
+  "The Netherlands": "🇳🇱",
   Rwanda: "🇷🇼", Germany: "🇩🇪", France: "🇫🇷", "United States": "🇺🇸",
   "United Kingdom": "🇬🇧", Burundi: "🇧🇮", Uganda: "🇺🇬", Tanzania: "🇹🇿",
+  Ireland: "🇮🇪", Italy: "🇮🇹", Luxembourg: "🇱🇺", Spain: "🇪🇸",
 };
 
 function getDaysAgoUTC(days: number): string {
@@ -146,7 +148,8 @@ const Dashboard = () => {
       pageCounts[v.path] = (pageCounts[v.path] || 0) + 1;
     });
     const pageNames: Record<string, string> = {
-      "/": "Homepage", "/terms": "Voorwaarden",
+      "/": "Homepage", "/terms": "Voorwaarden", "/privacy": "Privacybeleid",
+      "/privacy-disclaimer": "Privacy Disclaimer", "/admin": "Admin Login",
     };
     const topPages = Object.entries(pageCounts)
       .sort((a, b) => b[1] - a[1])
