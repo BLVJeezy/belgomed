@@ -44,7 +44,7 @@ const AdminLayout = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (loading && !authorized) {
+  if (!authorized) {
     return (
       <div className="min-h-screen gradient-hero flex items-center justify-center">
         <div className="text-primary animate-pulse text-lg">Laden...</div>

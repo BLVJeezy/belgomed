@@ -14,18 +14,42 @@ serve(async (req) => {
 
     // Handle lead submission
     if (action === "submit_lead" && leadData) {
+      // Server-side input validation
+      const naam = typeof leadData.naam === "string" ? leadData.naam.trim().slice(0, 100) : "";
+      const email = typeof leadData.email === "string" ? leadData.email.trim().slice(0, 255) : "";
+      const telefoon = typeof leadData.telefoon === "string" ? leadData.telefoon.trim().slice(0, 20) : "";
+      const bedrijfsnaam = typeof leadData.bedrijfsnaam === "string" ? leadData.bedrijfsnaam.trim().slice(0, 150) : "Via Chatbot";
+      const bericht = typeof leadData.bericht === "string" ? leadData.bericht.trim().slice(0, 2000) : "";
+      const sector = typeof leadData.sector === "string" ? leadData.sector.trim().slice(0, 50) : "RX";
+      const land = typeof leadData.land === "string" ? leadData.land.trim().slice(0, 100) : "België";
+
+      // Validate required fields
+      if (!naam || !email) {
+        return new Response(JSON.stringify({ error: "Naam en e-mail zijn verplicht." }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      // Basic email format check
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return new Response(JSON.stringify({ error: "Ongeldig e-mailadres." }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
       const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
       const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
       const supabase = createClient(supabaseUrl, supabaseKey);
 
       const { error } = await supabase.from("leads").insert({
-        contact_naam: leadData.naam,
-        contact_email: leadData.email,
-        telefoon: leadData.telefoon,
-        bedrijfsnaam: leadData.bedrijfsnaam || "Via Chatbot",
-        bericht: leadData.bericht || "",
-        sector: leadData.sector || "RX",
-        land: leadData.land || "België",
+        contact_naam: naam,
+        contact_email: email,
+        telefoon: telefoon,
+        bedrijfsnaam: bedrijfsnaam || "Via Chatbot",
+        bericht: bericht,
+        sector: sector,
+        land: land,
         service_type: "chatbot",
       });
 
