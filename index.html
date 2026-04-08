@@ -141,5 +141,32 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Standalone analytics tracking (independent of React bundle) -->
+    <script>
+    (function(){
+      try {
+        if (location.pathname.startsWith('/admin')) return;
+        var SK = 'belgomed_sid';
+        var sid = sessionStorage.getItem(SK);
+        if (!sid) { sid = crypto.randomUUID(); sessionStorage.setItem(SK, sid); }
+        var w = window.innerWidth;
+        var dt = w < 768 ? 'mobile' : w < 1024 ? 'tablet' : 'desktop';
+        var pid = 'qjhyojwdvhkwwfvplaab';
+        var key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqaHlvandkdmhrd3dmdnBsYWFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2OTUyNzAsImV4cCI6MjA4NzI3MTI3MH0.40FcJoWk4W6Dtd5b1RzbzNblvQJ4SYab7qDKVHbxudc';
+        fetch('https://' + pid + '.supabase.co/functions/v1/track-visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': key },
+          body: JSON.stringify({
+            path: location.pathname,
+            referrer: document.referrer || null,
+            userAgent: navigator.userAgent,
+            deviceType: dt,
+            sessionId: sid
+          }),
+          keepalive: true
+        }).catch(function(){});
+      } catch(e) {}
+    })();
+    </script>
   </body>
 </html>
