@@ -7,6 +7,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
+import CookieConsent from "@/components/CookieConsent";
 import { LangProvider } from "@/contexts/LangContext";
 
 const Index = () => {
