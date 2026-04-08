@@ -5,7 +5,8 @@ import { toast } from "sonner";
 
 type Msg = {role: "user" | "assistant";content: string;};
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const CHAT_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/chat` : null;
 
 async function streamChat({
   messages,
@@ -160,7 +161,7 @@ const LeadForm = ({ onSubmit, conversationSummary }: {onSubmit: () => void;conve
     </div>);
 };
 
-const ChatBot = () => {
+const ChatBotInner = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -340,5 +341,7 @@ const ChatBot = () => {
     </>);
 
 };
+
+const ChatBot = () => CHAT_URL ? <ChatBotInner /> : null;
 
 export default ChatBot;
