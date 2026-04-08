@@ -2,9 +2,8 @@ import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
 let _client: SupabaseClient<Database> | null = null;
-let _status: "ready" | "missing_config" | "not_initialized" = "not_initialized";
-
-export type AdminBackendStatus = typeof _status;
+export type AdminBackendStatus = "ready" | "missing_config" | "not_initialized";
+let _status: AdminBackendStatus = "not_initialized";
 
 export function getAdminClient(): SupabaseClient<Database> | null {
   if (_client) return _client;
