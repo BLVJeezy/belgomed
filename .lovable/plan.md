@@ -1,69 +1,123 @@
 
-Doel
+Do I know what the issue is? Ja.
 
-De admin-login weer stabiel maken zodat `/admin` niet meer blokkeert met “Backend niet beschikbaar” en geautoriseerde gebruikers opnieuw normaal kunnen inloggen.
+## Exact probleem
 
-Wat ik heb vastgesteld
+Dit is niet opnieuw een wachtwoord-, role- of databaseprobleem.
 
-- De fout in je screenshot komt alleen uit `src/pages/AdminLogin.tsx` wanneer `getAdminClient()` `null` teruggeeft.
-- In de preview werken backend-requests al met een geldige admin-sessie, dus database, authenticatie en admin-RLS lijken in principe correct te werken.
-- Het probleem zit daardoor waarschijnlijk in de frontend bootstrap van de admin-flow: configuratie-detectie en auth-readiness, niet in de analytics- of leads-tabellen zelf.
+Ik heb de code én de live build vergeleken en de echte fout is deze:
 
-Implementatieplan
+- `src/lib/adminBackend.ts` leest backend-config uit `import.meta.env.*`
+- op de live site wordt dat bestand gecompileerd naar een mini-stub die altijd `missing_config` teruggeeft
+- bewijs: het live bestand `assets/adminBackend-*.js` bevat geen client-initialisatie meer, alleen code die meteen `null` returned
+- tegelijk zie ik in de werkende preview succesvolle `user_roles`-requests met een admin-resultaat, dus authenticatie + admin-rol bestaan al
 
-1. Admin client bootstrap robuuster maken
-- `src/lib/adminBackend.ts` uitbreiden zodat die niet alleen `client/null` teruggeeft, maar ook een duidelijke status zoals `ready`, `missing_config` of `initializing`.
-- De backend-URL blijven afleiden uit de projectconfig wanneer de directe URL ontbreekt, zodat de admin niet afhankelijk blijft van één enkele env-waarde.
+Conclusie: de live bundle krijgt de backend-config niet betrouwbaar mee tijdens build. Daarom zie je nu “Backend-configuratie ontbreekt”.
 
-2. Centrale auth-ready hook toevoegen
-- Een kleine `useAdminAuthReady` hook toevoegen die eerst de sessie volledig laat herstellen en pas daarna protected queries toelaat.
-- Geen async werk meer in `onAuthStateChange`; die listener alleen gebruiken om lokale state bij te werken.
+## Waarom er steeds “een nieuw probleem” opduikt
 
-3. Login flow herstellen
-- `src/pages/AdminLogin.tsx` aanpassen zodat:
-  - de submit-knop pas actief is wanneer backend-config klaar is
-  - na `signInWithPassword` eerst de actuele sessie bevestigd wordt
-  - daarna pas de `user_roles` check gebeurt
-- Drie aparte foutmeldingen tonen:
-  - backend/config niet beschikbaar
-  - ongeldige login
-  - geen admin-toegang
+Dezelfde kwetsbare aanpak zit op meerdere plekken:
 
-4. Admin route guard stabiliseren
-- `src/components/admin/AdminLayout.tsx` laten wachten op dezelfde auth-ready status in plaats van direct queries te doen bij mount.
-- Alleen redirecten naar `/admin` wanneer auth echt klaar is en er géén sessie is.
-- Bij config-problemen een nette admin fallback tonen; bij geldige sessie pas `<Outlet />` renderen.
+- `src/lib/adminBackend.ts`
+- `src/lib/trackVisit.ts`
+- `src/components/ContactForm.tsx`
+- `src/components/ChatBot.tsx`
+- indirect ook via `src/integrations/supabase/client.ts`
 
-5. Beschermde admin-pagina’s op dezelfde guard aansluiten
-- `Dashboard.tsx`, `Leads.tsx`, `AdminSettings.tsx` en `AdminSidebar.tsx` pas backend-calls laten doen zodra client + sessie + admin-status klaar zijn.
-- Zo verdwijnt het risico dat login wel lukt maar vervolgpagina’s leeg blijven of vastlopen.
+Zolang verschillende onderdelen rechtstreeks afhangen van `import.meta.env` op build-tijd, blijft exact dezelfde root cause elders terugkomen: eerst admin, dan analytics, dan contact/chat.
 
-6. Rollen alleen controleren/backfillen indien nodig
-- Verifiëren of het bedoelde admin-account nog een `user_roles` rij heeft.
-- Alleen als daar echt een gat zit, een kleine backfill-migratie toevoegen voor bestaande toegelaten admin-gebruikers.
-- Op basis van de huidige preview verwacht ik dat dit waarschijnlijk niet nodig is voor het bestaande hoofdaccount.
+## Plan dat dit structureel oplost
 
-7. Verificatie na implementatie
-- `/admin` toont geen “Backend niet beschikbaar” meer
-- Inloggen met bestaand admin-account werkt opnieuw
-- `/admin/dashboard`, `/admin/leads` en `/admin/settings` laden ook na refresh correct
-- Uitloggen werkt
-- Verkeerde credentials geven een normale foutmelding in plaats van een backend-fout
+### 1. Eén centrale backend-config maken
+Nieuw bestand, bv. `src/lib/backendConfig.ts`, dat altijd één consistente config oplevert:
 
-Technische details
+- `url`
+- `projectId`
+- `publishableKey`
+- `isConfigured`
 
-- Geen aanpassing aan `src/integrations/supabase/client.ts`
-- Waarschijnlijk nieuwe hook:
-  - `src/hooks/useAdminAuthReady.ts`
-- Belangrijkste bestanden:
-  - `src/lib/adminBackend.ts`
-  - `src/pages/AdminLogin.tsx`
-  - `src/components/admin/AdminLayout.tsx`
-  - `src/pages/admin/Dashboard.tsx`
-  - `src/pages/admin/Leads.tsx`
-  - `src/pages/admin/AdminSettings.tsx`
-  - `src/components/admin/AdminSidebar.tsx`
+Volgorde van fallback:
+1. build env vars als ze bestaan
+2. afleiden van `url` uit `projectId` of omgekeerd
+3. vaste publieke fallback van de al verbonden backend
 
-Verwachte uitkomst
+Belangrijk: dit gebruikt alleen publieke browser-config, geen geheime sleutel.
 
-De admin-login werkt weer zoals vroeger, maar wordt tegelijk veel stabieler tegen configuratie- en timingproblemen tijdens het laden van de backend-sessie.
+### 2. Admin volledig op die centrale config zetten
+`src/lib/adminBackend.ts` refactoren zodat het alleen nog deze resolver gebruikt.
+
+Doel:
+- geen directe afhankelijkheid meer van `VITE_SUPABASE_URL`
+- `missing_config` enkel nog tonen als ook de fallback echt faalt
+- geen situatie meer waarin de live bundle compileert naar “altijd null”
+
+### 3. Alle publieke backend-features op dezelfde resolver aansluiten
+Dezelfde config gebruiken voor:
+
+- `src/lib/trackVisit.ts`
+- `src/components/ContactForm.tsx`
+- `src/components/ChatBot.tsx`
+
+Concreet:
+- `ContactForm` mag niet meer afhankelijk zijn van directe import van de gegenereerde client voor live gebruik
+- `ChatBot` moet zijn function URL en headers uit dezelfde centrale config halen
+- analytics tracking moet dezelfde resolver gebruiken zodat live analytics niet opnieuw uit sync raken
+
+### 4. De gegenereerde client niet als single point of failure gebruiken
+`src/integrations/supabase/client.ts` niet wijzigen, maar ook niet langer gebruiken op plekken waar een ontbrekende env de live site kan blokkeren of stilletjes uitschakelen.
+
+### 5. Admin UX behouden, maar zonder valse config-fout
+`AdminLogin` en `AdminLayout` blijven nette fallback-states houden, maar na deze refactor hoort op live:
+
+- geen rode configmelding meer te verschijnen
+- login gewoon te werken
+- een fout wachtwoord een normale auth-fout te geven
+- deep links naar dashboard/leads/settings niet meer stuk te gaan
+
+## Verificatie na implementatie
+
+### Live build-controle
+Ik zou expliciet controleren dat het gepubliceerde `adminBackend-*.js` bestand niet meer reduceert naar de huidige `missing_config` stub.
+
+### Functionele test
+Daarna live testen op:
+
+- `https://belgomed.com/admin`
+- `https://belgomed.com/admin/dashboard`
+- `https://belgomed.com/admin/leads`
+- `https://belgomed.com/admin/settings`
+
+Te bevestigen:
+- geen configmelding meer
+- login werkt
+- role-check werkt
+- dashboarddata laadt
+- leads laden
+- logout werkt
+
+### Extra regressietest
+Ook nog testen:
+- analytics tracking
+- contactformulier
+- chatbot
+
+Zo lossen we niet alleen dit admin-scherm op, maar ook de gedeelde oorzaak achter de vorige backend-gerelateerde bugs.
+
+## Bestanden
+
+Nieuw:
+- `src/lib/backendConfig.ts`
+
+Wijzigen:
+- `src/lib/adminBackend.ts`
+- `src/lib/trackVisit.ts`
+- `src/components/ContactForm.tsx`
+- `src/components/ChatBot.tsx`
+- `src/pages/AdminLogin.tsx`
+- `src/components/admin/AdminLayout.tsx`
+
+## Technische noot
+
+Ik heb ook de Vite env-regels nagekeken: `import.meta.env` wordt statisch vervangen tijdens de build. Dat past exact bij wat live gebeurt. Daarom is dit geen losse login-bug, maar één structurele build-config bug.
+
+Geen database-migratie of role-backfill nodig voor deze fix: de bestaande admin-rol werkt al in de preview.
