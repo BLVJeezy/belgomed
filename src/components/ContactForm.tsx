@@ -5,8 +5,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useLang } from "@/contexts/LangContext";
+
+const hasBackend = !!import.meta.env.VITE_SUPABASE_URL;
 
 const ContactForm = () => {
   const { toast } = useToast();

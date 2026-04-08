@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,14 +8,20 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-import AdminLogin from "./pages/AdminLogin";
-import AdminLayout from "./components/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import Leads from "./pages/admin/Leads";
 
-import AdminSettings from "./pages/admin/AdminSettings";
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const Leads = lazy(() => import("./pages/admin/Leads"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 
 const queryClient = new QueryClient();
+
+const AdminFallback = () => (
+  <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    Laden...
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -26,12 +33,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route element={<AdminLayout />}>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/leads" element={<Leads />} />
-            
-            <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />
+          <Route element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
+            <Route path="/admin/dashboard" element={<Suspense fallback={<AdminFallback />}><Dashboard /></Suspense>} />
+            <Route path="/admin/leads" element={<Suspense fallback={<AdminFallback />}><Leads /></Suspense>} />
+            <Route path="/admin/settings" element={<Suspense fallback={<AdminFallback />}><AdminSettings /></Suspense>} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
