@@ -170,6 +170,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Snelle, veilige levering vanuit ons distributiecentrum — inclusief cold-chain indien nodig.",
     "process.5.title": "Nazorg & Partnerschap",
     "process.5.desc": "Continue ondersteuning, voorraadbeheer en proactieve communicatie voor een duurzaam partnerschap.",
+
+    // Cookie consent
+    "cookie.title": "Wij respecteren uw privacy",
+    "cookie.description": "Deze website gebruikt cookies om uw ervaring te verbeteren. Noodzakelijke cookies zijn vereist voor de werking van de site. Analytische en marketing cookies worden alleen geplaatst met uw toestemming. Lees meer in ons",
+    "cookie.privacyLink": "privacybeleid",
+    "cookie.necessary": "Noodzakelijk",
+    "cookie.necessaryDesc": "Vereist voor de werking van de website (sessie, taalvoorkeur).",
+    "cookie.analytics": "Analytisch",
+    "cookie.analyticsDesc": "Helpt ons de website te verbeteren door anoniem bezoekersgedrag te meten.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Wordt gebruikt om relevante advertenties en content te tonen.",
+    "cookie.acceptAll": "Alles accepteren",
+    "cookie.rejectAll": "Alles weigeren",
+    "cookie.customize": "Voorkeuren aanpassen",
+    "cookie.saveSelection": "Selectie opslaan",
   },
 
   EN: {
@@ -320,6 +335,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Fast, safe delivery from our distribution center — including cold-chain when needed.",
     "process.5.title": "Aftercare & Partnership",
     "process.5.desc": "Continuous support, inventory management and proactive communication for a lasting partnership.",
+
+    // Cookie consent
+    "cookie.title": "We respect your privacy",
+    "cookie.description": "This website uses cookies to improve your experience. Necessary cookies are required for the site to function. Analytical and marketing cookies are only placed with your consent. Read more in our",
+    "cookie.privacyLink": "privacy policy",
+    "cookie.necessary": "Necessary",
+    "cookie.necessaryDesc": "Required for website functionality (session, language preference).",
+    "cookie.analytics": "Analytics",
+    "cookie.analyticsDesc": "Helps us improve the website by anonymously measuring visitor behaviour.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Used to show relevant ads and content.",
+    "cookie.acceptAll": "Accept all",
+    "cookie.rejectAll": "Reject all",
+    "cookie.customize": "Customize",
+    "cookie.saveSelection": "Save selection",
   },
 
   FR: {
@@ -470,6 +500,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Livraison rapide et sûre depuis notre centre de distribution — chaîne du froid incluse si nécessaire.",
     "process.5.title": "Suivi & Partenariat",
     "process.5.desc": "Support continu, gestion des stocks et communication proactive pour un partenariat durable.",
+
+    // Cookie consent
+    "cookie.title": "Nous respectons votre vie privée",
+    "cookie.description": "Ce site utilise des cookies pour améliorer votre expérience. Les cookies nécessaires sont requis pour le fonctionnement du site. Les cookies analytiques et marketing ne sont placés qu'avec votre consentement. En savoir plus dans notre",
+    "cookie.privacyLink": "politique de confidentialité",
+    "cookie.necessary": "Nécessaires",
+    "cookie.necessaryDesc": "Requis pour le fonctionnement du site (session, préférence linguistique).",
+    "cookie.analytics": "Analytiques",
+    "cookie.analyticsDesc": "Nous aide à améliorer le site en mesurant anonymement le comportement des visiteurs.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Utilisés pour afficher des publicités et du contenu pertinents.",
+    "cookie.acceptAll": "Tout accepter",
+    "cookie.rejectAll": "Tout refuser",
+    "cookie.customize": "Personnaliser",
+    "cookie.saveSelection": "Enregistrer la sélection",
   },
 
   DE: {
@@ -620,6 +665,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Schnelle, sichere Lieferung aus unserem Distributionszentrum — inklusive Kühlkette bei Bedarf.",
     "process.5.title": "Nachbetreuung & Partnerschaft",
     "process.5.desc": "Kontinuierliche Unterstützung, Lagerverwaltung und proaktive Kommunikation für eine dauerhafte Partnerschaft.",
+
+    // Cookie consent
+    "cookie.title": "Wir respektieren Ihre Privatsphäre",
+    "cookie.description": "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern. Notwendige Cookies sind für den Betrieb der Website erforderlich. Analyse- und Marketing-Cookies werden nur mit Ihrer Zustimmung gesetzt. Mehr erfahren Sie in unserer",
+    "cookie.privacyLink": "Datenschutzerklärung",
+    "cookie.necessary": "Notwendig",
+    "cookie.necessaryDesc": "Erforderlich für den Betrieb der Website (Sitzung, Spracheinstellung).",
+    "cookie.analytics": "Analytisch",
+    "cookie.analyticsDesc": "Hilft uns, die Website durch anonyme Messung des Besucherverhaltens zu verbessern.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Wird verwendet, um relevante Werbung und Inhalte anzuzeigen.",
+    "cookie.acceptAll": "Alle akzeptieren",
+    "cookie.rejectAll": "Alle ablehnen",
+    "cookie.customize": "Anpassen",
+    "cookie.saveSelection": "Auswahl speichern",
   },
 };
 
