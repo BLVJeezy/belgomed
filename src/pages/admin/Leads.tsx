@@ -32,7 +32,9 @@ const Leads = () => {
 
   const deleteLead = useCallback(async (id: string) => {
     setDeleting(id);
-    await supabase.from("leads").delete().eq("id", id);
+    const client = getAdminClient();
+    if (!client) return;
+    await client.from("leads").delete().eq("id", id);
     setLeads((prev) => prev.filter((l) => l.id !== id));
     if (selectedLead?.id === id) setSelectedLead(null);
     setDeleting(null);
