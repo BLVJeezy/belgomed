@@ -20,9 +20,11 @@ export function trackVisit() {
   // Don't track admin pages
   if (window.location.pathname.startsWith("/admin")) return;
 
-  const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-  const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-  if (!projectId || !anonKey) return;
+  const { getBackendConfig } = await_import();
+  const cfg = getBackendConfig();
+  if (!cfg.isConfigured) return;
+  const projectId = cfg.projectId;
+  const anonKey = cfg.publishableKey;
 
   const payload = {
     path: window.location.pathname,

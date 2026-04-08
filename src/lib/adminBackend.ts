@@ -1,5 +1,6 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { getBackendConfig } from "@/lib/backendConfig";
 
 let _client: SupabaseClient<Database> | null = null;
 export type AdminBackendStatus = "ready" | "missing_config" | "not_initialized";
@@ -8,21 +9,13 @@ let _status: AdminBackendStatus = "not_initialized";
 export function getAdminClient(): SupabaseClient<Database> | null {
   if (_client) return _client;
 
-  let url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-  const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
-  const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID as string | undefined;
-
-  // Derive URL from project ID if missing
-  if (!url && projectId) {
-    url = `https://${projectId}.supabase.co`;
-  }
-
-  if (!url || !key) {
+  const cfg = getBackendConfig();
+  if (!cfg.isConfigured) {
     _status = "missing_config";
     return null;
   }
 
-  _client = createClient<Database>(url, key, {
+  _client = createClient<Database>(cfg.url, cfg.publishableKey, {
     auth: {
       storage: localStorage,
       persistSession: true,
@@ -36,7 +29,6 @@ export function getAdminClient(): SupabaseClient<Database> | null {
 
 export function getAdminBackendStatus(): AdminBackendStatus {
   if (_status === "not_initialized") {
-    // Trigger initialization
     getAdminClient();
   }
   return _status;
