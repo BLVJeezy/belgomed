@@ -26,6 +26,7 @@ const Index = () => {
         </main>
         <Footer />
         <ChatBot />
+        <CookieConsent />
       </div>
     </LangProvider>
   );

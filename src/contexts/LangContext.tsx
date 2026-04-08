@@ -665,6 +665,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Schnelle, sichere Lieferung aus unserem Distributionszentrum — inklusive Kühlkette bei Bedarf.",
     "process.5.title": "Nachbetreuung & Partnerschaft",
     "process.5.desc": "Kontinuierliche Unterstützung, Lagerverwaltung und proaktive Kommunikation für eine dauerhafte Partnerschaft.",
+
+    // Cookie consent
+    "cookie.title": "Wir respektieren Ihre Privatsphäre",
+    "cookie.description": "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern. Notwendige Cookies sind für den Betrieb der Website erforderlich. Analyse- und Marketing-Cookies werden nur mit Ihrer Zustimmung gesetzt. Mehr erfahren Sie in unserer",
+    "cookie.privacyLink": "Datenschutzerklärung",
+    "cookie.necessary": "Notwendig",
+    "cookie.necessaryDesc": "Erforderlich für den Betrieb der Website (Sitzung, Spracheinstellung).",
+    "cookie.analytics": "Analytisch",
+    "cookie.analyticsDesc": "Hilft uns, die Website durch anonyme Messung des Besucherverhaltens zu verbessern.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Wird verwendet, um relevante Werbung und Inhalte anzuzeigen.",
+    "cookie.acceptAll": "Alle akzeptieren",
+    "cookie.rejectAll": "Alle ablehnen",
+    "cookie.customize": "Anpassen",
+    "cookie.saveSelection": "Auswahl speichern",
   },
 };
 
