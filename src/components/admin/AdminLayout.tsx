@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import AdminSidebar from "./AdminSidebar";
 
+type Status = "loading" | "ready" | "unauthorized" | "backend_unavailable";
+
 const AdminLayout = () => {
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const [status, setStatus] = useState<Status>("loading");
   const navigate = useNavigate();
 
   useEffect(() => {
+    const client = getAdminClient();
+    if (!client) {
+      setStatus("backend_unavailable");
+      return;
+    }
+
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await client.auth.getSession();
       if (!session) {
         navigate("/admin");
         return;
       }
 
-      const { data: roleData } = await supabase
+      const { data: roleData } = await client
         .from("user_roles")
         .select("role")
         .eq("user_id", session.user.id)
@@ -24,18 +31,17 @@ const AdminLayout = () => {
         .maybeSingle();
 
       if (!roleData) {
-        await supabase.auth.signOut();
+        await client.auth.signOut();
         navigate("/admin");
         return;
       }
 
-      setAuthorized(true);
-      setLoading(false);
+      setStatus("ready");
     };
 
     checkAuth();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+    const { data: { subscription } } = client.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_OUT") {
         navigate("/admin");
       }
@@ -44,7 +50,21 @@ const AdminLayout = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  if (!authorized) {
+  if (status === "backend_unavailable") {
+    return (
+      <div className="min-h-screen gradient-hero flex items-center justify-center p-6">
+        <div className="text-center space-y-4">
+          <h1 className="text-xl font-semibold text-foreground">Backend niet beschikbaar</h1>
+          <p className="text-sm text-muted-foreground">De configuratie kon niet geladen worden.</p>
+          <button onClick={() => window.location.reload()} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm">
+            Opnieuw proberen
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === "loading") {
     return (
       <div className="min-h-screen gradient-hero flex items-center justify-center">
         <div className="text-primary animate-pulse text-lg">Laden...</div>

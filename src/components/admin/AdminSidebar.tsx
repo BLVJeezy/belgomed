@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { LayoutDashboard, Users, Settings, LogOut, Menu, X } from "lucide-react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import logoHeader from "@/assets/logo-header.png";
 
 const navItems = [
   { label: "Overview", to: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Leads", to: "/admin/leads", icon: Users },
-  
   { label: "Settings", to: "/admin/settings", icon: Settings },
 ];
 
@@ -17,7 +16,8 @@ const AdminSidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    const client = getAdminClient();
+    if (client) await client.auth.signOut();
     navigate("/admin");
   };
 
