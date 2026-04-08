@@ -1,16 +1,10 @@
-import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { LangProvider, useLang } from "@/contexts/LangContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { trackVisit } from "@/lib/trackVisit";
 
 const TermsContent = () => {
   const { t } = useLang();
-
-  useEffect(() => {
-    trackVisit();
-  }, []);
 
   return (
     <div className="min-h-screen bg-background">
