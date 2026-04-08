@@ -1,101 +1,69 @@
 
-## Doel
+Doel
 
-De admin-omgeving op de live site weer stabiel maken zodat login, dashboard, leads en settings opnieuw laden zoals vroeger, zonder in de algemene foutpagina te vallen.
+De admin-login weer stabiel maken zodat `/admin` niet meer blokkeert met “Backend niet beschikbaar” en geautoriseerde gebruikers opnieuw normaal kunnen inloggen.
 
-## Diagnose
+Wat ik heb vastgesteld
 
-- De preview-admin werkt: `/admin/dashboard` laadt daar correct.
-- De live admin crasht nog steeds met `supabaseUrl is required`.
-- De oorzaak zit niet in de database of RLS: `user_roles`, `page_views` en `leads` zijn al aanwezig en de policies passen bij de admin-flow.
-- De echte oorzaak is dat meerdere admin-bestanden de gegenereerde backend-client nog steeds **bovenaan het bestand** importeren. Zodra de live admin-chunk geladen wordt, probeert die client meteen te initialiseren en crasht de pagina nog vóór de UI kan renderen.
+- De fout in je screenshot komt alleen uit `src/pages/AdminLogin.tsx` wanneer `getAdminClient()` `null` teruggeeft.
+- In de preview werken backend-requests al met een geldige admin-sessie, dus database, authenticatie en admin-RLS lijken in principe correct te werken.
+- Het probleem zit daardoor waarschijnlijk in de frontend bootstrap van de admin-flow: configuratie-detectie en auth-readiness, niet in de analytics- of leads-tabellen zelf.
 
-## Implementatieplan
+Implementatieplan
 
-### 1. Veilige admin-backend helper toevoegen
-Een kleine runtime helper toevoegen voor de admin, zonder `src/integrations/supabase/client.ts` te wijzigen.
+1. Admin client bootstrap robuuster maken
+- `src/lib/adminBackend.ts` uitbreiden zodat die niet alleen `client/null` teruggeeft, maar ook een duidelijke status zoals `ready`, `missing_config` of `initializing`.
+- De backend-URL blijven afleiden uit de projectconfig wanneer de directe URL ontbreekt, zodat de admin niet afhankelijk blijft van één enkele env-waarde.
 
-Die helper moet:
-- eerst `VITE_SUPABASE_URL` gebruiken als die bestaat
-- anders de backend-URL afleiden uit `VITE_SUPABASE_PROJECT_ID`  
-- dezelfde auth-instellingen behouden als nu, zodat sessies blijven werken zoals eerder
-- `null` of een nette foutstatus teruggeven als de backend echt niet geconfigureerd is
+2. Centrale auth-ready hook toevoegen
+- Een kleine `useAdminAuthReady` hook toevoegen die eerst de sessie volledig laat herstellen en pas daarna protected queries toelaat.
+- Geen async werk meer in `onAuthStateChange`; die listener alleen gebruiken om lokale state bij te werken.
 
-Dit volgt hetzelfde patroon dat nu al gebruikt wordt in `src/lib/trackVisit.ts`.
+3. Login flow herstellen
+- `src/pages/AdminLogin.tsx` aanpassen zodat:
+  - de submit-knop pas actief is wanneer backend-config klaar is
+  - na `signInWithPassword` eerst de actuele sessie bevestigd wordt
+  - daarna pas de `user_roles` check gebeurt
+- Drie aparte foutmeldingen tonen:
+  - backend/config niet beschikbaar
+  - ongeldige login
+  - geen admin-toegang
 
-### 2. Alle admin-bestanden loskoppelen van top-level backend imports
-De admin mag niet meer crashen tijdens module-load.
+4. Admin route guard stabiliseren
+- `src/components/admin/AdminLayout.tsx` laten wachten op dezelfde auth-ready status in plaats van direct queries te doen bij mount.
+- Alleen redirecten naar `/admin` wanneer auth echt klaar is en er géén sessie is.
+- Bij config-problemen een nette admin fallback tonen; bij geldige sessie pas `<Outlet />` renderen.
 
-Refactoren van:
-- `src/pages/AdminLogin.tsx`
-- `src/components/admin/AdminLayout.tsx`
-- `src/components/admin/AdminSidebar.tsx`
-- `src/pages/admin/Dashboard.tsx`
-- `src/pages/admin/Leads.tsx`
-- `src/pages/admin/AdminSettings.tsx`
+5. Beschermde admin-pagina’s op dezelfde guard aansluiten
+- `Dashboard.tsx`, `Leads.tsx`, `AdminSettings.tsx` en `AdminSidebar.tsx` pas backend-calls laten doen zodra client + sessie + admin-status klaar zijn.
+- Zo verdwijnt het risico dat login wel lukt maar vervolgpagina’s leeg blijven of vastlopen.
 
-In al deze bestanden:
-- top-level import van de backend-client verwijderen
-- backend pas ophalen **binnen** `useEffect`, event handlers of fetch-functies
+6. Rollen alleen controleren/backfillen indien nodig
+- Verifiëren of het bedoelde admin-account nog een `user_roles` rij heeft.
+- Alleen als daar echt een gat zit, een kleine backfill-migratie toevoegen voor bestaande toegelaten admin-gebruikers.
+- Op basis van de huidige preview verwacht ik dat dit waarschijnlijk niet nodig is voor het bestaande hoofdaccount.
 
-### 3. AdminLayout robuust maken
-`AdminLayout` moet duidelijke statussen krijgen in plaats van alleen `authorized`:
+7. Verificatie na implementatie
+- `/admin` toont geen “Backend niet beschikbaar” meer
+- Inloggen met bestaand admin-account werkt opnieuw
+- `/admin/dashboard`, `/admin/leads` en `/admin/settings` laden ook na refresh correct
+- Uitloggen werkt
+- Verkeerde credentials geven een normale foutmelding in plaats van een backend-fout
 
-- `loading`
-- `ready`
-- `unauthorized`
-- `backend_unavailable`
+Technische details
 
-Gedrag:
-- tijdens sessie/rol-check: loader tonen
-- bij geen sessie: redirect naar `/admin`
-- bij backend-probleem: nette admin-specifieke melding tonen
-- auth listener alleen starten als de client beschikbaar is
+- Geen aanpassing aan `src/integrations/supabase/client.ts`
+- Waarschijnlijk nieuwe hook:
+  - `src/hooks/useAdminAuthReady.ts`
+- Belangrijkste bestanden:
+  - `src/lib/adminBackend.ts`
+  - `src/pages/AdminLogin.tsx`
+  - `src/components/admin/AdminLayout.tsx`
+  - `src/pages/admin/Dashboard.tsx`
+  - `src/pages/admin/Leads.tsx`
+  - `src/pages/admin/AdminSettings.tsx`
+  - `src/components/admin/AdminSidebar.tsx`
 
-Zo vermijden we zowel de crash als een oneindige “Laden...” toestand.
+Verwachte uitkomst
 
-### 4. Bestaande functionaliteit behouden
-Na de refactor moet alles werken zoals eerder:
-
-- `AdminLogin`: zelfde e-mail/wachtwoord login en admin role-check
-- `Dashboard`: zelfde query op `page_views`, zelfde filters en refresh
-- `Leads`: zelfde lijst, detailmodal, realtime update en delete
-- `AdminSettings`: zelfde gebruikersinfo
-- `AdminSidebar`: zelfde navigatie en logout
-
-Met andere woorden: alleen de initialisatie verandert, niet de werking.
-
-### 5. Foutafhandeling in admin zelf tonen
-De globale `ErrorBoundary` mag blijven als laatste vangnet, maar mag niet langer de normale admin-ervaring zijn.
-
-Bij backend-init fouten:
-- admin-specifieke status tonen
-- retry-knop voorzien
-- eventueel link terug naar homepage of login
-
-Zo ziet de gebruiker een gecontroleerde melding in plaats van de algemene crash-pagina.
-
-### 6. Publiceren en live verifiëren
-Na implementatie opnieuw publiceren en specifiek controleren op de live site:
-
-- `/admin`
-- `/admin/dashboard`
-- `/admin/leads`
-- `/admin/settings`
-
-Te bevestigen:
-- login werkt
-- dashboarddata verschijnt
-- leads laden
-- logout werkt
-- refreshen van een admin deep-link geeft geen crash meer
-
-## Technische details
-
-- Geen database-migratie nodig voor deze fix.
-- `src/integrations/supabase/client.ts` niet aanpassen.
-- Waarschijnlijk nieuw helperbestand toevoegen, bv. `src/lib/adminBackend.ts`.
-- `App.tsx` hoeft in principe niet opnieuw aangepast te worden; de lazy-loading staat al goed.
-- Publieke pagina’s hoeven in deze ronde niet gewijzigd te worden.
-- Als enkel `VITE_SUPABASE_URL` ontbreekt maar project-ID en publishable key wel aanwezig zijn, herstelt deze aanpak de admin volledig.
-- Als ook de andere backend-variabelen ontbreken, moet de admin veilig falen met een nette melding in plaats van te crashen.
+De admin-login werkt weer zoals vroeger, maar wordt tegelijk veel stabieler tegen configuratie- en timingproblemen tijdens het laden van de backend-sessie.
