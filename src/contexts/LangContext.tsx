@@ -335,6 +335,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Fast, safe delivery from our distribution center — including cold-chain when needed.",
     "process.5.title": "Aftercare & Partnership",
     "process.5.desc": "Continuous support, inventory management and proactive communication for a lasting partnership.",
+
+    // Cookie consent
+    "cookie.title": "We respect your privacy",
+    "cookie.description": "This website uses cookies to improve your experience. Necessary cookies are required for the site to function. Analytical and marketing cookies are only placed with your consent. Read more in our",
+    "cookie.privacyLink": "privacy policy",
+    "cookie.necessary": "Necessary",
+    "cookie.necessaryDesc": "Required for website functionality (session, language preference).",
+    "cookie.analytics": "Analytics",
+    "cookie.analyticsDesc": "Helps us improve the website by anonymously measuring visitor behaviour.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Used to show relevant ads and content.",
+    "cookie.acceptAll": "Accept all",
+    "cookie.rejectAll": "Reject all",
+    "cookie.customize": "Customize",
+    "cookie.saveSelection": "Save selection",
   },
 
   FR: {
