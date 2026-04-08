@@ -170,6 +170,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Snelle, veilige levering vanuit ons distributiecentrum — inclusief cold-chain indien nodig.",
     "process.5.title": "Nazorg & Partnerschap",
     "process.5.desc": "Continue ondersteuning, voorraadbeheer en proactieve communicatie voor een duurzaam partnerschap.",
+
+    // Cookie consent
+    "cookie.title": "Wij respecteren uw privacy",
+    "cookie.description": "Deze website gebruikt cookies om uw ervaring te verbeteren. Noodzakelijke cookies zijn vereist voor de werking van de site. Analytische en marketing cookies worden alleen geplaatst met uw toestemming. Lees meer in ons",
+    "cookie.privacyLink": "privacybeleid",
+    "cookie.necessary": "Noodzakelijk",
+    "cookie.necessaryDesc": "Vereist voor de werking van de website (sessie, taalvoorkeur).",
+    "cookie.analytics": "Analytisch",
+    "cookie.analyticsDesc": "Helpt ons de website te verbeteren door anoniem bezoekersgedrag te meten.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Wordt gebruikt om relevante advertenties en content te tonen.",
+    "cookie.acceptAll": "Alles accepteren",
+    "cookie.rejectAll": "Alles weigeren",
+    "cookie.customize": "Voorkeuren aanpassen",
+    "cookie.saveSelection": "Selectie opslaan",
   },
 
   EN: {
