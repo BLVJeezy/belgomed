@@ -342,4 +342,6 @@ const ChatBotInner = () => {
 
 };
 
+const ChatBot = () => CHAT_URL ? <ChatBotInner /> : null;
+
 export default ChatBot;
