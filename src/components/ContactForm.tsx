@@ -6,8 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLang } from "@/contexts/LangContext";
+import { getBackendConfig } from "@/lib/backendConfig";
 
-const hasBackend = !!import.meta.env.VITE_SUPABASE_URL;
+const hasBackend = getBackendConfig().isConfigured;
 
 const ContactForm = () => {
   const { toast } = useToast();

@@ -1,3 +1,5 @@
+import { getBackendConfig } from "@/lib/backendConfig";
+
 const SESSION_KEY = "belgomed_session_id";
 
 function getSessionId(): string {
@@ -17,14 +19,10 @@ function getDeviceType(): string {
 }
 
 export function trackVisit() {
-  // Don't track admin pages
   if (window.location.pathname.startsWith("/admin")) return;
 
-  const { getBackendConfig } = await_import();
   const cfg = getBackendConfig();
   if (!cfg.isConfigured) return;
-  const projectId = cfg.projectId;
-  const anonKey = cfg.publishableKey;
 
   const payload = {
     path: window.location.pathname,
@@ -34,14 +32,13 @@ export function trackVisit() {
     sessionId: getSessionId(),
   };
 
-  const url = `https://${projectId}.supabase.co/functions/v1/track-visit`;
+  const url = `https://${cfg.projectId}.supabase.co/functions/v1/track-visit`;
 
-  // Use fetch with keepalive (sendBeacon can't send custom headers)
   fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "apikey": anonKey,
+      "apikey": cfg.publishableKey,
     },
     body: JSON.stringify(payload),
     keepalive: true,
