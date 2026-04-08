@@ -161,8 +161,7 @@ const LeadForm = ({ onSubmit, conversationSummary }: {onSubmit: () => void;conve
     </div>);
 };
 
-const ChatBot = () => {
-  if (!CHAT_URL) return null;
+const ChatBotInner = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
