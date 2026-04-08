@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Eye, Users, Clock,
@@ -91,7 +91,9 @@ const Dashboard = () => {
       if (isFirst) setAnalyticsLoading(true);
       const since = period === "today" ? getDaysAgoUTC(0) : period === "7d" ? getDaysAgoUTC(7) : getDaysAgoUTC(30);
 
-      const { data, error } = await supabase
+      const client = getAdminClient();
+      if (!client) { setAnalyticsLoading(false); return; }
+      const { data, error } = await client
         .from("page_views")
         .select("id, path, device_type, country, country_code, ip_hash, session_id, created_at")
         .gte("created_at", since)

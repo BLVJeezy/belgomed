@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, User, Mail } from "lucide-react";
 
@@ -8,7 +8,9 @@ const AdminSettings = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const client = getAdminClient();
+      if (!client) return;
+      const { data: { user } } = await client.auth.getUser();
       setEmail(user?.email ?? "");
     };
     getUser();

@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import { Button } from "@/components/ui/button";
 import { Eye, RefreshCw, Trash2, Users, X } from "lucide-react";
 
@@ -32,7 +32,9 @@ const Leads = () => {
 
   const deleteLead = useCallback(async (id: string) => {
     setDeleting(id);
-    await supabase.from("leads").delete().eq("id", id);
+    const client = getAdminClient();
+    if (!client) return;
+    await client.from("leads").delete().eq("id", id);
     setLeads((prev) => prev.filter((l) => l.id !== id));
     if (selectedLead?.id === id) setSelectedLead(null);
     setDeleting(null);
@@ -40,18 +42,22 @@ const Leads = () => {
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from("leads").select("*").order("created_at", { ascending: false });
+    const client = getAdminClient();
+    if (!client) { setLoading(false); return; }
+    const { data } = await client.from("leads").select("*").order("created_at", { ascending: false });
     setLeads(data as Lead[] ?? []);
     setLoading(false);
   }, []);
 
   useEffect(() => {
     fetchLeads();
-    const channel = supabase.
-    channel("leads-changes").
-    on("postgres_changes", { event: "INSERT", schema: "public", table: "leads" }, () => fetchLeads()).
-    subscribe();
-    return () => {supabase.removeChannel(channel);};
+    const client = getAdminClient();
+    if (!client) return;
+    const channel = client
+      .channel("leads-changes")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "leads" }, () => fetchLeads())
+      .subscribe();
+    return () => { client.removeChannel(channel); };
   }, [fetchLeads]);
 
   return (
