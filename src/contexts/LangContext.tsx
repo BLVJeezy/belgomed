@@ -500,6 +500,21 @@ const translations: Record<Lang, Record<string, string>> = {
     "process.4.desc": "Livraison rapide et sûre depuis notre centre de distribution — chaîne du froid incluse si nécessaire.",
     "process.5.title": "Suivi & Partenariat",
     "process.5.desc": "Support continu, gestion des stocks et communication proactive pour un partenariat durable.",
+
+    // Cookie consent
+    "cookie.title": "Nous respectons votre vie privée",
+    "cookie.description": "Ce site utilise des cookies pour améliorer votre expérience. Les cookies nécessaires sont requis pour le fonctionnement du site. Les cookies analytiques et marketing ne sont placés qu'avec votre consentement. En savoir plus dans notre",
+    "cookie.privacyLink": "politique de confidentialité",
+    "cookie.necessary": "Nécessaires",
+    "cookie.necessaryDesc": "Requis pour le fonctionnement du site (session, préférence linguistique).",
+    "cookie.analytics": "Analytiques",
+    "cookie.analyticsDesc": "Nous aide à améliorer le site en mesurant anonymement le comportement des visiteurs.",
+    "cookie.marketing": "Marketing",
+    "cookie.marketingDesc": "Utilisés pour afficher des publicités et du contenu pertinents.",
+    "cookie.acceptAll": "Tout accepter",
+    "cookie.rejectAll": "Tout refuser",
+    "cookie.customize": "Personnaliser",
+    "cookie.saveSelection": "Enregistrer la sélection",
   },
 
   DE: {
