@@ -2,11 +2,12 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Send, Bot, User, CheckCircle, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
+import { getBackendConfig } from "@/lib/backendConfig";
 
 type Msg = {role: "user" | "assistant";content: string;};
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const CHAT_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/chat` : null;
+const _cfg = getBackendConfig();
+const CHAT_URL = _cfg.isConfigured ? `${_cfg.url}/functions/v1/chat` : null;
 
 async function streamChat({
   messages,
@@ -23,7 +24,7 @@ async function streamChat({
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+      Authorization: `Bearer ${_cfg.publishableKey}`
     },
     body: JSON.stringify({ messages })
   });
@@ -69,7 +70,7 @@ async function submitLead(leadData: Record<string, string>) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+        Authorization: `Bearer ${_cfg.publishableKey}`
       },
       body: JSON.stringify({ action: "submit_lead", leadData })
     });
