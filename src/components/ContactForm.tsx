@@ -25,6 +25,12 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      if (!hasBackend) {
+        window.location.href = `mailto:info@belgomed.be?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Naam: ${formData.name}\nTelefoon: ${formData.phone}\nService: ${formData.service}\n\n${formData.message}`)}`;
+        setIsSubmitting(false);
+        return;
+      }
+      const { supabase } = await import("@/integrations/supabase/client");
       const { error } = await supabase.from("leads").insert({
         bedrijfsnaam: formData.subject || formData.name,
         contact_naam: formData.name.trim().slice(0, 100),
