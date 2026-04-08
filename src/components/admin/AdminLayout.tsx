@@ -1,56 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import { getAdminClient } from "@/lib/adminBackend";
+import { useAdminAuthReady } from "@/hooks/useAdminAuthReady";
 import AdminSidebar from "./AdminSidebar";
 
-type Status = "loading" | "ready" | "unauthorized" | "backend_unavailable";
-
 const AdminLayout = () => {
-  const [status, setStatus] = useState<Status>("loading");
   const navigate = useNavigate();
+  const { isReady, user, isAdmin, backendStatus } = useAdminAuthReady();
 
   useEffect(() => {
-    const client = getAdminClient();
-    if (!client) {
-      setStatus("backend_unavailable");
-      return;
+    if (!isReady) return;
+    if (backendStatus === "missing_config") return; // show fallback
+    if (!user || !isAdmin) {
+      navigate("/admin", { replace: true });
     }
+  }, [isReady, user, isAdmin, backendStatus, navigate]);
 
-    const checkAuth = async () => {
-      const { data: { session } } = await client.auth.getSession();
-      if (!session) {
-        navigate("/admin");
-        return;
-      }
+  if (!isReady) {
+    return (
+      <div className="min-h-screen gradient-hero flex items-center justify-center">
+        <div className="text-primary animate-pulse text-lg">Laden...</div>
+      </div>
+    );
+  }
 
-      const { data: roleData } = await client
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", session.user.id)
-        .eq("role", "admin")
-        .maybeSingle();
-
-      if (!roleData) {
-        await client.auth.signOut();
-        navigate("/admin");
-        return;
-      }
-
-      setStatus("ready");
-    };
-
-    checkAuth();
-
-    const { data: { subscription } } = client.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_OUT") {
-        navigate("/admin");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  if (status === "backend_unavailable") {
+  if (backendStatus === "missing_config") {
     return (
       <div className="min-h-screen gradient-hero flex items-center justify-center p-6">
         <div className="text-center space-y-4">
@@ -64,7 +37,7 @@ const AdminLayout = () => {
     );
   }
 
-  if (status === "loading") {
+  if (!user || !isAdmin) {
     return (
       <div className="min-h-screen gradient-hero flex items-center justify-center">
         <div className="text-primary animate-pulse text-lg">Laden...</div>

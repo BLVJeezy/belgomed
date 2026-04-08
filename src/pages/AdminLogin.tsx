@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAdminClient } from "@/lib/adminBackend";
+import { getAdminClient, getAdminBackendStatus } from "@/lib/adminBackend";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,8 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const backendStatus = getAdminBackendStatus();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,10 +39,18 @@ const AdminLogin = () => {
         return;
       }
 
+      // Confirm session is actually available
+      const { data: { session } } = await client.auth.getSession();
+      if (!session) {
+        setError("Sessie kon niet bevestigd worden. Probeer opnieuw.");
+        setLoading(false);
+        return;
+      }
+
       const { data: roleData, error: roleError } = await client
         .from("user_roles")
         .select("role")
-        .eq("user_id", data.user.id)
+        .eq("user_id", session.user.id)
         .eq("role", "admin")
         .maybeSingle();
 
@@ -76,6 +86,12 @@ const AdminLogin = () => {
           <h1 className="text-xl font-semibold text-foreground mb-1">Toegang Dashboard</h1>
           <p className="text-sm text-muted-foreground mb-6">Alleen voor geautoriseerde klanten</p>
 
+          {backendStatus === "missing_config" && (
+            <div className="mb-4 p-3 rounded-lg bg-destructive/10 text-sm text-destructive">
+              Backend-configuratie ontbreekt. Neem contact op met de beheerder.
+            </div>
+          )}
+
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-muted-foreground">E-mailadres</Label>
@@ -95,7 +111,7 @@ const AdminLogin = () => {
 
             {error && <p className="text-sm text-destructive bg-destructive/10 rounded-lg px-3 py-2">{error}</p>}
 
-            <Button type="submit" className="w-full" size="lg" disabled={loading}>
+            <Button type="submit" className="w-full" size="lg" disabled={loading || backendStatus === "missing_config"}>
               {loading ? "Verifiëren..." : "Dashboard Ontgrendelen"}
             </Button>
           </form>

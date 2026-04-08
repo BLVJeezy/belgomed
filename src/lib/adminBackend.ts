@@ -2,6 +2,8 @@ import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
 let _client: SupabaseClient<Database> | null = null;
+export type AdminBackendStatus = "ready" | "missing_config" | "not_initialized";
+let _status: AdminBackendStatus = "not_initialized";
 
 export function getAdminClient(): SupabaseClient<Database> | null {
   if (_client) return _client;
@@ -15,7 +17,10 @@ export function getAdminClient(): SupabaseClient<Database> | null {
     url = `https://${projectId}.supabase.co`;
   }
 
-  if (!url || !key) return null;
+  if (!url || !key) {
+    _status = "missing_config";
+    return null;
+  }
 
   _client = createClient<Database>(url, key, {
     auth: {
@@ -25,5 +30,14 @@ export function getAdminClient(): SupabaseClient<Database> | null {
     },
   });
 
+  _status = "ready";
   return _client;
+}
+
+export function getAdminBackendStatus(): AdminBackendStatus {
+  if (_status === "not_initialized") {
+    // Trigger initialization
+    getAdminClient();
+  }
+  return _status;
 }
