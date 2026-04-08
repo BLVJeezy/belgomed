@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getAdminClient } from "@/lib/adminBackend";
 import { Button } from "@/components/ui/button";
 import { Eye, RefreshCw, Trash2, Users, X } from "lucide-react";
 
