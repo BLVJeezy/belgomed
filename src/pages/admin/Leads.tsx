@@ -134,7 +134,8 @@ const Leads = () => {
               { label: "Contact", value: selectedLead.contact_naam ?? "—" },
               { label: "Email", value: selectedLead.contact_email ?? "—" },
               { label: "Telefoon", value: selectedLead.telefoon ?? "—" },
-              { label: "Land", value: selectedLead.land }].
+              { label: "Land", value: selectedLead.land },
+              { label: "Regio", value: selectedLead.regio ?? "—" }].
               map((field) =>
               <div key={field.label} className="bg-secondary/15 rounded-lg p-3">
                     <p className="text-muted-foreground text-[11px] font-medium uppercase tracking-wider mb-0.5">{field.label}</p>
