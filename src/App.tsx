@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
 
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cookies" element={<Cookies />} />
           <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />
           <Route element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
             <Route path="/admin/dashboard" element={<Suspense fallback={<AdminFallback />}><Dashboard /></Suspense>} />
