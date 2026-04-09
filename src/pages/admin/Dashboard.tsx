@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Eye, Users, Clock,
   Globe, TrendingUp, Loader2, Monitor, Smartphone, Tablet,
-  BarChart3, Activity,
+  BarChart3, Activity, MapPin,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart, Bar,
@@ -20,6 +20,7 @@ type PageView = {
   device_type: string;
   country: string | null;
   country_code: string | null;
+  region: string | null;
   ip_hash: string | null;
   session_id: string | null;
   created_at: string;
@@ -95,7 +96,7 @@ const Dashboard = () => {
       if (!client) { setAnalyticsLoading(false); return; }
       const { data, error } = await client
         .from("page_views")
-        .select("id, path, device_type, country, country_code, ip_hash, session_id, created_at")
+        .select("id, path, device_type, country, country_code, region, ip_hash, session_id, created_at")
         .gte("created_at", since)
         .order("created_at", { ascending: false });
 
@@ -144,6 +145,19 @@ const Dashboard = () => {
         pct: Math.round((bezoekers / Math.max(totalPageviews, 1)) * 100),
       }));
 
+    // Region breakdown
+    const regionCounts: Record<string, number> = {};
+    pageViews.forEach((v) => {
+      if (v.region) regionCounts[v.region] = (regionCounts[v.region] || 0) + 1;
+    });
+    const regionData = Object.entries(regionCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([regio, bezoekers]) => ({
+        regio,
+        bezoekers,
+        pct: Math.round((bezoekers / Math.max(totalPageviews, 1)) * 100),
+      }));
     // Top pages
     const pageCounts: Record<string, number> = {};
     pageViews.forEach((v) => {
@@ -191,7 +205,7 @@ const Dashboard = () => {
 
     return {
       totalPageviews, uniqueVisitors, uniqueSessions,
-      deviceData, countryData, topPages, visitorChartData, hourlyData,
+      deviceData, countryData, regionData, topPages, visitorChartData, hourlyData,
     };
   }, [pageViews]);
 
@@ -328,7 +342,7 @@ const Dashboard = () => {
       </div>
 
       {/* Second row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Top pages */}
         <Card className="glass-card border-border/20">
           <CardHeader className="pb-3">
@@ -403,6 +417,39 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
+        {/* Regions */}
+        <Card className="glass-card border-border/20">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-semibold text-foreground flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-primary" />
+              Regio's
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {analyticsLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="w-5 h-5 text-primary animate-spin" />
+              </div>
+            ) : analytics.regionData.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-4">Nog geen data</p>
+            ) : (
+              analytics.regionData.map((r) => (
+                <div key={r.regio} className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-primary/50 shrink-0" />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-foreground font-medium">{r.regio}</span>
+                      <span className="text-xs font-semibold text-muted-foreground tabular-nums">{r.bezoekers.toLocaleString()}</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-secondary/30 overflow-hidden">
+                      <div className="h-full rounded-full bg-accent/60 transition-all duration-500" style={{ width: `${r.pct}%` }} />
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
         {/* Hourly traffic */}
         <Card className="glass-card border-border/20">
           <CardHeader className="pb-2">
