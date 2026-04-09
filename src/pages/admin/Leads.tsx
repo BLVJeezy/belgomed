@@ -91,7 +91,6 @@ const Leads = () => {
                 <p className="text-xs text-muted-foreground mt-0.5">
                   {lead.sector} · {lead.land}{lead.regio ? ` — ${lead.regio}` : ""} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
                 </p>
-                </p>
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <Button
