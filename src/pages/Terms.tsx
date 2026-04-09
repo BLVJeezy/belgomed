@@ -33,7 +33,7 @@ const TermsContent = () => {
             <ul className="space-y-3 list-none pl-0">
               <li><strong>"General Terms and Conditions"</strong>: these general terms and conditions (version of February 24, 2026), which apply to each quotation, purchase order submitted to Belgomed BV, each acceptance by Belgomed BV and in general any agreement that is concluded between Belgomed BV and the Customer (hereinafter "Agreement").</li>
               <li><strong>"Customer"</strong>: the (future) contracting party of Belgomed BV who has placed an order and/or with whom an Agreement is concluded.</li>
-              <li><strong>"Belgomed BV"</strong>: Belgomed BV, with registered office at Trichterheideweg 11, 3500 Hasselt, Belgium.</li>
+              <li><strong>"Belgomed BV"</strong>: Belgomed BV, with registered office at Trichterheideweg 11, 3500 Hasselt, Belgium, registered with the Crossroads Bank for Enterprises (KBO) under number [FILL IN KBO NUMBER], VAT number [FILL IN VAT NUMBER].</li>
               <li><strong>"Products"</strong>: any product sold by Belgomed BV to the Customer as specified in a Purchase Order or any other products purchased by Customer or delivered to Customer pursuant to an Agreement.</li>
               <li><strong>"Portal"</strong>: the customized web portal used by Belgomed BV for sale of the Products and delivery of the Services.</li>
               <li><strong>"Purchase Order"</strong>: any order for Products or Services delivered by Belgomed BV, insofar accepted by Belgomed BV.</li>
@@ -176,8 +176,9 @@ const TermsContent = () => {
               <p className="font-semibold text-foreground">Belgomed BV</p>
               <p>Trichterheideweg 11</p>
               <p>3500 Hasselt, Belgium</p>
+              <p>KBO: [FILL IN KBO NUMBER]</p>
+              <p>VAT: [FILL IN VAT NUMBER]</p>
               <p className="mt-3">Email: <a href="mailto:info@belgomed.be" className="text-primary hover:underline">info@belgomed.be</a></p>
-              
             </div>
           </section>
         </div>
