@@ -20,6 +20,7 @@ type PageView = {
   device_type: string;
   country: string | null;
   country_code: string | null;
+  region: string | null;
   ip_hash: string | null;
   session_id: string | null;
   created_at: string;
