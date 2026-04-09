@@ -8,6 +8,7 @@ type Lead = {
   bedrijfsnaam: string;
   sector: string;
   land: string;
+  regio: string | null;
   stage: string;
   contact_email: string | null;
   contact_naam: string | null;
@@ -88,7 +89,7 @@ const Leads = () => {
               <div className="min-w-0">
                 <p className="font-semibold text-foreground truncate">{lead.bedrijfsnaam}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {lead.sector} · {lead.land} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
+                  {lead.sector} · {lead.land}{lead.regio ? ` — ${lead.regio}` : ""} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
                 </p>
               </div>
               <div className="flex items-center gap-1 shrink-0">
@@ -133,7 +134,8 @@ const Leads = () => {
               { label: "Contact", value: selectedLead.contact_naam ?? "—" },
               { label: "Email", value: selectedLead.contact_email ?? "—" },
               { label: "Telefoon", value: selectedLead.telefoon ?? "—" },
-              { label: "Land", value: selectedLead.land }].
+              { label: "Land", value: selectedLead.land },
+              { label: "Regio", value: selectedLead.regio ?? "—" }].
               map((field) =>
               <div key={field.label} className="bg-secondary/15 rounded-lg p-3">
                     <p className="text-muted-foreground text-[11px] font-medium uppercase tracking-wider mb-0.5">{field.label}</p>
