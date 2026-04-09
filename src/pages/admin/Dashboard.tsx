@@ -417,6 +417,39 @@ const Dashboard = () => {
           </CardContent>
         </Card>
 
+        {/* Regions */}
+        <Card className="glass-card border-border/20">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-semibold text-foreground flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-primary" />
+              Regio's
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {analyticsLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="w-5 h-5 text-primary animate-spin" />
+              </div>
+            ) : analytics.regionData.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-4">Nog geen data</p>
+            ) : (
+              analytics.regionData.map((r) => (
+                <div key={r.regio} className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-primary/50 shrink-0" />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-foreground font-medium">{r.regio}</span>
+                      <span className="text-xs font-semibold text-muted-foreground tabular-nums">{r.bezoekers.toLocaleString()}</span>
+                    </div>
+                    <div className="h-1 rounded-full bg-secondary/30 overflow-hidden">
+                      <div className="h-full rounded-full bg-accent/60 transition-all duration-500" style={{ width: `${r.pct}%` }} />
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
         {/* Hourly traffic */}
         <Card className="glass-card border-border/20">
           <CardHeader className="pb-2">
