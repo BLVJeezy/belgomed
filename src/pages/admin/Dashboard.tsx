@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Eye, Users, Clock,
   Globe, TrendingUp, Loader2, Monitor, Smartphone, Tablet,
-  BarChart3, Activity,
+  BarChart3, Activity, MapPin,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart, Bar,
