@@ -61,6 +61,7 @@ Deno.serve(async (req) => {
       device_type: deviceType || "desktop",
       country,
       country_code: countryCode,
+      region,
       ip_hash: ipHash,
       session_id: sessionId || null,
     });
