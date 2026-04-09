@@ -96,7 +96,7 @@ const Dashboard = () => {
       if (!client) { setAnalyticsLoading(false); return; }
       const { data, error } = await client
         .from("page_views")
-        .select("id, path, device_type, country, country_code, ip_hash, session_id, created_at")
+        .select("id, path, device_type, country, country_code, region, ip_hash, session_id, created_at")
         .gte("created_at", since)
         .order("created_at", { ascending: false });
 
