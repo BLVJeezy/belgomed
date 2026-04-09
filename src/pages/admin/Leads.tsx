@@ -8,6 +8,7 @@ type Lead = {
   bedrijfsnaam: string;
   sector: string;
   land: string;
+  regio: string | null;
   stage: string;
   contact_email: string | null;
   contact_naam: string | null;
