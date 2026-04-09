@@ -205,7 +205,7 @@ const Dashboard = () => {
 
     return {
       totalPageviews, uniqueVisitors, uniqueSessions,
-      deviceData, countryData, topPages, visitorChartData, hourlyData,
+      deviceData, countryData, regionData, topPages, visitorChartData, hourlyData,
     };
   }, [pageViews]);
 
