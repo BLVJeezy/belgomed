@@ -89,7 +89,8 @@ const Leads = () => {
               <div className="min-w-0">
                 <p className="font-semibold text-foreground truncate">{lead.bedrijfsnaam}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {lead.sector} · {lead.land} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
+                  {lead.sector} · {lead.land}{lead.regio ? ` — ${lead.regio}` : ""} · {new Date(lead.created_at).toLocaleDateString("nl-BE")}
+                </p>
                 </p>
               </div>
               <div className="flex items-center gap-1 shrink-0">
