@@ -32,6 +32,7 @@ Deno.serve(async (req) => {
     // Geo lookup via free API
     let country = null;
     let countryCode = null;
+    let region = null;
     try {
       if (ip !== "unknown" && ip !== "127.0.0.1") {
         const geoRes = await fetch(`http://ip-api.com/json/${ip}?fields=country,countryCode,regionName`);
