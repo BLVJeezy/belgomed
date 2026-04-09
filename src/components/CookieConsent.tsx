@@ -57,6 +57,9 @@ const CookieConsent = () => {
           {t("cookie.description")}{" "}
           <a href="/privacy" className="underline text-primary hover:text-primary/80 transition-colors">
             {t("cookie.privacyLink")}
+          </a>{" · "}
+          <a href="/cookies" className="underline text-primary hover:text-primary/80 transition-colors">
+            {t("footer.cookies")}
           </a>.
         </p>
 
