@@ -145,6 +145,19 @@ const Dashboard = () => {
         pct: Math.round((bezoekers / Math.max(totalPageviews, 1)) * 100),
       }));
 
+    // Region breakdown
+    const regionCounts: Record<string, number> = {};
+    pageViews.forEach((v) => {
+      if (v.region) regionCounts[v.region] = (regionCounts[v.region] || 0) + 1;
+    });
+    const regionData = Object.entries(regionCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([regio, bezoekers]) => ({
+        regio,
+        bezoekers,
+        pct: Math.round((bezoekers / Math.max(totalPageviews, 1)) * 100),
+      }));
     // Top pages
     const pageCounts: Record<string, number> = {};
     pageViews.forEach((v) => {
