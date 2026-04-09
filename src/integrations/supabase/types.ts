@@ -61,6 +61,7 @@ export type Database = {
           id: string
           land: string
           notities: string | null
+          regio: string | null
           sector: string
           service_type: string | null
           stage: Database["public"]["Enums"]["lead_stage"]
@@ -78,6 +79,7 @@ export type Database = {
           id?: string
           land?: string
           notities?: string | null
+          regio?: string | null
           sector?: string
           service_type?: string | null
           stage?: Database["public"]["Enums"]["lead_stage"]
@@ -95,6 +97,7 @@ export type Database = {
           id?: string
           land?: string
           notities?: string | null
+          regio?: string | null
           sector?: string
           service_type?: string | null
           stage?: Database["public"]["Enums"]["lead_stage"]
