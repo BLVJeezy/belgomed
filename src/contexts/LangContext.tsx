@@ -325,7 +325,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "privacy.s6.title": "Sharing with Third Parties",
     "privacy.s6.body": "We do not share your data with third parties unless necessary for the performance of our services or when we are legally obliged to do so. Our website uses secure hosting and processing within the European Economic Area.",
     "privacy.s7.title": "Your Rights",
-    "privacy.s7.body": "You have the right to access, rectify, delete and port your data, as well as the right to object to processing. You can exercise your rights by contacting info@belgomed.be. You also have the right to file a complaint with the Data Protection Authority (www.gegevensbeschermingsautoriteit.be).",
+    "privacy.s7.body": "Under the GDPR you have the right to access, rectify, delete, restrict and port your data, as well as the right to object to processing. You can exercise your rights by contacting info@belgomed.be.\n\nIf you believe your rights are not being respected, you may file a complaint with the Belgian Data Protection Authority (GBA):\nGegevensbeschermingsautoriteit\nDrukpersstraat 35, 1000 Brussels\nPhone: +32 2 274 48 00\nEmail: contact@apd-gba.be\nWebsite: www.gegevensbeschermingsautoriteit.be",
     "privacy.s8.title": "Changes",
     "privacy.s8.body": "Belgomed BV reserves the right to modify this privacy policy. The most recent version is always available on our website.",
     "timeline.1974": "Founded",
