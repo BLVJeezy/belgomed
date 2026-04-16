@@ -358,6 +358,10 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Yes, we provide fast and safe deliveries throughout Belgium from our distribution center in Hasselt. Our logistics are optimized for reliable and timely deliveries.",
     "faq.q6": "Does Belgomed offer cold-chain distribution?",
     "faq.a6": "Yes, we guarantee full cold-chain compliance for temperature-sensitive pharmaceutical products. Our storage facilities and transport meet all GDP requirements for cold chain distribution.",
+    "faq.q7": "Which Belgian cities does Belgomed deliver to?",
+    "faq.a7": "Belgomed delivers daily to pharmacies, hospitals and care institutions throughout Belgium, with a strong presence in Antwerp, Hasselt, Liège, Genk and Bilzen. From our distribution center in Hasselt we serve both Flanders and Wallonia with fast, GDP-compliant deliveries.",
+    "faq.q8": "Can a pharmacy in Antwerp, Genk or Bilzen partner with Belgomed?",
+    "faq.a8": "Absolutely. Pharmacies, hospitals and healthcare institutions in Antwerp, Hasselt, Liège, Genk, Bilzen and the rest of Belgium can order directly from Belgomed. Contact us via our quote form for a personal proposal and introduction to your account manager.",
 
     // Process
     "process.tag": "How We Work",
