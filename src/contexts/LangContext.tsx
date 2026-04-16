@@ -102,6 +102,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "footer.desc": "Belgomed BV — Uw vertrouwde partner voor farmaceutische distributie met volledige GDP en WDA compliance.",
     "footer.nav": "Navigatie",
     "footer.contact": "Contact",
+    "footer.serviceArea": "Servicegebied",
+    "footer.serviceAreaText": "Belgomed levert dagelijks aan apotheken, ziekenhuizen en zorginstellingen in heel België: Antwerpen, Hasselt, Luik, Genk, Bilzen, Brussel, Gent, Brugge, Leuven, Mechelen, Aalst, Kortrijk, Oostende, Sint-Truiden, Tongeren, Maasmechelen, Maaseik, Lommel, Beringen, Heusden-Zolder, Diepenbeek, Houthalen-Helchteren, Charleroi, Namen, Bergen, Doornik en Verviers.",
     "footer.rights": "Alle rechten voorbehouden.",
     "footer.terms": "Algemene Voorwaarden",
     "footer.privacy": "Privacyverklaring",
