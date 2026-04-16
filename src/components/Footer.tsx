@@ -17,11 +17,6 @@ const Footer = () => {
           <div>
             <span className="text-lg font-bold tracking-wider gradient-accent-text">BELGOMED BV</span>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{t("footer.desc")}</p>
-            <div className="text-xs text-muted-foreground/60 mt-2 space-y-0.5">
-              <p>Trichterheideweg 11, 3500 Hasselt, België</p>
-              <p>KBO: [VUL KBO-NUMMER IN]</p>
-              <p>BTW: [VUL BTW-NUMMER IN]</p>
-            </div>
           </div>
           <div>
             <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground mb-4">{t("footer.nav")}</h4>
