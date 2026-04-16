@@ -668,6 +668,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "footer.desc": "Belgomed BV — Ihr vertrauenswürdiger Partner für pharmazeutischen Vertrieb mit vollständiger GDP- und WDA-Compliance.",
     "footer.nav": "Navigation",
     "footer.contact": "Kontakt",
+    "footer.serviceArea": "Liefergebiet",
+    "footer.serviceAreaText": "Belgomed beliefert täglich Apotheken, Krankenhäuser und Pflegeeinrichtungen in ganz Belgien: Antwerpen, Hasselt, Lüttich, Genk, Bilzen, Brüssel, Gent, Brügge, Löwen, Mecheln, Aalst, Kortrijk, Ostende, Sint-Truiden, Tongeren, Maasmechelen, Maaseik, Lommel, Beringen, Heusden-Zolder, Diepenbeek, Houthalen-Helchteren, Charleroi, Namur, Mons, Tournai und Verviers.",
     "footer.rights": "Alle Rechte vorbehalten.",
     "footer.terms": "Allgemeine Geschäftsbedingungen",
     "footer.privacy": "Datenschutzerklärung",
