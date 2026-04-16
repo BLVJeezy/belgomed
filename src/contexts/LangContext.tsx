@@ -730,6 +730,10 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.a5": "Ja, wir sorgen für schnelle und sichere Lieferungen in ganz Belgien von unserem Distributionszentrum in Hasselt aus. Unsere Logistik ist auf zuverlässige und pünktliche Lieferungen optimiert.",
     "faq.q6": "Bietet Belgomed Cold-Chain-Distribution an?",
     "faq.a6": "Ja, wir garantieren vollständige Cold-Chain-Compliance für temperatursensible pharmazeutische Produkte. Unsere Lagerstätten und Transportmittel erfüllen alle GDP-Anforderungen für die Kühlkettendistribution.",
+    "faq.q7": "In welche belgischen Städte liefert Belgomed?",
+    "faq.a7": "Belgomed beliefert täglich Apotheken, Krankenhäuser und Pflegeeinrichtungen in ganz Belgien, mit starker Präsenz in Antwerpen, Hasselt, Lüttich, Genk und Bilzen. Von unserem Distributionszentrum in Hasselt aus bedienen wir Flandern und Wallonien mit schnellen, GDP-konformen Lieferungen.",
+    "faq.q8": "Kann eine Apotheke in Antwerpen, Genk oder Bilzen mit Belgomed zusammenarbeiten?",
+    "faq.a8": "Selbstverständlich. Apotheken, Krankenhäuser und Pflegeeinrichtungen in Antwerpen, Hasselt, Lüttich, Genk, Bilzen und im übrigen Belgien können direkt bei Belgomed bestellen. Kontaktieren Sie uns über unser Angebotsformular für ein persönliches Angebot.",
 
     // Process
     "process.tag": "Wie Wir Arbeiten",
