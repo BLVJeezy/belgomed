@@ -715,7 +715,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.q4": "Wie kann ich ein Angebot anfordern?",
     "faq.a4": "Sie können einfach ein Angebot über unser Kontaktformular auf dieser Website anfordern. Wählen Sie Ihre Produktgruppe (RX, OTC oder Medizinische Geräte), beschreiben Sie Ihre Anfrage und wir melden uns innerhalb von 24 Stunden.",
     "faq.q5": "Liefert Belgomed in ganz Belgien?",
-    "faq.a5": "Ja, wir sorgen für schnelle und sichere Lieferungen in ganz Belgien von unserem Distributionszentrum in Hasselt aus. Unsere Logistik ist auf zuverlässige und pünktliche Lieferungen optimiert.",
+    "faq.a5": "Ja, wir sorgen für schnelle und sichere Lieferungen in ganz Belgien von unserem Distributionszentrum aus. Unsere Logistik ist auf zuverlässige und pünktliche Lieferungen optimiert.",
     "faq.q6": "Bietet Belgomed Cold-Chain-Distribution an?",
     "faq.a6": "Ja, wir garantieren vollständige Cold-Chain-Compliance für temperatursensible pharmazeutische Produkte. Unsere Lagerstätten und Transportmittel erfüllen alle GDP-Anforderungen für die Kühlkettendistribution.",
 
