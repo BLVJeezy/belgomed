@@ -155,7 +155,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015": "WDA-Vergunning",
     "timeline.2015.desc": "Verkrijging van de Wholesale Distribution Authorisation.",
     "timeline.now": "Marktleider",
-    "timeline.now.desc": "45+ jaar ervaring, opererend vanuit ons distributiecentrum in Hasselt.",
+    "timeline.now.desc": "45+ jaar ervaring, opererend vanuit ons distributiecentrum.",
 
     // FAQ
     "faq.tag": "Veelgestelde Vragen",
@@ -169,7 +169,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.q4": "Hoe kan ik een offerte aanvragen?",
     "faq.a4": "U kunt eenvoudig een offerte aanvragen via ons contactformulier op deze website. Selecteer uw productgroep (RX, OTC of Medische Hulpmiddelen), beschrijf uw aanvraag en wij nemen binnen 24 uur contact met u op.",
     "faq.q5": "Levert Belgomed in heel België?",
-    "faq.a5": "Ja, wij verzorgen snelle en veilige leveringen in heel België vanuit ons distributiecentrum in Hasselt. Onze logistiek is geoptimaliseerd voor betrouwbare en tijdige leveringen.",
+    "faq.a5": "Ja, wij verzorgen snelle en veilige leveringen in heel België vanuit ons distributiecentrum. Onze logistiek is geoptimaliseerd voor betrouwbare en tijdige leveringen.",
     "faq.q6": "Biedt Belgomed cold-chain distributie aan?",
     "faq.a6": "Ja, wij garanderen volledige cold-chain compliance voor temperatuurgevoelige farmaceutische producten. Onze opslagfaciliteiten en transportmiddelen voldoen aan alle GDP-vereisten voor koude keten distributie.",
 
@@ -337,7 +337,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015": "WDA Authorization",
     "timeline.2015.desc": "Obtaining the Wholesale Distribution Authorisation.",
     "timeline.now": "Market Leader",
-    "timeline.now.desc": "45+ years of experience, operating from our distribution center in Hasselt.",
+    "timeline.now.desc": "45+ years of experience, operating from our distribution center.",
 
     // FAQ
     "faq.tag": "Frequently Asked Questions",
@@ -351,7 +351,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.q4": "How can I request a quote?",
     "faq.a4": "You can easily request a quote through our contact form on this website. Select your product group (RX, OTC or Medical Devices), describe your request and we will contact you within 24 hours.",
     "faq.q5": "Does Belgomed deliver throughout Belgium?",
-    "faq.a5": "Yes, we provide fast and safe deliveries throughout Belgium from our distribution center in Hasselt. Our logistics are optimized for reliable and timely deliveries.",
+    "faq.a5": "Yes, we provide fast and safe deliveries throughout Belgium from our distribution center. Our logistics are optimized for reliable and timely deliveries.",
     "faq.q6": "Does Belgomed offer cold-chain distribution?",
     "faq.a6": "Yes, we guarantee full cold-chain compliance for temperature-sensitive pharmaceutical products. Our storage facilities and transport meet all GDP requirements for cold chain distribution.",
 
@@ -519,7 +519,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "timeline.2015": "Autorisation WDA",
     "timeline.2015.desc": "Obtention de l'autorisation de distribution en gros.",
     "timeline.now": "Leader du Marché",
-    "timeline.now.desc": "45+ ans d'expérience, opérant depuis notre centre de distribution à Hasselt.",
+    "timeline.now.desc": "45+ ans d'expérience, opérant depuis notre centre de distribution.",
 
     // FAQ
     "faq.tag": "Questions Fréquentes",
@@ -533,7 +533,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "faq.q4": "Comment puis-je demander un devis ?",
     "faq.a4": "Vous pouvez facilement demander un devis via notre formulaire de contact sur ce site. Sélectionnez votre groupe de produits (RX, OTC ou Dispositifs Médicaux), décrivez votre demande et nous vous contacterons dans les 24 heures.",
     "faq.q5": "Belgomed livre-t-il dans toute la Belgique ?",
-    "faq.a5": "Oui, nous assurons des livraisons rapides et sûres dans toute la Belgique depuis notre centre de distribution à Hasselt. Notre logistique est optimisée pour des livraisons fiables et ponctuelles.",
+    "faq.a5": "Oui, nous assurons des livraisons rapides et sûres dans toute la Belgique depuis notre centre de distribution. Notre logistique est optimisée pour des livraisons fiables et ponctuelles.",
     "faq.q6": "Belgomed propose-t-il une distribution chaîne du froid ?",
     "faq.a6": "Oui, nous garantissons une conformité totale de la chaîne du froid pour les produits pharmaceutiques thermosensibles. Nos installations de stockage et nos moyens de transport répondent à toutes les exigences GDP.",
 
