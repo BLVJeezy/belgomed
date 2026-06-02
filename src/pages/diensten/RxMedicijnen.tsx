@@ -1,7 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
-import DienstShowcase from "@/components/diensten/DienstShowcase";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import { Pill, ShieldCheck, Thermometer, FileCheck2, Activity, AlertCircle } from "lucide-react";
 
@@ -18,19 +17,6 @@ const RxMedicijnen = () => (
     <Lead>
       Belgomed BV is een FAGG-goedgekeurd grossist en levert voorschriftplichtige geneesmiddelen aan apotheken, ziekenhuizen en zorginstellingen in heel België. Onze farmaceutische distributie verloopt volgens strikte GDP-richtlijnen — van inkoop tot eindlevering.
     </Lead>
-
-    <DienstShowcase
-      code="RX"
-      icon={Pill}
-      subtitle="Voorschriftplichtige geneesmiddelen"
-      title="FAGG-goedgekeurde RX-distributie"
-      description="Volledige GDP-keten, gecontroleerde temperatuur en batch-traceerbaarheid voor elke verzending — van centrale apotheek tot ziekenhuisafdeling."
-      stats={[
-        { value: "FAGG", label: "WDA-vergunning" },
-        { value: "GDP", label: "Compliance" },
-        { value: "24/7", label: "Pharmacovigilance" },
-      ]}
-    />
 
     <H2>Wat zijn RX Medicijnen?</H2>
     <P>RX-medicijnen (prescription only) zijn voorschriftplichtige geneesmiddelen die enkel verkrijgbaar zijn op doktersvoorschrift. Deze producten vereisen een hogere graad van controle, traceerbaarheid en koudeketenbeheer dan vrij verkrijgbare geneesmiddelen. Als gespecialiseerde RX medicijnen groothandel garanderen wij compliance op elk niveau van de keten.</P>
