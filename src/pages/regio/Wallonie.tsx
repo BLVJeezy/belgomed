@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
+import ContactForm from "@/components/ContactForm";
 
 const provinces = [
   { h: "Grossiste Médical Hainaut / Henegouwen", kw: "fournisseur pharmacie Hainaut", nl: "Belgomed levert farmaceutische producten aan apotheken in Henegouwen — van Mons tot Charleroi en Tournai.", fr: "Belgomed approvisionne les pharmacies du Hainaut — de Mons à Charleroi et Tournai." },
@@ -43,6 +44,7 @@ const Wallonie = () => (
     ))}
 
     <CTA>Demandez votre offre / Offerte aanvragen</CTA>
+    <ContactForm />
   </PageLayout>
 );
 
