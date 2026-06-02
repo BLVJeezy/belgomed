@@ -3,7 +3,7 @@ import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import ContactForm from "@/components/ContactForm";
-import { Pill, ShieldCheck, Thermometer, FileCheck2, Activity, AlertCircle } from "lucide-react";
+import { Pill, ShieldCheck, Thermometer, FileCheck2 } from "lucide-react";
 
 const RxMedicijnen = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "RX Medicijnen" }]}>
@@ -29,8 +29,6 @@ const RxMedicijnen = () => (
         { icon: ShieldCheck, title: "GDP-compliance", description: "Gedocumenteerde kwaliteitsprocedures over de volledige distributieketen." },
         { icon: Thermometer, title: "Koudeketenbeheer", description: "Gecontroleerde temperatuur voor koude- en omgevingsproducten, continu gemonitord." },
         { icon: FileCheck2, title: "Batch-traceerbaarheid", description: "Modern ordersysteem met volledige traceerbaarheid op batch- en lotniveau." },
-        { icon: Activity, title: "FAGG-audits", description: "WDA-vergunning en periodieke audits door het Federaal Agentschap voor Geneesmiddelen." },
-        { icon: AlertCircle, title: "Pharmacovigilance", description: "Directe terugroepprocedures en meldingsbeheer bij kwaliteitssignalen." },
         { icon: Pill, title: "Volledig assortiment", description: "Brede catalogus aan voorschriftplichtige geneesmiddelen, generiek en specialiteiten." },
       ]}
     />
