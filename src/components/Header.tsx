@@ -16,18 +16,39 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [dienstenOpen, setDienstenOpen] = useState(false);
+  const [regioOpen, setRegioOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const dienstenRef = useRef<HTMLDivElement>(null);
+  const regioRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
-  { label: t("nav.about"), href: "#overons" },
-  { label: t("nav.process"), href: "#process" },
-  { label: t("nav.contact"), href: "#contact" }];
+  { label: t("nav.about"), href: "/#overons" },
+  { label: t("nav.process"), href: "/#process" },
+  { label: t("nav.contact"), href: "/#contact" }];
+
+  const dienstenItems = [
+    { label: "RX Medicijnen", href: "/diensten/rx-medicijnen" },
+    { label: "OTC Producten", href: "/diensten/otc-producten" },
+    { label: "Medische Hulpmiddelen", href: "/diensten/medische-hulpmiddelen" },
+  ];
+  const regioItems = [
+    { label: "Vlaanderen", href: "/regio/vlaanderen" },
+    { label: "Wallonië", href: "/regio/wallonie" },
+    { label: "Brussel", href: "/regio/brussel" },
+  ];
 
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (langRef.current && !langRef.current.contains(e.target as Node)) {
         setLangOpen(false);
+      }
+      if (dienstenRef.current && !dienstenRef.current.contains(e.target as Node)) {
+        setDienstenOpen(false);
+      }
+      if (regioRef.current && !regioRef.current.contains(e.target as Node)) {
+        setRegioOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClick);
@@ -52,6 +73,42 @@ const Header = () => {
                 {item.label}
               </a>
             )}
+
+            <div className="relative" ref={dienstenRef}>
+              <button
+                onClick={() => { setDienstenOpen(!dienstenOpen); setRegioOpen(false); }}
+                className="flex items-center gap-1 text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+                Diensten
+                <ChevronDown className={`w-3 h-3 transition-transform ${dienstenOpen ? "rotate-180" : ""}`} />
+              </button>
+              {dienstenOpen && (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[220px] z-50">
+                  {dienstenItems.map((d) => (
+                    <a key={d.href} href={d.href} onClick={() => setDienstenOpen(false)} className="block px-3 py-2 text-xs tracking-wide text-muted-foreground hover:text-primary hover:bg-secondary/50 transition-colors">
+                      {d.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="relative" ref={regioRef}>
+              <button
+                onClick={() => { setRegioOpen(!regioOpen); setDienstenOpen(false); }}
+                className="flex items-center gap-1 text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+                Regio's
+                <ChevronDown className={`w-3 h-3 transition-transform ${regioOpen ? "rotate-180" : ""}`} />
+              </button>
+              {regioOpen && (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[180px] z-50">
+                  {regioItems.map((d) => (
+                    <a key={d.href} href={d.href} onClick={() => setRegioOpen(false)} className="block px-3 py-2 text-xs tracking-wide text-muted-foreground hover:text-primary hover:bg-secondary/50 transition-colors">
+                      {d.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <a
               href="/admin"
@@ -131,6 +188,22 @@ const Header = () => {
                 {item.label}
               </a>
           )}
+            <div className="pt-2 border-t border-border/30">
+              <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary mb-2">Diensten</p>
+              {dienstenItems.map((d) => (
+                <a key={d.href} href={d.href} onClick={() => setMobileOpen(false)} className="block py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {d.label}
+                </a>
+              ))}
+            </div>
+            <div className="pt-2 border-t border-border/30">
+              <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary mb-2">Regio's</p>
+              {regioItems.map((d) => (
+                <a key={d.href} href={d.href} onClick={() => setMobileOpen(false)} className="block py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {d.label}
+                </a>
+              ))}
+            </div>
             <a
             href="/admin"
             onClick={() => setMobileOpen(false)}

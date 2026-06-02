@@ -5,15 +5,25 @@ const Footer = () => {
   const { t } = useLang();
 
   const navItems = [
-  { label: t("diensten.title"), href: "#diensten" },
-  { label: t("process.title"), href: "#process" },
-  { label: t("nav.contact"), href: "#contact" }];
+  { label: t("diensten.title"), href: "/#diensten" },
+  { label: t("process.title"), href: "/#process" },
+  { label: t("nav.contact"), href: "/#contact" }];
+
+  const seoLinks = [
+    { label: "RX Medicijnen", href: "/diensten/rx-medicijnen" },
+    { label: "OTC Producten", href: "/diensten/otc-producten" },
+    { label: "Medische Hulpmiddelen", href: "/diensten/medische-hulpmiddelen" },
+    { label: "Vlaanderen", href: "/regio/vlaanderen" },
+    { label: "Wallonië", href: "/regio/wallonie" },
+    { label: "Brussel", href: "/regio/brussel" },
+    { label: "Zoekwoorden", href: "/zoekwoorden" },
+  ];
 
 
   return (
     <footer className="border-t border-border/30 py-10 md:py-16" role="contentinfo">
       <div className="container mx-auto px-5 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <span className="text-lg font-bold tracking-wider gradient-accent-text">BELGOMED BV</span>
             <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{t("footer.desc")}</p>
@@ -23,6 +33,16 @@ const Footer = () => {
             <div className="space-y-2">
               {navItems.map((item) =>
               <a key={item.label} href={item.href} className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {item.label}
+                </a>
+              )}
+            </div>
+          </div>
+          <div>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground mb-4">Diensten & Regio's</h4>
+            <div className="space-y-2">
+              {seoLinks.map((item) =>
+              <a key={item.href} href={item.href} className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                   {item.label}
                 </a>
               )}
