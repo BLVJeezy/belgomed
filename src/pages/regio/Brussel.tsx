@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
+import BelgiumMap from "@/components/regio/BelgiumMap";
 
 const Brussel = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Regio" }, { label: "Brussel" }]}>
@@ -17,6 +18,12 @@ const Brussel = () => (
       <br />
       Belgomed BV approvisionne les pharmacies, hôpitaux et institutions de soins de la Région de Bruxelles-Capitale — bilingue et certifié GDP.
     </Lead>
+
+    <BelgiumMap
+      active="brussel"
+      label="Brussel-Hoofdstad / Bruxelles-Capitale"
+      sublabel="Distribution dans les 19 communes — bilingue NL/FR. Levering in de 19 gemeenten — tweetalig."
+    />
 
     <H2>Levering in het Brussels Hoofdstedelijk Gewest / Livraison Bruxelles-Capitale</H2>
     <P>Snelle distributie binnen de 19 gemeenten van Brussel, met aandacht voor de logistieke uitdagingen van de hoofdstad. Livraisons rapides dans les 19 communes de Bruxelles, adaptées aux contraintes logistiques de la capitale.</P>
