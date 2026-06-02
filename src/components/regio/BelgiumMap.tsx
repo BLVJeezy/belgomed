@@ -21,8 +21,8 @@ interface BelgiumMapProps {
 // All three regions live inside a single <g> with the parent translate; only
 // VLAANDEREN gets a counter-transform so its coordinates land in the same frame.
 const PATHS: Record<Region, { d: string; transform?: string }> = {
-  vlaanderen: { d: VLAANDEREN_D, transform: VLAANDEREN_TRANSFORM },
-  wallonie: { d: WALLONIE_D },
+  vlaanderen: { d: WALLONIE_D },
+  wallonie: { d: VLAANDEREN_D, transform: VLAANDEREN_TRANSFORM },
   brussel: { d: BRUSSEL_D },
 };
 
