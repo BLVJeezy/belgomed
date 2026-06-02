@@ -36,7 +36,7 @@ const PageLayout = ({ children, breadcrumbs }: PageLayoutProps) => {
                 ))}
               </nav>
             )}
-            <article className="prose-content space-y-6">{children}</article>
+            <article className="space-y-6">{children}</article>
           </div>
         </main>
         <Footer />
