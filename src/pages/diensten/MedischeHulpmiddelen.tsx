@@ -49,7 +49,7 @@ const MedischeHulpmiddelen = () => (
       "Woonzorgcentra en thuiszorgorganisaties.",
     ]} />
 
-    <CTA>Offerte aanvragen</CTA>
+    <CTA href="#contact">Offerte aanvragen</CTA>
     <ContactForm />
   </PageLayout>
 );

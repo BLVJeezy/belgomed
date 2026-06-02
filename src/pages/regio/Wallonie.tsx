@@ -43,7 +43,7 @@ const Wallonie = () => (
       </div>
     ))}
 
-    <CTA>Demandez votre offre / Offerte aanvragen</CTA>
+    <CTA href="#contact">Demandez votre offre / Offerte aanvragen</CTA>
     <ContactForm />
   </PageLayout>
 );

@@ -39,7 +39,7 @@ const Brussel = () => (
       "Zorginstellingen en woonzorgcentra / Institutions de soins et maisons de repos.",
     ]} />
 
-    <CTA>Demandez votre offre / Offerte aanvragen</CTA>
+    <CTA href="#contact">Demandez votre offre / Offerte aanvragen</CTA>
     <ContactForm />
   </PageLayout>
 );
