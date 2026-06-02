@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
+import BelgiumMap from "@/components/regio/BelgiumMap";
 
 const provinces = [
   { h: "Medische Groothandel Antwerpen", kw: "apotheek leverancier Antwerpen", body: "Wij bedienen apotheken en ziekenhuizen in Antwerpen en de Antwerpse Kempen met snelle leveringen van RX, OTC en medische hulpmiddelen." },
@@ -23,6 +24,12 @@ const Vlaanderen = () => (
     <Lead>
       Belgomed BV verzorgt medische groothandel in heel Vlaanderen. Vanuit ons distributiecentrum leveren wij snel en betrouwbaar aan apotheken, ziekenhuizen en zorginstellingen in alle vijf de Vlaamse provincies.
     </Lead>
+
+    <BelgiumMap
+      active="vlaanderen"
+      label="Vlaanderen — 5 provincies"
+      sublabel="Antwerpen, Oost-Vlaanderen, West-Vlaanderen, Vlaams-Brabant en Limburg — bediend vanuit ons distributiecentrum."
+    />
 
     {provinces.map((p) => (
       <div key={p.h}>

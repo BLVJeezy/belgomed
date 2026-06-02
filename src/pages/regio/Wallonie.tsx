@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
+import BelgiumMap from "@/components/regio/BelgiumMap";
 
 const provinces = [
   { h: "Grossiste Médical Hainaut / Henegouwen", kw: "fournisseur pharmacie Hainaut", nl: "Belgomed levert farmaceutische producten aan apotheken in Henegouwen — van Mons tot Charleroi en Tournai.", fr: "Belgomed approvisionne les pharmacies du Hainaut — de Mons à Charleroi et Tournai." },
@@ -26,6 +27,12 @@ const Wallonie = () => (
       <br />
       Belgomed BV levert farmaceutische producten aan apotheken, ziekenhuizen en zorginstellingen in heel Wallonië — GDP & WDA gecertificeerd.
     </Lead>
+
+    <BelgiumMap
+      active="wallonie"
+      label="Wallonie — 5 provinces"
+      sublabel="Hainaut, Liège, Namur, Luxembourg et Brabant Wallon — livraisons rapides certifiées GDP."
+    />
 
     {provinces.map((p) => (
       <div key={p.h}>
