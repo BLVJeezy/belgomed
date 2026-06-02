@@ -31,7 +31,7 @@ const Wallonie = () => (
       <div key={p.h}>
         <H2>{p.h}</H2>
         <P>{p.fr}</P>
-        <P>{p.nl} <span className="text-foreground italic">{p.kw}</span>.</P>
+        <P>{p.nl}</P>
       </div>
     ))}
 
