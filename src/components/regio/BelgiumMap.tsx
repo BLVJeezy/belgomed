@@ -1,4 +1,12 @@
 import { MapPin } from "lucide-react";
+import {
+  VLAANDEREN_D,
+  WALLONIE_D,
+  BRUSSEL_D,
+  BE_VIEWBOX,
+  BE_PARENT_TRANSFORM,
+  VLAANDEREN_TRANSFORM,
+} from "./belgium-paths";
 
 type Region = "vlaanderen" | "wallonie" | "brussel";
 
@@ -8,22 +16,20 @@ interface BelgiumMapProps {
   sublabel?: string;
 }
 
-// Recognizable outlines of the three Belgian regions, scaled to viewBox 0 0 500 360.
-// Shapes approximate the real geography (Flanders north, Wallonia south, Brussels
-// as a small enclave inside Flanders).
-const PATHS: Record<Region, string> = {
-  vlaanderen:
-    "M30,118 L55,92 L95,78 L150,68 L210,58 L255,54 L305,60 L355,72 L395,92 L425,118 L440,148 L440,172 L405,176 L355,184 L305,186 L278,182 L268,170 L255,164 L240,168 L232,180 L210,184 L165,182 L120,176 L85,168 L58,158 L40,142 Z",
-  brussel:
-    "M248,160 L268,158 L274,168 L270,178 L256,180 L246,172 Z",
-  wallonie:
-    "M40,142 L58,158 L85,168 L120,176 L165,182 L210,184 L232,180 L240,168 L255,164 L268,170 L278,182 L305,186 L355,184 L405,176 L440,172 L452,200 L450,238 L438,278 L420,318 L388,320 L350,308 L300,300 L262,322 L215,300 L170,278 L130,252 L98,222 L72,192 L52,170 Z",
+// Accurate vector paths sourced from Wikimedia Commons (CC BY-SA, Ssolbergj 2008).
+// All three regions live inside a single <g> with the parent translate; only
+// VLAANDEREN gets a counter-transform so its coordinates land in the same frame.
+const PATHS: Record<Region, { d: string; transform?: string }> = {
+  vlaanderen: { d: VLAANDEREN_D, transform: VLAANDEREN_TRANSFORM },
+  wallonie: { d: WALLONIE_D },
+  brussel: { d: BRUSSEL_D },
 };
 
+// Label anchor points in the un-translated viewBox (0..307 x 0..251).
 const LABELS: Record<Region, { x: number; y: number; text: string; size: number }> = {
-  vlaanderen: { x: 230, y: 122, text: "VLAANDEREN", size: 13 },
-  wallonie: { x: 270, y: 244, text: "WALLONIË", size: 13 },
-  brussel: { x: 305, y: 168, text: "BRUSSEL", size: 9 },
+  vlaanderen: { x: 145, y: 70, text: "VLAANDEREN", size: 11 },
+  wallonie: { x: 165, y: 175, text: "WALLONIË", size: 11 },
+  brussel: { x: 220, y: 100, text: "BRUSSEL", size: 7.5 },
 };
 
 const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
@@ -42,9 +48,9 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
           </span>
         </div>
 
-        <div className="w-full max-w-[360px] shrink-0">
+        <div className="w-full max-w-[380px] shrink-0">
           <svg
-            viewBox="0 0 500 350"
+            viewBox={BE_VIEWBOX}
             className="w-full h-auto"
             role="img"
             aria-label={`Kaart van België met ${label} gemarkeerd`}
@@ -55,7 +61,7 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                 <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
               </linearGradient>
               <filter id="activeGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
@@ -63,33 +69,26 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
               </filter>
             </defs>
 
-            {/* Vlaanderen + Wallonie first, Brussel last so it sits on top */}
-            {(["vlaanderen", "wallonie", "brussel"] as Region[]).map((r) => {
-              const isActive = r === active;
-              return (
-                <path
-                  key={r}
-                  d={PATHS[r]}
-                  fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.14)"}
-                  stroke={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground) / 0.4)"}
-                  strokeWidth={isActive ? 1.6 : 0.9}
-                  strokeLinejoin="round"
-                  filter={isActive ? "url(#activeGlow)" : undefined}
-                  className="transition-all duration-500"
-                />
-              );
-            })}
-
-            {/* Leader line from Brussels label to enclave */}
-            <line
-              x1={278}
-              y1={168}
-              x2={285}
-              y2={166}
-              stroke="hsl(var(--muted-foreground))"
-              strokeOpacity={0.5}
-              strokeWidth={0.8}
-            />
+            <g transform={BE_PARENT_TRANSFORM}>
+              {(["vlaanderen", "wallonie", "brussel"] as Region[]).map((r) => {
+                const isActive = r === active;
+                const p = PATHS[r];
+                return (
+                  <path
+                    key={r}
+                    d={p.d}
+                    transform={p.transform}
+                    fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.16)"}
+                    stroke={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground) / 0.45)"}
+                    strokeWidth={isActive ? 0.6 : 0.35}
+                    strokeLinejoin="round"
+                    filter={isActive ? "url(#activeGlow)" : undefined}
+                    className="transition-all duration-500"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                );
+              })}
+            </g>
 
             {(["vlaanderen", "wallonie", "brussel"] as Region[]).map((r) => {
               const isActive = r === active;
@@ -100,11 +99,12 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                   x={l.x}
                   y={l.y}
                   textAnchor="middle"
-                  className="select-none"
+                  className="select-none pointer-events-none"
                   fontSize={l.size}
                   fontWeight={isActive ? 800 : 600}
-                  letterSpacing="1.2"
+                  letterSpacing="0.6"
                   fill={isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))"}
+                  opacity={isActive ? 1 : 0.75}
                 >
                   {l.text}
                 </text>
