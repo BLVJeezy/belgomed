@@ -1,6 +1,9 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
+import DienstShowcase from "@/components/diensten/DienstShowcase";
+import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
+import { Package, TrendingDown, Truck, BadgeCheck, Boxes, Sparkles } from "lucide-react";
 
 const OtcProducten = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "OTC Producten" }]}>
@@ -16,6 +19,19 @@ const OtcProducten = () => (
       Belgomed is uw OTC leverancier voor apotheken en drogisterijen in België. Van paracetamol en dafalgan tot ibuprofen en pantoprazol — wij leveren vrij verkrijgbare geneesmiddelen in groothandelsvolumes, met dezelfde GDP-discipline als onze RX-distributie.
     </Lead>
 
+    <DienstShowcase
+      code="OTC"
+      icon={Package}
+      subtitle="Vrij verkrijgbare geneesmiddelen"
+      title="OTC distributie op groothandelsschaal"
+      description="Stabiele beschikbaarheid van de meest gevraagde merken en generieken — met rechtstreekse contracten, GDP-discipline en snelle leveringen in heel België."
+    stats={[
+        { value: "500+", label: "Referenties" },
+        { value: "GDP", label: "Behandeling" },
+        { value: "BE", label: "Dekking" },
+      ]}
+    />
+
     <H2>Populaire OTC Producten</H2>
     <Ul items={[
       "Paracetamol — pijnstilling en koortswerend, alle gangbare doseringen.",
@@ -26,12 +42,17 @@ const OtcProducten = () => (
     ]} />
 
     <H2>Voordelen van Belgomed als OTC Leverancier</H2>
-    <Ul items={[
-      "Stabiele beschikbaarheid van populaire merken en generieken.",
-      "Concurrentiële prijzen door rechtstreekse contracten.",
-      "Snelle leveringen in heel België.",
-      "GDP-gecertificeerde behandeling van alle batches.",
-    ]} />
+    <DienstFeatureGrid
+      eyebrow="Waarom Belgomed"
+      features={[
+        { icon: Boxes, title: "Stabiele voorraad", description: "Doorlopende beschikbaarheid van populaire merken en generieken." },
+        { icon: TrendingDown, title: "Scherpe prijzen", description: "Concurrentiële tarieven door rechtstreekse contracten met fabrikanten." },
+        { icon: Truck, title: "Snelle leveringen", description: "Distributie in heel België met korte leadtijden voor apotheken en drogisterijen." },
+        { icon: BadgeCheck, title: "GDP-discipline", description: "Elke batch behandeld volgens dezelfde GDP-richtlijnen als onze RX-keten." },
+        { icon: Sparkles, title: "Brand & generiek", description: "Mix van merkproducten en generieken — kies wat past bij uw assortiment." },
+        { icon: Package, title: "Bulkvolumes", description: "Groothandelsverpakkingen afgestemd op de behoeften van uw apotheek." },
+      ]}
+    />
 
     <H2>Voor wie?</H2>
     <Ul items={[
