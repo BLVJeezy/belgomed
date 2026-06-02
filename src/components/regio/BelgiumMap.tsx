@@ -20,13 +20,6 @@ const PATHS: Record<Region, string> = {
     "M40,142 L58,158 L85,168 L120,176 L165,182 L210,184 L232,180 L240,168 L255,164 L268,170 L278,182 L305,186 L355,184 L405,176 L440,172 L452,200 L450,238 L438,278 L420,318 L388,320 L350,308 L300,300 L262,322 L215,300 L170,278 L130,252 L98,222 L72,192 L52,170 Z",
 };
 
-const REGION_COLORS: Record<Region, string> = {
-  // Iconic Belgian regional colors
-  vlaanderen: "#d22d2d", // rood (Vlaamse leeuw)
-  wallonie: "#2f8a3e", // groen
-  brussel: "#1f3aa0", // blauw (iris)
-};
-
 const LABELS: Record<Region, { x: number; y: number; text: string; size: number }> = {
   vlaanderen: { x: 230, y: 122, text: "VLAANDEREN", size: 13 },
   wallonie: { x: 270, y: 244, text: "WALLONIË", size: 13 },
@@ -57,6 +50,10 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
             aria-label={`Kaart van België met ${label} gemarkeerd`}
           >
             <defs>
+              <linearGradient id="activeFill" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+              </linearGradient>
               <filter id="activeGlow" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur stdDeviation="5" result="blur" />
                 <feMerge>
@@ -73,11 +70,9 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                 <path
                   key={r}
                   d={PATHS[r]}
-                  fill={REGION_COLORS[r]}
-                  fillOpacity={isActive ? 1 : 0.45}
-                  stroke={isActive ? "#0f172a" : "#0f172a"}
-                  strokeOpacity={isActive ? 0.85 : 0.35}
-                  strokeWidth={isActive ? 1.8 : 0.9}
+                  fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.14)"}
+                  stroke={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground) / 0.4)"}
+                  strokeWidth={isActive ? 1.6 : 0.9}
                   strokeLinejoin="round"
                   filter={isActive ? "url(#activeGlow)" : undefined}
                   className="transition-all duration-500"
@@ -91,7 +86,7 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
               y1={168}
               x2={285}
               y2={166}
-              stroke="#0f172a"
+              stroke="hsl(var(--muted-foreground))"
               strokeOpacity={0.5}
               strokeWidth={0.8}
             />
@@ -109,13 +104,7 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                   fontSize={l.size}
                   fontWeight={isActive ? 800 : 600}
                   letterSpacing="1.2"
-                  fill="#ffffff"
-                  opacity={isActive ? 1 : 0.85}
-                  style={{
-                    paintOrder: "stroke",
-                    stroke: "rgba(15,23,42,0.55)",
-                    strokeWidth: 2,
-                  } as React.CSSProperties}
+                  fill={isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))"}
                 >
                   {l.text}
                 </text>
