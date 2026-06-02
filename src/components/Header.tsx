@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, Menu, X, ChevronDown, Globe } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logoHeader from "@/assets/logo-header.png";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useLang } from "@/contexts/LangContext";
@@ -13,6 +14,8 @@ const languages = [
 
 const Header = () => {
   const { lang, setLang, t } = useLang();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -38,6 +41,27 @@ const Header = () => {
     { label: "Brussel", href: "/regio/brussel" },
   ];
 
+  // Smart navigation for hash links like "/#overons" — if we're already on the
+  // home page, smooth-scroll to the section; otherwise navigate home and scroll
+  // once the target is mounted.
+  const handleHashNav = (href: string) => (e: React.MouseEvent) => {
+    if (!href.startsWith("/#")) return;
+    e.preventDefault();
+    const id = href.slice(2);
+    const scrollTo = () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    if (location.pathname === "/") {
+      scrollTo();
+    } else {
+      navigate("/");
+      // wait for home to mount
+      setTimeout(scrollTo, 80);
+    }
+    setMobileOpen(false);
+  };
+
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -59,15 +83,16 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50" role="banner">
       <nav className="border-b border-border/30 bg-background/60 backdrop-blur-xl" aria-label="Hoofdnavigatie">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
-          <a href="#" className="flex items-center">
+          <Link to="/" aria-label="Belgomed — terug naar home" className="flex items-center">
             <img src={logoHeader} alt="Belgomed" className="h-9 w-auto dark:invert dark:hue-rotate-180" />
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) =>
             <a
               key={item.label}
               href={item.href}
+              onClick={handleHashNav(item.href)}
               className="text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
 
                 {item.label}
@@ -182,7 +207,7 @@ const Header = () => {
           <a
             key={item.label}
             href={item.href}
-            onClick={() => setMobileOpen(false)}
+            onClick={handleHashNav(item.href)}
             className="block text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors">
 
                 {item.label}
