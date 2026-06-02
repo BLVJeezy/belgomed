@@ -33,25 +33,6 @@ const DienstShowcase = ({
       <div className="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-accent/10 blur-3xl" />
 
       <div className="relative z-10">
-        <div className="flex items-start justify-between gap-4 mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-              <Icon className="w-5 h-5 text-primary" strokeWidth={1.75} />
-            </div>
-            <span className="text-[10px] font-bold tracking-[0.25em] uppercase px-2.5 py-1 rounded-full border border-primary/30 text-primary bg-background/60 backdrop-blur-sm">
-              {code}
-            </span>
-          </div>
-          <a
-            href={ctaHref}
-            aria-label={ctaLabel}
-            className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-primary hover:gap-2.5 transition-all"
-          >
-            {ctaLabel}
-            <ArrowUpRight className="w-4 h-4" strokeWidth={2} />
-          </a>
-        </div>
-
         <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-medium mb-2">
           {subtitle}
         </p>
