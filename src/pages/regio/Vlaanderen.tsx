@@ -35,11 +35,11 @@ const Vlaanderen = () => (
     {provinces.map((p) => (
       <div key={p.h}>
         <H2>{p.h}</H2>
-        <P>{p.body} <a href="/#contact" className="text-primary hover:underline">Vraag uw offerte aan →</a></P>
+        <P>{p.body} <a href="#contact" className="text-primary hover:underline">Vraag uw offerte aan →</a></P>
       </div>
     ))}
 
-    <CTA>Offerte aanvragen</CTA>
+    <CTA href="#contact">Offerte aanvragen</CTA>
     <ContactForm />
   </PageLayout>
 );
