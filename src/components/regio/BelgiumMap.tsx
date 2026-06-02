@@ -8,21 +8,29 @@ interface BelgiumMapProps {
   sublabel?: string;
 }
 
-// Stylized, approximate polygon outlines of the three Belgian regions.
-// Designed for clarity over cartographic accuracy.
+// Recognizable outlines of the three Belgian regions, scaled to viewBox 0 0 500 360.
+// Shapes approximate the real geography (Flanders north, Wallonia south, Brussels
+// as a small enclave inside Flanders).
 const PATHS: Record<Region, string> = {
   vlaanderen:
-    "M55,110 L130,70 L220,55 L320,58 L405,80 L440,130 L395,165 L320,170 L255,165 L235,150 L215,155 L200,170 L160,180 L110,175 L70,150 Z",
+    "M30,118 L55,92 L95,78 L150,68 L210,58 L255,54 L305,60 L355,72 L395,92 L425,118 L440,148 L440,172 L405,176 L355,184 L305,186 L278,182 L268,170 L255,164 L240,168 L232,180 L210,184 L165,182 L120,176 L85,168 L58,158 L40,142 Z",
   brussel:
-    "M205,158 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0",
+    "M248,160 L268,158 L274,168 L270,178 L256,180 L246,172 Z",
   wallonie:
-    "M70,150 L110,175 L160,180 L200,170 L215,155 L235,150 L255,165 L320,170 L395,165 L440,130 L455,185 L430,245 L370,295 L300,310 L230,300 L170,285 L110,250 L70,210 Z",
+    "M40,142 L58,158 L85,168 L120,176 L165,182 L210,184 L232,180 L240,168 L255,164 L268,170 L278,182 L305,186 L355,184 L405,176 L440,172 L452,200 L450,238 L438,278 L420,318 L388,320 L350,308 L300,300 L262,322 L215,300 L170,278 L130,252 L98,222 L72,192 L52,170 Z",
 };
 
-const LABELS: Record<Region, { x: number; y: number; text: string }> = {
-  vlaanderen: { x: 245, y: 120, text: "Vlaanderen" },
-  wallonie: { x: 260, y: 240, text: "Wallonië" },
-  brussel: { x: 205, y: 158, text: "BXL" },
+const REGION_COLORS: Record<Region, string> = {
+  // Iconic Belgian regional colors
+  vlaanderen: "#d22d2d", // rood (Vlaamse leeuw)
+  wallonie: "#2f8a3e", // groen
+  brussel: "#1f3aa0", // blauw (iris)
+};
+
+const LABELS: Record<Region, { x: number; y: number; text: string; size: number }> = {
+  vlaanderen: { x: 230, y: 122, text: "VLAANDEREN", size: 13 },
+  wallonie: { x: 270, y: 244, text: "WALLONIË", size: 13 },
+  brussel: { x: 305, y: 168, text: "BRUSSEL", size: 9 },
 };
 
 const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
@@ -49,12 +57,8 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
             aria-label={`Kaart van België met ${label} gemarkeerd`}
           >
             <defs>
-              <linearGradient id="activeFill" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
-              </linearGradient>
               <filter id="activeGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feGaussianBlur stdDeviation="5" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
@@ -62,26 +66,37 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
               </filter>
             </defs>
 
-            {order.map((r) => {
+            {/* Vlaanderen + Wallonie first, Brussel last so it sits on top */}
+            {(["vlaanderen", "wallonie", "brussel"] as Region[]).map((r) => {
               const isActive = r === active;
               return (
                 <path
                   key={r}
                   d={PATHS[r]}
-                  fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.12)"}
-                  stroke={
-                    isActive
-                      ? "hsl(var(--primary))"
-                      : "hsl(var(--muted-foreground) / 0.35)"
-                  }
-                  strokeWidth={isActive ? 1.5 : 0.8}
+                  fill={REGION_COLORS[r]}
+                  fillOpacity={isActive ? 1 : 0.45}
+                  stroke={isActive ? "#0f172a" : "#0f172a"}
+                  strokeOpacity={isActive ? 0.85 : 0.35}
+                  strokeWidth={isActive ? 1.8 : 0.9}
+                  strokeLinejoin="round"
                   filter={isActive ? "url(#activeGlow)" : undefined}
                   className="transition-all duration-500"
                 />
               );
             })}
 
-            {order.map((r) => {
+            {/* Leader line from Brussels label to enclave */}
+            <line
+              x1={278}
+              y1={168}
+              x2={285}
+              y2={166}
+              stroke="#0f172a"
+              strokeOpacity={0.5}
+              strokeWidth={0.8}
+            />
+
+            {(["vlaanderen", "wallonie", "brussel"] as Region[]).map((r) => {
               const isActive = r === active;
               const l = LABELS[r];
               return (
@@ -91,31 +106,21 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                   y={l.y}
                   textAnchor="middle"
                   className="select-none"
-                  fontSize={r === "brussel" ? 9 : 13}
-                  fontWeight={isActive ? 700 : 500}
-                  letterSpacing="1"
-                  fill={
-                    isActive
-                      ? "hsl(var(--primary-foreground))"
-                      : "hsl(var(--muted-foreground))"
-                  }
-                  style={{ textTransform: "uppercase" }}
+                  fontSize={l.size}
+                  fontWeight={isActive ? 800 : 600}
+                  letterSpacing="1.2"
+                  fill="#ffffff"
+                  opacity={isActive ? 1 : 0.85}
+                  style={{
+                    paintOrder: "stroke",
+                    stroke: "rgba(15,23,42,0.55)",
+                    strokeWidth: 2,
+                  } as React.CSSProperties}
                 >
                   {l.text}
                 </text>
               );
             })}
-
-            {active !== "brussel" && (
-              <circle
-                cx={205}
-                cy={158}
-                r={4}
-                fill="hsl(var(--background))"
-                stroke="hsl(var(--muted-foreground))"
-                strokeWidth={1}
-              />
-            )}
           </svg>
         </div>
 
