@@ -27,7 +27,7 @@ const Vlaanderen = () => (
     {provinces.map((p) => (
       <div key={p.h}>
         <H2>{p.h}</H2>
-        <P>{p.body} Trefwoord: <em className="text-foreground">{p.kw}</em>. <a href="/#contact" className="text-primary hover:underline">Vraag uw offerte aan →</a></P>
+        <P>{p.body} <a href="/#contact" className="text-primary hover:underline">Vraag uw offerte aan →</a></P>
       </div>
     ))}
 
