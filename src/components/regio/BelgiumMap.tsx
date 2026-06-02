@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   VLAANDEREN_D,
   WALLONIE_D,
@@ -32,8 +33,21 @@ const LABELS: Record<Region, { x: number; y: number; text: string; size: number 
   brussel: { x: 220, y: 100, text: "BRUSSEL", size: 7.5 },
 };
 
+const ROUTES: Record<Region, string> = {
+  vlaanderen: "/regio/vlaanderen",
+  wallonie: "/regio/wallonie",
+  brussel: "/regio/brussel",
+};
+
+const LABEL_TEXT: Record<Region, string> = {
+  vlaanderen: "Vlaanderen",
+  wallonie: "Wallonië",
+  brussel: "Brussel",
+};
+
 const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
   const order: Region[] = ["vlaanderen", "wallonie", "brussel"];
+  const navigate = useNavigate();
 
   return (
     <section className="relative overflow-hidden rounded-2xl border border-border/40 dark:border-white/10 bg-card/40 backdrop-blur-sm p-6 md:p-8 my-6">
@@ -57,8 +71,8 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
           >
             <defs>
               <linearGradient id="activeFill" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+                <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.75" />
               </linearGradient>
               <filter id="activeGlow" x="-20%" y="-20%" width="140%" height="140%">
                 <feGaussianBlur stdDeviation="2.5" result="blur" />
@@ -74,18 +88,32 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                 const isActive = r === active;
                 const p = PATHS[r];
                 return (
-                  <path
+                  <g
                     key={r}
-                    d={p.d}
-                    transform={p.transform}
-                    fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.16)"}
-                    stroke={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground) / 0.45)"}
-                    strokeWidth={isActive ? 0.6 : 0.35}
-                    strokeLinejoin="round"
-                    filter={isActive ? "url(#activeGlow)" : undefined}
-                    className="transition-all duration-500"
-                    vectorEffect="non-scaling-stroke"
-                  />
+                    role="link"
+                    tabIndex={0}
+                    aria-label={`Ga naar regio ${LABEL_TEXT[r]}`}
+                    onClick={() => navigate(ROUTES[r])}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        navigate(ROUTES[r]);
+                      }
+                    }}
+                    className="cursor-pointer outline-none focus-visible:[&>path]:stroke-[#38bdf8]"
+                  >
+                    <path
+                      d={p.d}
+                      transform={p.transform}
+                      fill={isActive ? "url(#activeFill)" : "hsl(var(--muted-foreground) / 0.16)"}
+                      stroke={isActive ? "#38bdf8" : "hsl(var(--muted-foreground) / 0.45)"}
+                      strokeWidth={isActive ? 0.6 : 0.35}
+                      strokeLinejoin="round"
+                      filter={isActive ? "url(#activeGlow)" : undefined}
+                      className="transition-all duration-300 hover:fill-[#bae6fd] hover:stroke-[#38bdf8]"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </g>
                 );
               })}
             </g>
@@ -103,7 +131,7 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
                   fontSize={l.size}
                   fontWeight={isActive ? 800 : 600}
                   letterSpacing="0.6"
-                  fill={isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))"}
+                  fill={isActive ? "#0c4a6e" : "hsl(var(--muted-foreground))"}
                   opacity={isActive ? 1 : 0.75}
                 >
                   {l.text}
@@ -130,16 +158,17 @@ const BelgiumMap = ({ active, label, sublabel }: BelgiumMapProps) => {
           )}
           <div className="mt-5 flex flex-wrap gap-2 justify-center md:justify-start">
             {order.map((r) => (
-              <span
+              <Link
                 key={`chip-${r}`}
+                to={ROUTES[r]}
                 className={
                   r === active
-                    ? "text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-primary/50 bg-primary/15 text-primary font-semibold"
-                    : "text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-border/50 text-muted-foreground"
+                    ? "text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-[#38bdf8]/60 bg-[#7dd3fc]/15 text-[#0c4a6e] dark:text-[#bae6fd] font-semibold"
+                    : "text-[10px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-border/50 text-muted-foreground hover:border-[#38bdf8]/50 hover:text-foreground transition-colors"
                 }
               >
-                {r === "vlaanderen" ? "Vlaanderen" : r === "wallonie" ? "Wallonië" : "Brussel"}
-              </span>
+                {LABEL_TEXT[r]}
+              </Link>
             ))}
           </div>
         </div>
