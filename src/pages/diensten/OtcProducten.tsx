@@ -1,7 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
-import DienstShowcase from "@/components/diensten/DienstShowcase";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import { Package, TrendingDown, Truck, BadgeCheck, Boxes, Sparkles } from "lucide-react";
 
@@ -18,19 +17,6 @@ const OtcProducten = () => (
     <Lead>
       Belgomed is uw OTC leverancier voor apotheken en drogisterijen in België. Van paracetamol en dafalgan tot ibuprofen en pantoprazol — wij leveren vrij verkrijgbare geneesmiddelen in groothandelsvolumes, met dezelfde GDP-discipline als onze RX-distributie.
     </Lead>
-
-    <DienstShowcase
-      code="OTC"
-      icon={Package}
-      subtitle="Vrij verkrijgbare geneesmiddelen"
-      title="OTC distributie op groothandelsschaal"
-      description="Stabiele beschikbaarheid van de meest gevraagde merken en generieken — met rechtstreekse contracten, GDP-discipline en snelle leveringen in heel België."
-    stats={[
-        { value: "500+", label: "Referenties" },
-        { value: "GDP", label: "Behandeling" },
-        { value: "BE", label: "Dekking" },
-      ]}
-    />
 
     <H2>Populaire OTC Producten</H2>
     <Ul items={[

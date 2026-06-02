@@ -1,7 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
-import DienstShowcase from "@/components/diensten/DienstShowcase";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import { Stethoscope, Syringe, Bandage, ShieldCheck, ScanSearch, HeartPulse } from "lucide-react";
 
@@ -18,19 +17,6 @@ const MedischeHulpmiddelen = () => (
     <Lead>
       Als distributeur medische hulpmiddelen in België levert Belgomed verbruiksmaterialen en disposables aan apotheken, ziekenhuizen en woonzorgcentra. Ons aanbod sluit aan op de dagelijkse behoeften van zorgprofessionals — met dezelfde betrouwbaarheid als onze farmaceutische distributie.
     </Lead>
-
-    <DienstShowcase
-      code="MD"
-      icon={Stethoscope}
-      subtitle="Medical devices & disposables"
-      title="Verbruiksmateriaal voor de zorgsector"
-      description="Een coherent assortiment CE-gemarkeerde medische hulpmiddelen — geleverd met dezelfde GDP-discipline als onze farmaceutische distributie."
-      stats={[
-        { value: "CE", label: "Gemarkeerd" },
-        { value: "WDA", label: "FAGG-vergund" },
-        { value: "100%", label: "Traceerbaar" },
-      ]}
-    />
 
     <H2>Ons Assortiment Medische Hulpmiddelen</H2>
     <P>Belgomed stelt een breed assortiment medische materialen samen, afgestemd op de zorgomgeving van de klant: verbandmateriaal, injectiemateriaal, diagnostische hulpmiddelen, persoonlijke beschermingsmiddelen en aanverwante disposables.</P>
