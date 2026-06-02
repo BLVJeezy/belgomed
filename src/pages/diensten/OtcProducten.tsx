@@ -3,7 +3,7 @@ import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import ContactForm from "@/components/ContactForm";
-import { Package, TrendingDown, Truck, BadgeCheck, Boxes, Sparkles } from "lucide-react";
+import { Package, TrendingDown, Truck, BadgeCheck, Boxes, Tags } from "lucide-react";
 
 const OtcProducten = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "OTC Producten" }]}>
@@ -36,7 +36,7 @@ const OtcProducten = () => (
         { icon: TrendingDown, title: "Scherpe prijzen", description: "Concurrentiële tarieven door rechtstreekse contracten met fabrikanten." },
         { icon: Truck, title: "Snelle leveringen", description: "Distributie in heel België met korte leadtijden voor apotheken en drogisterijen." },
         { icon: BadgeCheck, title: "GDP-discipline", description: "Elke batch behandeld volgens dezelfde GDP-richtlijnen als onze RX-keten." },
-        { icon: Sparkles, title: "Brand & generiek", description: "Mix van merkproducten en generieken — kies wat past bij uw assortiment." },
+        { icon: Tags, title: "Brand & generiek", description: "Mix van merkproducten en generieken — kies wat past bij uw assortiment." },
         { icon: Package, title: "Bulkvolumes", description: "Groothandelsverpakkingen afgestemd op de behoeften van uw apotheek." },
       ]}
     />
