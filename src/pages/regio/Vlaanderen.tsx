@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
+import ContactForm from "@/components/ContactForm";
 
 const provinces = [
   { h: "Medische Groothandel Antwerpen", kw: "apotheek leverancier Antwerpen", body: "Wij bedienen apotheken en ziekenhuizen in Antwerpen en de Antwerpse Kempen met snelle leveringen van RX, OTC en medische hulpmiddelen." },
@@ -39,6 +40,7 @@ const Vlaanderen = () => (
     ))}
 
     <CTA>Offerte aanvragen</CTA>
+    <ContactForm />
   </PageLayout>
 );
 

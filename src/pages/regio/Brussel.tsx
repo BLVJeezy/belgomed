@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
+import ContactForm from "@/components/ContactForm";
 
 const Brussel = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Regio" }, { label: "Brussel" }]}>
@@ -39,6 +40,7 @@ const Brussel = () => (
     ]} />
 
     <CTA>Demandez votre offre / Offerte aanvragen</CTA>
+    <ContactForm />
   </PageLayout>
 );
 

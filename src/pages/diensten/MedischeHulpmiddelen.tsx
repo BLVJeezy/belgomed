@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
 import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
+import ContactForm from "@/components/ContactForm";
 import { Stethoscope, Syringe, Bandage, ShieldCheck, ScanSearch, HeartPulse } from "lucide-react";
 
 const MedischeHulpmiddelen = () => (
@@ -49,6 +50,7 @@ const MedischeHulpmiddelen = () => (
     ]} />
 
     <CTA>Offerte aanvragen</CTA>
+    <ContactForm />
   </PageLayout>
 );
 
