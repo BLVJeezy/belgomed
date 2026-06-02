@@ -6,9 +6,9 @@ import serviceMed from "@/assets/service-med.jpg";
 import { useLang } from "@/contexts/LangContext";
 
 const serviceData = [
-{ icon: Pill, tag: "RX", image: serviceRx, titleKey: "sg.rx.title", descKey: "sg.rx.desc" },
-{ icon: Heart, tag: "OTC", image: serviceOtc, titleKey: "sg.otc.title", descKey: "sg.otc.desc" },
-{ icon: Stethoscope, tag: "MED", image: serviceMed, titleKey: "sg.med.title", descKey: "sg.med.desc" }];
+{ icon: Pill, tag: "RX", image: serviceRx, titleKey: "sg.rx.title", descKey: "sg.rx.desc", href: "/diensten/rx-medicijnen" },
+{ icon: Heart, tag: "OTC", image: serviceOtc, titleKey: "sg.otc.title", descKey: "sg.otc.desc", href: "/diensten/otc-producten" },
+{ icon: Stethoscope, tag: "MED", image: serviceMed, titleKey: "sg.med.title", descKey: "sg.med.desc", href: "/diensten/medische-hulpmiddelen" }];
 
 
 const zones = [
@@ -105,7 +105,7 @@ const ServiceGrid = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {serviceData.map((service, i) =>
-          <div key={service.tag} className={`glass-card-hover overflow-hidden group fade-up fade-up-delay-${i + 1}`}>
+          <a key={service.tag} href={service.href} aria-label={t(service.titleKey)} className={`glass-card-hover overflow-hidden group fade-up fade-up-delay-${i + 1} block cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-xl`}>
               <div className="relative h-48 overflow-hidden">
                 <img src={service.image} alt={t(service.titleKey)} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
@@ -121,8 +121,12 @@ const ServiceGrid = () => {
                   <h3 className="text-xl font-bold tracking-tight text-foreground">{t(service.titleKey)}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{t(service.descKey)}</p>
+                <span className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold tracking-wider uppercase text-primary group-hover:gap-2.5 transition-all">
+                  Ontdek
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </span>
               </div>
-            </div>
+            </a>
           )}
         </div>
 

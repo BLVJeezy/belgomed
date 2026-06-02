@@ -2,6 +2,7 @@ import { Shield, Award, FileCheck, Building2, Brain, Home, HeartHandshake, Cross
 import { useEffect, useRef, useState } from "react";
 import pharmacyImage from "@/assets/pharmacy-hasselt.jpg";
 import ServiceGrid from "@/components/ServiceGrid";
+import RegioSection from "@/components/RegioSection";
 import StatsCounter from "@/components/StatsCounter";
 import { useLang } from "@/contexts/LangContext";
 
@@ -94,6 +95,8 @@ const AboutSection = () => {
       </section>
 
       <ServiceGrid />
+
+      <RegioSection />
 
       {/* Diensten */}
       
