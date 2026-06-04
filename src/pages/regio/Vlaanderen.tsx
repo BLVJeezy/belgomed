@@ -1,6 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
-import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
+import { H1, Lead, H2, P, CTA, Faq } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
 import ContactForm from "@/components/ContactForm";
 import { audienceServiceSchema, faqSchema } from "@/lib/seoSchemas";
