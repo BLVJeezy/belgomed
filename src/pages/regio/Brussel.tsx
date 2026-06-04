@@ -1,8 +1,15 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
-import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
+import { H1, Lead, H2, P, Ul, CTA, Faq } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
 import ContactForm from "@/components/ContactForm";
+import { audienceServiceSchema, faqSchema } from "@/lib/seoSchemas";
+
+const FAQ = [
+  { q: "Levert Belgomed in alle 19 Brusselse gemeenten? / Belgomed livre-t-il dans les 19 communes ?", a: "Ja, wij verzorgen leveringen in heel het Brussels Hoofdstedelijk Gewest. Oui, nous livrons dans l'ensemble de la Région de Bruxelles-Capitale." },
+  { q: "Is de service tweetalig? / Le service est-il bilingue ?", a: "Ja, klantendienst en documentatie zijn beschikbaar in NL en FR. Oui, le service client et la documentation sont disponibles en NL et FR." },
+  { q: "Hoe snel verloopt een spoedlevering in Brussel? / Quel est le délai d'une livraison urgente ?", a: "Spoedleveringen in Brussel kunnen doorgaans dezelfde dag verzorgd worden. Les livraisons urgentes peuvent généralement être effectuées le jour même." },
+];
 
 const Brussel = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Regio" }, { label: "Brussel" }]}>
@@ -11,6 +18,7 @@ const Brussel = () => (
       description="Belgomed levert medische producten aan apotheken in Brussel. Grossiste médical certifié GDP pour Bruxelles. Snelle levering, betrouwbare service."
       keywords="medische groothandel Brussel, grossiste medical Bruxelles, apotheek leverancier Brussel, fournisseur pharmacie Bruxelles, farmaceutische distributie Brussel"
       canonical="/regio/brussel"
+      jsonLd={[audienceServiceSchema("Apothéquaires, hôpitaux en zorginstellingen in Brussel / Bruxelles"), faqSchema(FAQ)]}
     />
 
     <H1>Medische Groothandel Brussel / Grossiste Médical Bruxelles</H1>
@@ -40,6 +48,10 @@ const Brussel = () => (
     ]} />
 
     <CTA href="#contact">Demandez votre offre / Offerte aanvragen</CTA>
+
+    <H2>FAQ</H2>
+    <Faq items={FAQ} />
+
     <ContactForm />
   </PageLayout>
 );

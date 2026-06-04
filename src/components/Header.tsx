@@ -21,9 +21,11 @@ const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [dienstenOpen, setDienstenOpen] = useState(false);
   const [regioOpen, setRegioOpen] = useState(false);
+  const [klantenOpen, setKlantenOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const dienstenRef = useRef<HTMLDivElement>(null);
   const regioRef = useRef<HTMLDivElement>(null);
+  const klantenRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
   { label: t("nav.about"), href: "/#overons" },
@@ -34,11 +36,21 @@ const Header = () => {
     { label: "RX Medicijnen", href: "/diensten/rx-medicijnen" },
     { label: "OTC Producten", href: "/diensten/otc-producten" },
     { label: "Medische Hulpmiddelen", href: "/diensten/medische-hulpmiddelen" },
+    { label: "Leverancier WZC", href: "/diensten/leverancier-woonzorgcentrum" },
+    { label: "Thuiszorg Materiaal", href: "/diensten/thuiszorg-medisch-materiaal" },
+    { label: "GDP-Distributie", href: "/diensten/gdp-gecertificeerde-distributie" },
+    { label: "Spoedlevering", href: "/diensten/spoedlevering-geneesmiddelen" },
   ];
   const regioItems = [
     { label: "Vlaanderen", href: "/regio/vlaanderen" },
     { label: "Wallonië", href: "/regio/wallonie" },
     { label: "Brussel", href: "/regio/brussel" },
+  ];
+  const klantenItems = [
+    { label: "Apotheken", href: "/klanten/apotheek" },
+    { label: "Ziekenhuizen", href: "/klanten/ziekenhuis" },
+    { label: "Woonzorgcentra", href: "/klanten/woonzorgcentrum" },
+    { label: "Thuiszorg", href: "/klanten/thuiszorg" },
   ];
 
   // Smart navigation for hash links like "/#overons" — if we're already on the
@@ -73,6 +85,9 @@ const Header = () => {
       }
       if (regioRef.current && !regioRef.current.contains(e.target as Node)) {
         setRegioOpen(false);
+      }
+      if (klantenRef.current && !klantenRef.current.contains(e.target as Node)) {
+        setKlantenOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClick);
@@ -119,7 +134,7 @@ const Header = () => {
 
             <div className="relative" ref={regioRef}>
               <button
-                onClick={() => { setRegioOpen(!regioOpen); setDienstenOpen(false); }}
+                onClick={() => { setRegioOpen(!regioOpen); setDienstenOpen(false); setKlantenOpen(false); }}
                 className="flex items-center gap-1 text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
                 Regio's
                 <ChevronDown className={`w-3 h-3 transition-transform ${regioOpen ? "rotate-180" : ""}`} />
@@ -128,6 +143,24 @@ const Header = () => {
                 <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[180px] z-50">
                   {regioItems.map((d) => (
                     <a key={d.href} href={d.href} onClick={() => setRegioOpen(false)} className="block px-3 py-2 text-xs tracking-wide text-muted-foreground hover:text-primary hover:bg-secondary/50 transition-colors">
+                      {d.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="relative" ref={klantenRef}>
+              <button
+                onClick={() => { setKlantenOpen(!klantenOpen); setDienstenOpen(false); setRegioOpen(false); }}
+                className="flex items-center gap-1 text-sm font-medium tracking-wide uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+                Wij Leveren Aan
+                <ChevronDown className={`w-3 h-3 transition-transform ${klantenOpen ? "rotate-180" : ""}`} />
+              </button>
+              {klantenOpen && (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border rounded-lg shadow-lg py-1 min-w-[200px] z-50">
+                  {klantenItems.map((d) => (
+                    <a key={d.href} href={d.href} onClick={() => setKlantenOpen(false)} className="block px-3 py-2 text-xs tracking-wide text-muted-foreground hover:text-primary hover:bg-secondary/50 transition-colors">
                       {d.label}
                     </a>
                   ))}
@@ -224,6 +257,14 @@ const Header = () => {
             <div className="pt-2 border-t border-border/30">
               <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary mb-2">Regio's</p>
               {regioItems.map((d) => (
+                <a key={d.href} href={d.href} onClick={() => setMobileOpen(false)} className="block py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {d.label}
+                </a>
+              ))}
+            </div>
+            <div className="pt-2 border-t border-border/30">
+              <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary mb-2">Wij Leveren Aan</p>
+              {klantenItems.map((d) => (
                 <a key={d.href} href={d.href} onClick={() => setMobileOpen(false)} className="block py-1 text-sm text-muted-foreground hover:text-primary transition-colors">
                   {d.label}
                 </a>

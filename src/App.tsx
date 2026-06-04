@@ -13,9 +13,14 @@ import Zoekwoorden from "./pages/Zoekwoorden";
 import RxMedicijnen from "./pages/diensten/RxMedicijnen";
 import OtcProducten from "./pages/diensten/OtcProducten";
 import MedischeHulpmiddelen from "./pages/diensten/MedischeHulpmiddelen";
+import LeverancierWoonzorgcentrum from "./pages/diensten/LeverancierWoonzorgcentrum";
+import ThuiszorgMedischMateriaal from "./pages/diensten/ThuiszorgMedischMateriaal";
+import GdpGecertificeerdeDistributie from "./pages/diensten/GdpGecertificeerdeDistributie";
+import SpoedleveringGeneesmiddelen from "./pages/diensten/SpoedleveringGeneesmiddelen";
 import Vlaanderen from "./pages/regio/Vlaanderen";
 import Wallonie from "./pages/regio/Wallonie";
 import Brussel from "./pages/regio/Brussel";
+import KlantDetail from "./pages/klanten/KlantDetail";
 
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -46,9 +51,14 @@ const App = () => (
           <Route path="/diensten/rx-medicijnen" element={<RxMedicijnen />} />
           <Route path="/diensten/otc-producten" element={<OtcProducten />} />
           <Route path="/diensten/medische-hulpmiddelen" element={<MedischeHulpmiddelen />} />
+          <Route path="/diensten/leverancier-woonzorgcentrum" element={<LeverancierWoonzorgcentrum />} />
+          <Route path="/diensten/thuiszorg-medisch-materiaal" element={<ThuiszorgMedischMateriaal />} />
+          <Route path="/diensten/gdp-gecertificeerde-distributie" element={<GdpGecertificeerdeDistributie />} />
+          <Route path="/diensten/spoedlevering-geneesmiddelen" element={<SpoedleveringGeneesmiddelen />} />
           <Route path="/regio/vlaanderen" element={<Vlaanderen />} />
           <Route path="/regio/wallonie" element={<Wallonie />} />
           <Route path="/regio/brussel" element={<Brussel />} />
+          <Route path="/klanten/:slug" element={<KlantDetail />} />
           <Route path="/admin" element={<Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>} />
           <Route element={<Suspense fallback={<AdminFallback />}><AdminLayout /></Suspense>}>
             <Route path="/admin/dashboard" element={<Suspense fallback={<AdminFallback />}><Dashboard /></Suspense>} />

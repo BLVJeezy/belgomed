@@ -4,6 +4,13 @@ import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import ContactForm from "@/components/ContactForm";
 import { Stethoscope, Syringe, Bandage, ShieldCheck, ScanSearch, HeartPulse } from "lucide-react";
+import { serviceSchema, faqSchema } from "@/lib/seoSchemas";
+
+const FAQ = [
+  { q: "Zijn alle medische hulpmiddelen CE-gemarkeerd?", a: "Ja. Belgomed werkt uitsluitend met CE-gemarkeerde medische hulpmiddelen, conform de Europese Medical Device Regulation." },
+  { q: "Welke categorieën hulpmiddelen leveren jullie?", a: "Onder meer verbandmateriaal, injectiemateriaal, diagnostische hulpmiddelen, PBM en zorgdisposables — afgestemd op apotheken, ziekenhuizen en WZC." },
+  { q: "Is batchregistratie voorzien voor terugroepacties?", a: "Ja. Elke levering wordt geregistreerd met batchnummer, zodat een eventuele terugroepactie snel en gericht kan verlopen." },
+];
 
 const MedischeHulpmiddelen = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "Medische Hulpmiddelen" }]}>
@@ -12,6 +19,7 @@ const MedischeHulpmiddelen = () => (
       description="Belgomed distribueert medische hulpmiddelen aan zorginstellingen in heel België. Groot assortiment, snelle levering, GDP & WDA gecertificeerd."
       keywords="medische hulpmiddelen groothandel, distributeur medische hulpmiddelen belgie, groothandel medische materialen, medisch materiaal bestellen groot, zorginstellingen leverancier"
       canonical="/diensten/medische-hulpmiddelen"
+      jsonLd={[serviceSchema("Medische Hulpmiddelen Groothandel"), faqSchema(FAQ)]}
     />
 
     <H1>Medische Hulpmiddelen Groothandel</H1>

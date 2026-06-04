@@ -4,6 +4,13 @@ import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import ContactForm from "@/components/ContactForm";
 import { Package, TrendingDown, Truck, BadgeCheck, Boxes, Tags } from "lucide-react";
+import { serviceSchema, faqSchema } from "@/lib/seoSchemas";
+
+const FAQ = [
+  { q: "Levert Belgomed zowel merk- als generieke OTC-producten?", a: "Ja. Wij combineren een breed gamma merkproducten met generieken zodat elke apotheek of drogisterij een passend assortiment kan samenstellen." },
+  { q: "Welke OTC-volumes zijn beschikbaar?", a: "Wij leveren in groothandelsverpakkingen afgestemd op apotheekvolumes, met zowel kleinere herhaalbestellingen als grotere bulkleveringen." },
+  { q: "Hoe lang duurt een standaardlevering?", a: "Bestellingen worden doorgaans binnen 24-48 uur geleverd, afhankelijk van uw locatie en het ordermoment." },
+];
 
 const OtcProducten = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "OTC Producten" }]}>
@@ -12,6 +19,7 @@ const OtcProducten = () => (
       description="Groot assortiment OTC-producten voor apotheken in België. Paracetamol, dafalgan, ibuprofen en meer. GDP & WDA gecertificeerd."
       keywords="OTC producten groothandel, paracetamol groothandel belgie, dafalgan leverancier apotheek, ibuprofen groothandel, vrij verkrijgbare geneesmiddelen groothandel"
       canonical="/diensten/otc-producten"
+      jsonLd={[serviceSchema("OTC Producten Groothandel"), faqSchema(FAQ)]}
     />
 
     <H1>OTC Producten Groothandel</H1>
