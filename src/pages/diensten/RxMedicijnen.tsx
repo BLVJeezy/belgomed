@@ -4,6 +4,13 @@ import { H1, Lead, H2, P, Ul, CTA } from "@/components/seo/SeoPageHelpers";
 import DienstFeatureGrid from "@/components/diensten/DienstFeatureGrid";
 import ContactForm from "@/components/ContactForm";
 import { Pill, ShieldCheck, Thermometer, FileCheck2 } from "lucide-react";
+import { serviceSchema, faqSchema } from "@/lib/seoSchemas";
+
+const FAQ = [
+  { q: "Is Belgomed FAGG-goedgekeurd voor RX-distributie?", a: "Ja. Belgomed BV beschikt over een WDA-vergunning van het FAGG en distribueert voorschriftplichtige geneesmiddelen volledig conform de Europese GDP-richtlijnen." },
+  { q: "Hoe wordt de koudeketen voor RX-producten gegarandeerd?", a: "Met continue temperatuurmonitoring, gevalideerde koelinstallaties en gecertificeerd koeltransport — elke afwijking wordt automatisch geregistreerd." },
+  { q: "Welke RX-producten zijn beschikbaar?", a: "Een breed assortiment voorschriftplichtige geneesmiddelen, zowel generiek als specialiteiten, met volledige batch- en lottraceerbaarheid." },
+];
 
 const RxMedicijnen = () => (
   <PageLayout breadcrumbs={[{ label: "Home", href: "/" }, { label: "Diensten" }, { label: "RX Medicijnen" }]}>
@@ -12,6 +19,7 @@ const RxMedicijnen = () => (
       description="Belgomed levert voorschriftplichtige RX-medicijnen aan apotheken en ziekenhuizen in België. GDP-gecertificeerd, snelle levering, FAGG-goedgekeurd."
       keywords="RX medicijnen groothandel, voorschriftplichtige geneesmiddelen distributeur, apotheek leverancier belgie, farmaceutische distributie belgie, FAGG goedgekeurd grossist"
       canonical="/diensten/rx-medicijnen"
+      jsonLd={[serviceSchema("RX Medicijnen Groothandel"), faqSchema(FAQ)]}
     />
 
     <H1>RX Medicijnen Groothandel</H1>
