@@ -1,8 +1,15 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
-import { H1, Lead, H2, P, CTA } from "@/components/seo/SeoPageHelpers";
+import { H1, Lead, H2, P, CTA, Faq } from "@/components/seo/SeoPageHelpers";
 import BelgiumMap from "@/components/regio/BelgiumMap";
 import ContactForm from "@/components/ContactForm";
+import { audienceServiceSchema, faqSchema } from "@/lib/seoSchemas";
+
+const FAQ = [
+  { q: "Belgomed livre-t-il dans toute la Wallonie ?", a: "Oui. Depuis notre centre de distribution, nous desservons le Hainaut, Liège, Namur, le Luxembourg et le Brabant Wallon." },
+  { q: "Les livraisons sont-elles disponibles en français ?", a: "Oui. Notre service client et notre documentation sont entièrement disponibles en français pour les pharmacies wallonnes." },
+  { q: "Quels sont les délais de livraison standard ?", a: "Les commandes standard sont généralement livrées sous 24-48 heures, avec option urgence en cas de rupture critique." },
+];
 
 const provinces = [
   { h: "Grossiste Médical Hainaut / Henegouwen", kw: "fournisseur pharmacie Hainaut", nl: "Belgomed levert farmaceutische producten aan apotheken in Henegouwen — van Mons tot Charleroi en Tournai.", fr: "Belgomed approvisionne les pharmacies du Hainaut — de Mons à Charleroi et Tournai." },
@@ -20,6 +27,7 @@ const Wallonie = () => (
       keywords="grossiste medical Wallonie, fournisseur pharmacie Wallonie, distributeur medical Belgique, medische groothandel Wallonie"
       canonical="/regio/wallonie"
       ogLocale="fr_BE"
+      jsonLd={[audienceServiceSchema("Pharmacies, hôpitaux et institutions de soins en Wallonie"), faqSchema(FAQ)]}
     />
 
     <H1>Grossiste Médical Wallonie / Medische Groothandel Wallonië</H1>
@@ -44,6 +52,10 @@ const Wallonie = () => (
     ))}
 
     <CTA href="#contact">Demandez votre offre / Offerte aanvragen</CTA>
+
+    <H2>FAQ</H2>
+    <Faq items={FAQ} />
+
     <ContactForm />
   </PageLayout>
 );
