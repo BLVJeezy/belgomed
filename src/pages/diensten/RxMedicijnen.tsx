@@ -48,7 +48,7 @@ const RxMedicijnen = () => (
       "Zorginstellingen en woonzorgcentra met eigen apotheekfunctie.",
     ]} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );

@@ -29,13 +29,13 @@ const ThuiszorgMedischMateriaal = () => (
     <H2>De aanpak van Belgomed</H2>
     <P>Belgomed BV levert rechtstreeks aan thuiszorgorganisaties met een flexibel ordersysteem, GDP-gecertificeerde distributie en volledige FAGG-conformiteit. Onze logistiek is gebouwd op betrouwbaarheid: kleine en grote orders worden met dezelfde zorg verwerkt, en spoedleveringen worden geprioriteerd.</P>
 
-    <H2>Klaar voor een offerte op maat?</H2>
-    <P>Neem contact op via info@belgomed.com voor een offerte op maat voor uw thuiszorgorganisatie.</P>
+    <H2>Hoe kan Belgomed uw thuiszorgorganisatie ondersteunen?</H2>
+    <P>Neem contact op via info@belgomed.be en wij helpen u graag verder.</P>
 
     <H2>Veelgestelde vragen</H2>
     <Faq items={FAQ} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );

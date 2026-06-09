@@ -29,13 +29,13 @@ const LeverancierWoonzorgcentrum = () => (
     <H2>De oplossing van Belgomed</H2>
     <P>Belgomed BV biedt WZC één GDP-gecertificeerde partner met een breed portfolio aan RX, OTC én medische hulpmiddelen. Vaste leveringsschema's, batchtraceerbaarheid en koudeketenbeheer worden gecombineerd met persoonlijk contact en een vast aanspreekpunt. Zo blijft de focus van uw zorgteam waar die hoort: bij de bewoner.</P>
 
-    <H2>Klaar voor een offerte op maat?</H2>
-    <P>Neem contact op via info@belgomed.com voor een offerte op maat voor uw woonzorgcentrum.</P>
+    <H2>Hoe kan Belgomed uw woonzorgcentrum ondersteunen?</H2>
+    <P>Neem contact op via info@belgomed.be en wij helpen u graag verder.</P>
 
     <H2>Veelgestelde vragen</H2>
     <Faq items={FAQ} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );

@@ -8,7 +8,7 @@ const TITLE = "Spoedlevering Geneesmiddelen België";
 const FAQ = [
   { q: "Hoe snel kan een spoedlevering ter plaatse zijn?", a: "Afhankelijk van uw locatie binnen België verzorgen wij dezelfde dag of binnen 24 uur een prioritaire levering, met een vast aanspreekpunt voor opvolging." },
   { q: "Welke producten kunnen via spoed geleverd worden?", a: "Zowel RX-medicijnen, OTC-producten als medische hulpmiddelen — voor zover beschikbaar in onze voorraad. Bij schaarste activeren wij ons netwerk om alternatieven te zoeken." },
-  { q: "Wat kost een spoedlevering?", a: "Spoedlevering wordt transparant geprijsd op basis van afstand en urgentie. Vraag een offerte aan via info@belgomed.com voor uw specifieke situatie." },
+  { q: "Wat kost een spoedlevering?", a: "Spoedlevering wordt transparant geprijsd op basis van afstand en urgentie. Neem contact op via info@belgomed.be voor uw specifieke situatie." },
 ];
 
 const SpoedleveringGeneesmiddelen = () => (
@@ -30,12 +30,12 @@ const SpoedleveringGeneesmiddelen = () => (
     <P>Belgomed BV organiseert spoedleveringen met prioritaire orderverwerking, nationale dekking vanuit ons distributiecentrum in Hasselt, en direct contact met een vaste verantwoordelijke. Wij activeren in dergelijke situaties ons volledige netwerk om de juiste producten zo snel mogelijk bij u te krijgen — GDP-conform, met volledige traceerbaarheid.</P>
 
     <H2>Heeft u nu een dringende aanvraag?</H2>
-    <P>Neem contact op via info@belgomed.com en vermeld duidelijk "spoed" in uw onderwerpregel.</P>
+    <P>Neem contact op via info@belgomed.be en vermeld duidelijk "spoed" in uw onderwerpregel.</P>
 
     <H2>Veelgestelde vragen</H2>
     <Faq items={FAQ} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );

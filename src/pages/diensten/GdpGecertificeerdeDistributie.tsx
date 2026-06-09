@@ -29,13 +29,13 @@ const GdpGecertificeerdeDistributie = () => (
     <H2>Hoe Belgomed compliance in de praktijk brengt</H2>
     <P>Bij Belgomed BV is GDP geen papieren oefening. Onze faciliteiten zijn uitgerust met continue temperatuurmonitoring, sluitende audit trails, gevalideerde transportprocedures en een volledig gedocumenteerde chain of custody. Het FAGG inspecteert onze processen op regelmatige basis en wij investeren actief in kwaliteitsborging en personeelsopleiding.</P>
 
-    <H2>Klaar voor een betrouwbare partner?</H2>
-    <P>Neem contact op via info@belgomed.com voor een offerte op maat voor uw organisatie.</P>
+    <H2>Klaar om samen te werken?</H2>
+    <P>Neem contact op via info@belgomed.be om de mogelijkheden voor uw organisatie te bespreken.</P>
 
     <H2>Veelgestelde vragen</H2>
     <Faq items={FAQ} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );

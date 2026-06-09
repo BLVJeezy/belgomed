@@ -31,7 +31,7 @@ const SEGMENTS: Record<string, Segment> = {
     paragraphs: [
       "Zelfstandige apotheken en apothekersgroepen hebben nood aan één betrouwbare partner voor zowel RX-medicijnen als OTC-producten. Het jongleren met meerdere leveranciers, wisselende prijzen en onregelmatige beschikbaarheid kost dagelijks tijd die beter aan de patiënt besteed wordt.",
       "Belgomed BV biedt apothekers een volledig portfolio — voorschriftplichtige geneesmiddelen, vrij verkrijgbare producten en medische hulpmiddelen — gedistribueerd volgens GDP-richtlijnen en met volledige FAGG-conformiteit. Snelle dagelijkse levering, transparante prijzen en een vast aanspreekpunt zorgen voor de operationele rust die uw team verdient.",
-      "Neem contact op via info@belgomed.com voor een offerte op maat voor uw apotheek.",
+      "Neem contact op via info@belgomed.be en wij helpen u graag verder.",
     ],
     faq: [
       { q: "Levert Belgomed dagelijks aan apotheken?", a: "Ja, wij verzorgen dagelijkse leveringen aan apotheken in heel België, met vaste afhaalmomenten en mogelijkheid tot spoedlevering." },
@@ -51,7 +51,7 @@ const SEGMENTS: Record<string, Segment> = {
     paragraphs: [
       "Ziekenhuisapotheken werken in een omgeving waarin elke afwijking telt: batchtraceerbaarheid is wettelijk verplicht, koudeketens mogen niet onderbroken worden en de inkoopvolumes vereisen een leverancier met capaciteit. Het minste defect in de aanvoer heeft directe impact op afdelingen, planning en patiëntveiligheid.",
       "Belgomed BV bedient ziekenhuizen vanuit een GDP- en WDA-gecertificeerde infrastructuur, met continue temperatuurmonitoring, batchregistratie en gedocumenteerde chain of custody. Onze logistiek is afgestemd op planmatige leveringen én op spoedinterventies — telkens met een vast contactpunt voor uw aankoopdienst.",
-      "Neem contact op via info@belgomed.com voor een gestructureerde offerte voor uw ziekenhuis.",
+      "Klaar om samen te werken? Neem contact op via info@belgomed.be om de mogelijkheden voor uw ziekenhuis te bespreken.",
     ],
     faq: [
       { q: "Hoe wordt batchtraceerbaarheid gegarandeerd?", a: "Elke levering bevat volledige batch- en lotinformatie, opgenomen in onze digitale chain of custody — beschikbaar voor uw audits en inspecties." },
@@ -71,7 +71,7 @@ const SEGMENTS: Record<string, Segment> = {
     paragraphs: [
       "Woonzorgcentra hebben behoefte aan voorspelbaarheid: vaste leveringsmomenten, een gekende productmix en korte communicatielijnen wanneer er iets verandert. Het beheer van meerdere leveranciers met elk hun eigen administratie weegt zwaar op het hoofdverpleegkundig team en op de aankoopverantwoordelijke.",
       "Belgomed BV neemt die operationele complexiteit weg met één GDP-gecertificeerde keten voor RX, OTC én medisch materiaal. Vaste leveringsschema's, gegroepeerde facturatie, batchtraceerbaarheid en een vast aanspreekpunt geven uw WZC de rust om zich te richten op de bewoners.",
-      "Neem contact op via info@belgomed.com voor een offerte op maat voor uw woonzorgcentrum.",
+      "Hoe kan Belgomed uw woonzorgcentrum ondersteunen? Neem contact op via info@belgomed.be en wij helpen u graag verder.",
     ],
     faq: [
       { q: "Werkt Belgomed met vaste leveringsschema's?", a: "Ja. Wij plannen wekelijkse of meerdaagse leveringen volgens uw bewonersaantal en zorgprofiel, met spoedleveringen indien nodig." },
@@ -91,7 +91,7 @@ const SEGMENTS: Record<string, Segment> = {
     paragraphs: [
       "Thuiszorgorganisaties opereren decentraal: verpleegkundigen werken bij de patiënt thuis, met variabele zorgvragen en weinig ruimte voor logistieke fouten. Een gemiste levering of onvolledige set materiaal heeft directe impact op het zorgtraject.",
       "Belgomed BV ondersteunt thuiszorgorganisaties met een flexibel bestelsysteem, snelle leveringen vanuit ons centraal distributiecentrum en een breed assortiment OTC, verbandmateriaal en medische hulpmiddelen — GDP-gecertificeerd en FAGG-conform.",
-      "Neem contact op via info@belgomed.com voor een offerte op maat voor uw thuiszorgorganisatie.",
+      "Hoe kan Belgomed uw thuiszorgorganisatie ondersteunen? Neem contact op via info@belgomed.be en wij helpen u graag verder.",
     ],
     faq: [
       { q: "Kunnen jullie leveren op meerdere locaties?", a: "Ja, wij organiseren leveringen op één centraal punt of verspreid naar verschillende uitvalsbases van uw organisatie." },
@@ -121,13 +121,13 @@ const KlantDetail = () => {
       <H2>De aanpak van Belgomed</H2>
       <P>{data.paragraphs[1]}</P>
 
-      <H2>Klaar voor een offerte op maat?</H2>
+      <H2>Hoe kan Belgomed u ondersteunen?</H2>
       <P>{data.paragraphs[2]}</P>
 
       <H2>Veelgestelde vragen</H2>
       <Faq items={data.faq} />
 
-      <CTA href="#contact">Offerte aanvragen</CTA>
+      <CTA href="#contact">Neem contact op</CTA>
       <ContactForm />
     </PageLayout>
   );

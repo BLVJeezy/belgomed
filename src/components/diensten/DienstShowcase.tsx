@@ -24,7 +24,7 @@ const DienstShowcase = ({
   description,
   stats,
   ctaHref = "/#contact",
-  ctaLabel = "Offerte aanvragen",
+  ctaLabel = "Neem contact op",
 }: DienstShowcaseProps) => {
   return (
     <section className="relative overflow-hidden rounded-2xl border border-border/40 dark:border-white/10 bg-card/40 backdrop-blur-sm p-7 md:p-10 my-6 group">

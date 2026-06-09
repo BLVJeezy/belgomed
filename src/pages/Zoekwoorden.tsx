@@ -59,7 +59,7 @@ const Zoekwoorden = () => {
       <H2>Veelgestelde Vragen</H2>
       <Faq items={faq} />
 
-      <CTA>Vraag uw offerte aan</CTA>
+      <CTA>Neem contact op</CTA>
     </PageLayout>
   );
 };

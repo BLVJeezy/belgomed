@@ -56,7 +56,7 @@ const OtcProducten = () => (
       "Zorginstellingen met eigen verstrekking.",
     ]} />
 
-    <CTA href="#contact">Offerte aanvragen</CTA>
+    <CTA href="#contact">Neem contact op</CTA>
     <ContactForm />
   </PageLayout>
 );
