@@ -85,6 +85,9 @@ const Footer = () => {
               Belgomed Hub
             </a>
           </div>
+          <a href="https://solynglobal.be" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+            Created by Solyn Global
+          </a>
         </div>
       </div>
     </footer>);
